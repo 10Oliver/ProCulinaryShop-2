@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Pedidos</title>
+
+    <!--Importación de iconos y hojas de estilo-->
+    <link rel="stylesheet" href="../../resources/css/materialize.min.css" />
+    <link rel="stylesheet" href="../../resources/css/private.css" />
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
+
+    <!--Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+
+<body>
+    <!--Estructura de la barra de navegación lateral-->
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-shopify icon'></i>
+            <div class="logo_name">ProculinaryShop</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="empleados.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="inventario.html">
+                    <i class='bx bxs-book-open'></i>
+                    <span class="links_name">Inventario</span>
+                </a>
+                <span class="tooltip">Inventario</span>
+            </li>
+            <li>
+                <a href="noticias.html">
+                    <i class='bx bxs-bell-ring'></i>
+                    <span class="links_name">Noticias</span>
+                </a>
+                <span class="tooltip">Noticias</span>
+            </li>
+            <li>
+                <a href="control_usuarios.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="links_name">Empleados</span>
+                </a>
+                <span class="tooltip">Empleados</span>
+            </li>
+            <li>
+                <a href="usuario.html">
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="pedidos.html">
+                    <i class='bx bxs-package'></i>
+                    <span class="links_name">Pedidos</span>
+                </a>
+                <span class="tooltip">Pedidos</span>
+            </li>
+            <li>
+                <a href="comentarios.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="links_name">Comentarios</span>
+                </a>
+                <span class="tooltip">Comentarios</span>
+            </li>
+            <li>
+                <a href="clientes.html">
+                    <i class='bx bxs-user-rectangle'></i>
+                    <span class="links_name">Clientes</span>
+                </a>
+                <span class="tooltip">Clientes</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="links_name">Gráficos</span>
+                </a>
+                <span class="tooltip">Gráficos</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Stephanie Salinas</div>
+                        <div class="job">Web designer</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <!--fin de estructura de sidebar-->
+    <!--Home section-->
+    <section class="home-section">
+        <div class="nav">
+            <div class="sidebar-button">
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="time hide-on-med-and-down">
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num hour_num">09</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num min_num">06</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num sec_num">06</span>
+                    </div>
+                    <span class="am_pm">AM</span>
+                </div>
+                <span id="dia" class="dayweek"></span>
+                <span id="date" class="day"></span>
+                <span class="day-text">De</span>
+                <span id="month" class="month"></span>
+                <span class="month-text">Del</span>
+                <span id="year" class="year"></span>
+            </div>
+            <div class="darkLight-searchBox">
+                <div class="settings">
+                    <i class="bx bx-cog"></i>
+                </div>
+                <div class="dark-light">
+                    <i class="bx bx-moon moon"></i>
+                    <i class="bx bx-sun sun"></i>
+                </div>
+            </div>
+        </div>
+        <!--Main, SCRUDS-->
+        <main class="datos_contenedor">
+            <div class="buscador_empleado center-align">
+                <div class="bus_empleado">
+                    <div class="linea_buscador">
+                        <input id="buscador" name="buscador" placeholder="Buscar..." type="text"
+                            onkeypress="soloLetras(event)" class="validate buscar" />
+                    </div>
+                    <div class="btn boton_buscador">
+                        <a href=""><i class="waves-effect medium material-icons blanco">search</i></a>
+                    </div>
+                </div>
+                <div class="input-field selecionar_cargo_empleados">
+                    <select id="categoria_pedido">
+                        <option value="0" disabled selected>Elige tu opción</option>
+                        <option value="1">Nombre cliente</option>
+                        <option value="2">Total</option>
+                        <option value="3">Cantidad de productos</option>
+                        <option value="4">Fecha</option>
+                        <option value="5">Estado</option>
+                    </select>
+                    <label>Filtros</label>
+                </div>
+            </div>
+
+            <dir class="board">
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <td class="nombre_cliente_pedido">Nombre del cliente</td>
+                            <td class="direccion_cliente_pedido">Dirección</td>
+                            <td class="Fecha_pedido">Fecha</td>
+                            <td class="Total_pedido">Total</td>
+                            <td class="visualizar_pedido">Visualizar</td>
+                            <td class="Estado_pedido">Estado</td>
+                            <td class="Cancelar_pedido">Cancelar</td>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpo_pedido"></tbody>
+                </table>
+            </dir>
+        </main>
+    </section>
+
+    <!--Modal para mostrar los productos de cada pedido-->
+    <div id="mostrar" class="modal modal1">
+        <div class="modal-content" id="padding">
+            <h4 class="titulo_model">Lista de productos</h4>
+            <div class="col l12 m12 s12 center-align">
+                <!--Se insertarán los productos listados-->
+                <div id="contenedor_listado"></div>
+                <div class="aceptar_modal">
+                    <a class="modal-close"><i class="medium material-icons azul">check_circle</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Se importan los archivos de JavaScript-->
+
+    <script src="../../resources/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/components.js"></script>
+    <script type="text/javascript " src="../../controllers/Private/pedidos.js "></script>
+    <script type="text/javascript " src="../../controllers/Private/sidebar.js "></script>
+    <script type="text/javascript" src="../../controllers/verificador.js"></script>
+    <script type="text/javascript " src="../../controllers/Private/activaciones_privadas.js"></script>
+</body>
+
+</html>

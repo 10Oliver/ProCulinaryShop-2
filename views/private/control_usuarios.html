@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <title>Control de usuarios</title>
+
+    <!--Importación de iconos y hojas de estilo-->
+    <link rel="stylesheet" href="../../resources/css/materialize.min.css">
+    <link rel="stylesheet" href="../../resources/css/private.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
+
+    <!--Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+</head>
+
+<body>
+    <!--Estructura de la barra de navegación lateral-->
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-shopify icon'></i>
+            <div class="logo_name">ProculinaryShop</div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav-list">
+            <li>
+                <a href="empleados.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="inventario.html">
+                    <i class='bx bxs-book-open'></i>
+                    <span class="links_name">Inventario</span>
+                </a>
+                <span class="tooltip">Inventario</span>
+            </li>
+            <li>
+                <a href="noticias.html">
+                    <i class='bx bxs-bell-ring'></i>
+                    <span class="links_name">Noticias</span>
+                </a>
+                <span class="tooltip">Noticias</span>
+            </li>
+            <li>
+                <a href="control_usuarios.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="links_name">Empleados</span>
+                </a>
+                <span class="tooltip">Empleados</span>
+            </li>
+            <li>
+                <a href="usuario.html">
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="pedidos.html">
+                    <i class='bx bxs-package'></i>
+                    <span class="links_name">Pedidos</span>
+                </a>
+                <span class="tooltip">Pedidos</span>
+            </li>
+            <li>
+                <a href="comentarios.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="links_name">Comentarios</span>
+                </a>
+                <span class="tooltip">Comentarios</span>
+            </li>
+            <li>
+                <a href="clientes.html">
+                    <i class='bx bxs-user-rectangle'></i>
+                    <span class="links_name">Clientes</span>
+                </a>
+                <span class="tooltip">Clientes</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="links_name">Gráficos</span>
+                </a>
+                <span class="tooltip">Gráficos</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Stephanie Salinas</div>
+                        <div class="job">Web designer</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
+    <!--fin de estructura de sidebar-->
+    <!--Home section-->
+    <section class="home-section">
+        <div class="nav">
+            <div class="sidebar-button">
+                <span class="dashboard">Dashboard</span>
+            </div>
+            <div class="time hide-on-med-and-down ">
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num hour_num">09</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num min_num">06</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num sec_num">06</span>
+                    </div>
+                    <span class="am_pm">AM</span>
+                </div>
+                <span id="dia" class="dayweek"></span>
+                <span id="date" class="day"></span>
+                <span class="day-text">De</span>
+                <span id="month" class="month"></span>
+                <span class="month-text">Del</span>
+                <span id="year" class="year"></span>
+            </div>
+            <div class="darkLight-searchBox">
+                <div class="settings">
+                    <i class="bx bx-cog"></i>
+                </div>
+                <div class="dark-light">
+                    <i class="bx bx-moon moon"></i>
+                    <i class="bx bx-sun sun"></i>
+                </div>
+            </div>
+        </div>
+        <!--Main, SCRUDS-->
+        <main class="datos_contenedor">
+            <div class="buscador_empleado center-align">
+                <div class="bus_empleado">
+                    <div class="linea_buscador">
+                        <input id="buscador" name="buscador" onkeypress="return letras_numeros(event)" placeholder="Buscar..." type="text" class="validate buscar">
+                    </div>
+                    <div class="btn boton_buscador">
+                        <a href=""><i class="waves-effect medium material-icons blanco">search</i></a>
+                    </div>
+                </div>
+                <div class="input-field selecionar_cargo_empleados">
+                    <select id="selector_cargo" name="selector_cargo">
+                    </select>
+                    <label>Cargo empleados</label>
+                </div>
+                <div>
+                    <a onclick="cargar_modal()" href="#agregar" class="modal-trigger"><i
+                            class="medium azul material-icons">add_circle</i></a>
+                </div>
+            </div>
+            <dir class="board">
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <td class="ID_datos_empleado">ID</td>
+                            <td class="nombre_usuario_empleado">Nombre empleado</td>
+                            <td class="correo_usuario_empleado">Teléfono</td>
+                            <td class="hora_empleado">Correo</td>
+                            <td class="intentos_empleado">Cargo</td>
+                            <td class="habilitar_empleado   "></td>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpo_empleado">
+                        <!--Contenido de la tabla, se cargará mediante una inyección HTML-->
+                    </tbody>
+                </table>
+            </dir>
+        </main>
+
+    </section>
+
+    <!--Modales-->
+    <!--Agregar usuario-->
+    <div id="agregar" class="modal fondo_modal">
+        <div class="modal-content " id="padding">
+            <h4 class="titulo_model ">Agregar empleado</h4>
+            <div class="row sin_marge">
+                <form method="post" id="guardar_empleado" enctype="multipart/form-data"  autocomplete="off">
+                    <div class="col l6 m6 s12">
+                        <div class="input-field col l12 m12 s12">
+                            <input id="nombre_empleado" type="text" name="nombre_empleado" onkeypress="return soloLetras(event)" class="validate" required>
+                            <label for="nombre_empleado">Nombres</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="dui_empleado">DUI</label>
+                            <input id="dui_empleado" type="text" name="dui_empleado" onkeypress="return verificarDUI(event, 'dui_empleado')" class="validate" required>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="correo_empleado">Correo</label>
+                            <input id="correo_empleado" type="email" name="correo_empleado" onkeypress="return revisarTexto(event)" class="validate" required>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="telefono_empleado">Teléfono</label>
+                            <input id="telefono_empleado" type="tel" name="telefono_empleado" onkeypress="return soloNumeros(event)" class="validate" required>
+                        </div>
+                    </div>
+                    <div class="col l6 m6 s12">
+                        <div class="input-field col l12 m12 s12">
+
+                            <input id="apellido_empleado" type="text" name="apellido_empleado" onkeypress="return soloLetras(event)" class="validate" required>
+                            <label for="apellido_empleado">Apellidos</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <select id="cargo_empleado" name="cargo_empleado">
+                            </select>
+                            <label>Cargo del empleado</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <select id="estado_empleado" name="estado_empleado">
+                            </select>
+                            <label>Estado</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <input id="direccion_empleado" type="text" name="direccion_empleado" onkeypress="return revisarTexto(event)" class="validate" required>
+                            <label for="direccion_empleado">Dirección del empleado</label>
+                        </div>
+                    </div>
+                    <div class="container center-align">
+                        <button id="btn_guardar_empleado" class="transparent confirmacion_boton_modal" type="submit"><i
+                                class="material-icons medium">check_circle</i></button>
+                        <button class="transparent confirmacion_boton_modal" type="submit"><i
+                                class="material-icons medium">cancel</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Modificar-->
+    <div id="modificar" class="modal fondo_modal">
+        <div class="modal-content " id="padding">
+            <h4 class="titulo_model ">Modificar empleado</h4>
+            <div class="row sin_marge">
+                <form method="post" id="actualizar_empleado_f" enctype="multipart/form-data"  autocomplete="off">
+                    <!--Campo oculto para guardar el id-->
+                    <input class="hide" type="number" id="identificadorM" name="identificador">
+                    <div class="col l6 m6 s12">
+                        <div class="input-field col l12 m12 s12">
+                            <input id="nombre_empleadoM" type="text" onkeypress="return soloLetras(event)" name="nombre_empleado" class="validate" required>
+                            <label for="nombre_empleadoM">Nombres</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="dui_empleadoM">DUI</label>
+                            <input id="dui_empleadoM" type="text" onkeypress="return verificarDUI(event, 'dui_empleadoM')" name="dui_empleado" class="validate" required>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="correo_empleadoM">Correo</label>
+                            <input id="correo_empleadoM" type="email" onkeypress="return revisarTexto(event)" name="correo_empleado" class="validate" required>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <label for="telefono_empleado">Teléfono</label>
+                            <input id="telefono_empleadoM" type="tel" onkeypress="return revisarTexto(event)" name="telefono_empleado" class="validate" required>
+                        </div>
+                    </div>
+                    <div class="col l6 m6 s12">
+                        <div class="input-field col l12 m12 s12">
+
+                            <input id="apellido_empleadoM" type="text" onkeypress="return soloLetras(event)" name="apellido_empleado" class="validate" required>
+                            <label for="apellido_empleadoM">Apellidos</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <select id="cargo_empleadoM" name="cargo_empleado">
+                            </select>
+                            <label>Cargo del empleado</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <select id="estado_empleadoM" name="estado_empleado">
+                            </select>
+                            <label>Estado</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <input id="direccion_empleadoM" type="text" onkeypress="return revisarTexto(event)" name="direccion_empleado" class="validate" required>
+                            <label for="direccion_empleadoM">Dirección del empleado</label>
+                        </div>
+                    </div>
+                    <div class="container center-align">
+                        <button id="btn_modificar_empleado" class=" transparent confirmacion_boton_modal" type="submit"><i class="material-icons medium">check_circle</i></button>
+                        <button class="transparent confirmacion_boton_modal" type="submit"><i
+                                class="material-icons medium">cancel</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Eliminar-->
+    <div id="eliminar" class="modal fondo_modal">
+        <div class="modal-content " id="padding">
+            <h4 class="titulo_model">Eliminar empleado</h4>
+            <p class="texto_modal">Estás a punto de eliminar un empleado/a</p>
+            <p class="texto_modal">¿Eliminar?</p>
+            <div class="col l12 m12 s12 botones_modal">
+                <div class="aceptar_modal">
+                    <a href="" class=""><i class="medium material-icons azul">check_circle</i></a>
+                </div>
+                <div class="eliminar_modal">
+                    <a href="" class=""><i class="medium material-icons azul">cancel</i></a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--Se importan los archivos de JavaScript-->
+
+    <script src="../../resources/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/components.js"></script>
+    <script type="text/javascript " src="../../controllers/Private/empleado.js "></script>
+    <script type="text/javascript " src="../../controllers/Private/sidebar.js "></script>
+    <script type="text/javascript" src="../../controllers/verificador.js"></script>
+    <script type="text/javascript " src="../../controllers/Private/activaciones_privadas.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,651 @@
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap%27);
+
+/* estilo para index.html*/
+
+
+/*Diseño especializado para scrollbar del cuerpo de la paginas*/
+
+body::-webkit-scrollbar{
+   width: 12px;
+}
+
+body::-webkit-scrollbar-track{
+   background: #D9D9D9;
+   border-radius: 2px;
+}
+
+body::-webkit-scrollbar-thumb{
+   background: #BDBEBF;
+   border-radius: 2px;
+   border: 3px solid #BDBEBF;
+}
+
+
+/*navbar de catalogo modificado ligeramente*/
+
+.nav {
+   font-family: 'Josefin Sans';
+   height: 120px;
+   box-shadow: 0px 0px 15px black;
+   opacity: 2.4;
+   position: fixed;
+   z-index: 10;
+}
+#nav_down_second{
+   margin-top: 25px;
+}
+
+/*Aplicación de estilos para el navbar y sidenav*/
+
+
+.nav-wrapper {
+
+    font-family: "Josefin Sans";
+    height: 148px;
+    opacity: 2.5;
+    box-shadow: 0px 0px 15px black;
+    position: fixed;
+    z-index: 10;
+ 
+ }
+
+ .logo_preset{
+    margin: 5px 3px;
+    margin-top: 25px;
+    margin-left: 10px;
+ }
+
+ .logo_preset-2{
+    margin: 5px 2px;
+    margin-bottom: 15px;
+    margin-left: 95px;
+ }
+
+ .material-icons {
+ 
+    align-items: center;
+    display: inline-block;
+    margin: 2px 2px;
+ }
+ 
+ .image {
+ 
+    background-position: center;
+    width: 100%;
+    margin-top: 130px;
+ }
+ 
+ 
+ 
+ .logo {
+ 
+    margin: 5px 3px;
+    margin-top: 35px;
+    margin-left: 10px;
+ }
+ 
+ .logo-2 {
+    margin: 5px 2px;
+    margin-top: 35px;
+    margin-left: 55%;
+ 
+ }
+ 
+ 
+ #nav_down {
+ 
+    margin-left: 75px;
+ }
+ 
+ .fa-search {
+    font-size: 20px;
+ }
+ 
+ form {
+    margin: 10px;
+ }
+
+ /*aplicando estilos a la barra de busqueda*/
+.form>div {
+
+
+    display: flex;
+    background: #fff;
+    padding: 9px 15px 9px 24px;
+    border-radius: 20px;
+    box-shadow: rgba(4, 217, 57, 0.5) -8px -8px 15px, rgba(0, 0, 0, 0.1) 10px 10px 10px, rgba(255, 255, 255, 0.5) -8px -8px 15px inset, rgba(0, 0, 0, 0.1) 10px 10px 10px inset;
+ }
+ 
+ form input {
+    border: none;
+    background: transparent;
+    font-weight: bold;
+    padding-left: 24px;
+ }
+ 
+ #input-field {
+    height: 20px;
+    border-bottom: none;
+    font-family: "Josefin Sans";
+    margin-top: 4px;
+ }
+ 
+ #nav_down {
+    margin-right: 45px;
+ }
+ 
+ .sidenav-trigger {
+    margin-right: 55%;
+ }
+ 
+ input {
+    font: inherit;
+    display: flex;
+    align-items: center;
+ }
+
+ /*creando dropdown con css y js puro, aplicando estilos*/
+
+:root {
+    --dropdown: #16B500;
+ }
+ 
+
+
+ /*justificando icono dropdown*/
+
+.input-wrapper {
+    position: relative;
+    width: 271px;
+ }
+ 
+ .input-icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 35px;
+    top: 7%;
+    transform: translateY(-7%);
+ }
+
+ /*alineando placeholder a de mas opciones*/
+
+#input-content{
+    margin-top: 6px;
+ }
+
+ #input-field {
+    width: 100%;
+    border-style: none;
+    outline: none;
+ }
+ 
+ /*creando, diseñando y estructurando apartado de cards de información para productos en venta*/
+
+#cards-container{
+   position: absolute;
+}
+
+.title {
+    font-family: "Josefin Sans";
+    text-align: center;
+    font-size: 18pt;
+ }
+ 
+ .divider {
+
+   background-color: #03a549;
+}
+ 
+ .section-1 {
+ 
+    text-align: center;
+    font-family: "Josefin Sans";
+    margin-top: 20px;
+ }
+ 
+ #cards-title {
+    font-size: 13pt;
+ }
+ 
+ .card-title {
+ 
+ 
+    font-family: "Josefin Sans";
+ }
+ 
+ #span-title {
+    font-family: "Josefin Sans";
+    text-align: center;
+ }
+ 
+ .card-content {
+    font-family: "Josefin Sans";
+    text-align: center;
+ }
+ 
+ .card-action {
+    font-family: "Josefin Sans";
+ }
+ 
+ #btn-cards {
+ 
+    width: 250px;
+ }
+ 
+ .content {
+    font-family: 'Josefin Sans';
+    font-size: 11pt;
+ }
+
+ /*estructurando y aplicando estilos al footer*/
+
+
+
+.container-footer {
+    text-align: left;
+ }
+ 
+ .content-1 {
+    font-family: 'Josefin Sans';
+ }
+ 
+ #footer-align {
+    text-align: center;
+ }
+ 
+ :root {
+    --facebook: #3b5999;
+    --instagram: #e4405f;
+    --twitter: #55acee;
+    --whatsapp: #0DC143;
+ }
+ 
+ #redes-container {
+    display: inline-block;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+ }
+ 
+ #redes-container ul li {
+    display: inline-block;
+    margin: 0 5px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+ 
+ }
+ 
+ #redes-container ul li a {
+    display: block;
+    padding: 0 15px;
+    background: #333;
+    color: #fff;
+    line-height: 50px;
+    font-size: 18px;
+    box-shadow: 0 3px 5px 0px rgba(0, 0, 0, .2);
+    transition: .2s;
+ }
+ 
+ #redes-container ul:hover a {
+    filter: blur(2px);
+ }
+ 
+ #redes-container ul li a:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 5px 0px rgba(0, 0, 0, .4);
+    filter: none;
+ }
+ 
+ #facebook:hover {
+    background: var(--facebook);
+ }
+ 
+ #twitter:hover {
+    background: var(--twitter);
+ }
+ 
+ #instagram:hover {
+    background: var(--instagram);
+ }
+ 
+ #whatsapp:hover {
+    background: var(--whatsapp);
+ }
+
+
+ /*estilo para categorias de redireccionamiento a: Explora nuestras categorias destacadas*/
+
+
+ .options-rounded-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+ }
+
+.img{
+   height: 25vh;
+   width: 25vh;
+   margin-right: 15px;
+}
+
+.categories-rounded-images{
+   margin-top: 5px;
+}
+
+.images{
+   margin-top: 5%;
+   cursor: pointer;
+}
+h7 a{
+   color: black;
+   font-weight: 500;
+   text-decoration: underline;
+}
+
+#left-margin{
+   padding: 0 10px;
+}
+
+
+
+ /*redimensionando estilos a determinadas pantallas*/
+
+
+@media only screen and (max-width: 1536px) {
+   
+    .nav-wrapper {
+       
+       height: 145px;
+    }
+ 
+    #nav_down {
+       width: max-content;
+       margin: 1px 20px;
+    }
+ 
+    .material-icons {
+       align-items: center;
+       display: inline-block;
+    }
+ 
+    #btn-cards {
+       
+       width: 195px;
+    }
+ 
+    .content {
+       
+       font-size: 9pt;
+    }
+    
+    
+ }
+
+ 
+ @media only screen and (max-width: 1280px) {
+    
+    #nav_down {
+       right: 25px;
+       margin: 2px 10px;
+       
+    }
+ 
+    #btn-cards {
+       
+       width: 155px;
+    }
+    
+ }
+ @media only screen and (max-width: 1366px) {
+   .nav-wrapper {
+
+      height: 145px;
+   }
+
+   #nav_down {
+      width: max-content;
+      margin: 1px 15px;
+   }
+
+   .material-icons {
+
+      align-items: center;
+      display: inline-block;
+
+   }
+
+   #btn-cards {
+
+      width: 165px;
+      
+   }
+   
+
+   .content{
+      font-size: 5pt;
+   }
+
+   #span-title{
+      font-size: 12pt;
+      text-align: justify;
+   }
+   .content{
+      font-size: 8pt;
+   }
+
+   .content-2{
+      font-size: 12pt;
+   }
+
+}
+ 
+
+/* --------------Carrito de compras---------*/
+
+main h5{
+    margin-top: 0px !important;
+    padding-top: 160px;
+}
+
+main{
+    height:  800px;
+}
+
+.imagen_carrito{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.imagen-foto{
+    width: 80% !important;
+    height: 245px !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+}
+
+.rojo{
+    color: #c50000;
+    font-size: 18pt;
+}
+
+.negro{
+    color: #000;
+    font-size: 16pt;
+}
+
+.opciones_carrito{
+    width: 150px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.imagen_producto_max{
+    width: 50%;
+}
+
+/*------------------Valoraciones-------------------*/
+
+/*Valoraciones en estrellas*/
+.estrellas_contenedor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-origin: 1px solid black;
+    height: auto;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    justify-content: center;
+}
+
+label:hover,
+label:hover~label>.estrella {
+    color: orange;
+}
+
+input[type="radio"]:checked~label>.estrella {
+    color: orange;
+}
+
+/*------------------Historial-------------------*/
+
+.verde{
+    color: var(--verde_neon2);
+}
+
+.card-historial{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.card-historial .row{
+    width: 100% !important;
+    margin: 0px !important;
+}
+
+/*Modales ---------------------*/
+
+.titulo_model {
+  color: white;
+  background-color: #4caf50;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo_campo {
+  width: 80%;
+  text-align: left;
+  left: 0;
+  margin-left: 10%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#padding {
+  padding: 0px;
+}
+
+.valoracion_card .row{
+   width: 90% !important;
+   margin-left: 5% !important;
+   margin-right: 5% !important;
+
+}
+
+.carta_pedido {
+  background-color: var(white);
+  border-radius: 15px;
+  width: 95% !important;
+  margin: 10px !important;
+}
+
+.carta_pedido img {
+  border-radius: 15px !important;
+  width: 80%;
+  margin-top: 5px !important;
+}
+
+.carta_pedido p {
+  color: var(black);
+}
+
+.carta_pedido h5 {
+  color: var(black);
+}
+
+
+
+.card-catalogo{
+    background-color: #fbfbfb;
+    box-shadow: 5px 5px rgba(200, 200, 200, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title-catalogo{
+    font-size: 18pt;
+}
+
+.seccion-comentario{
+   margin-bottom: 20px;
+   display: flex;
+   justify-content: center;
+}
+
+.seccion-comentario a{
+   display: flex;
+   align-items: center;
+}
+
+.precio_detalle{
+   margin-bottom: 20px;
+}
+
+.foto{
+   width: 70% !important;
+   margin-left: 15%;
+   margin-right: 15%;
+   height: 250px;
+}
+
+.contenedor_detalle{
+   padding-top: 150px;
+}
+
+.card-inicio{
+   width: 80%;
+}
+
+.alinear-login{
+   display: flex;
+   justify-content: center;
+}
+
+.card-inicio .row{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.card-inicio .input-field{
+   margin-left: 0px !important ;
+   margin-right: 0px !important;
+}
+
+.buscar {
+   width: 100% !important;
+   height: 50px !important;
+   margin-top: 0px !important;
+   padding-top: 0px !important;
+   border: none !important;
+   box-shadow: none !important;
+}
+
+.buscar:focus{
+    border: none !important;
+    box-shadow: none !important;
+}

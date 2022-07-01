@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Agregando etiquetas meta-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Agregando archivos de estilo-->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../resources/css/materialize.min.css">
+    <link rel="stylesheet" href="../../resources/css/public.css">
+
+    <title>ProCulinary Shop</title>
+    <link rel="icon" href="../../resources/img/home/shopping.png">
+</head>
+
+<body>
+    <nav id="sticky-nav" class="nav-wrapper green ">
+        <div class="row">
+            <div class="col s1">
+                <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+            <div class="col s2">
+                <img src="../../resources/img/home/Recurso 11.png"
+                    class="logo  hide-on-small-only hide-on-med-and-down">
+            </div>
+            <div class="col s8 hide-on-small-only hide-on-med-and-down">
+                <div class="section-2">
+                    <form class="form" autocomplete="off">
+                        <div class="buscar">
+                            <input id="input-field" type="text " placeholder="Buscar...">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="nav_down" class="col s12 m6 12">
+                <img src="../../resources/img/home/Recurso 11.png" class="logo-2 hide-on-large-only ">
+                </a>
+                <ul class=" left hide-on-med-and-down">
+                    <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
+                    <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
+                    <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
+                    <li><a href="#"><i class=" material-icons left">add_shopping_cart</i><span
+                                class="new badge">1</span></a></li>
+                    <li><a href="#"><i class="material-icons left">group</i>Acceso a cuenta</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav" id="sidenav-list">
+        <li><a href="badges.html">Catálogo</a></li>
+        <li><a href="collapsible.html">Sobre Nosotros</a></li>
+        <li><a href="mobile.html">Centro de Ayuda</a></li>
+    </ul>
+
+    <section class="container contenedor_detalle">
+        <div class="row" id="producto">
+            <!--Imagen representativa-->
+            <div class="col l7 m5 s12">
+                <img src="../../resources/img/cards/martillo_carne.jpg" alt="" class="foto">
+            </div>
+            <div class="col l5 m7 s12 " id="datos_productolg">
+                <!--Datos principales-->
+                <h2>Afilador de cuchillos</h2>
+                <h6>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro obcaecati quod consectetur rem,
+                    delectus asperiores est itaque cupiditate? Enim veritatis ducimus, debitis asperiores vero
+                    recusandae voluptate culpa totam molestias soluta? Lorem ipsum dolor sit amet consectetur,
+                    adipisicing elit. Porro obcaecati quod consectetur rem,
+                    delectus asperiores est itaque cupiditate? Enim veritatis ducimus, debitis asperiores vero
+                    recusandae voluptate culpa totam molestias soluta?</h6>
+
+
+                <div class="col l12 m12 s12 ordenar_detalles">
+                    <div class="ordenardetallesproducto">
+                        <h6 class="titulos_datos">Restantes: </h6>
+                    </div>
+                    <div class="ordenardetallesproducto">
+                        <h6 class="titulos_datos">Material: </h6>
+                    </div>
+                    <div class="ordenardetallesproducto">
+                        <h6 class="titulos_datos">Categoría: </h6>
+                    </div>
+                </div>
+                <!--Precio y opciones para el comprar-->
+                <div class="col l12 m12 s12 center-align">
+                    <h5 class="precio_detalle">$15.99</h5>
+                    <div class="col l12 m12 s12 valign-wrapper">
+                        <div class="col l3">
+                            <a id="add4" onclick="aumentar_productos(4)" onblur="">
+                                <i class="bx bx-plus negro"></i>
+                            </a>
+                        </div>
+                        <div class="col l6 ">
+                            <input id="cantidad4" value="15" class="center-align" onkeyup="cambioManual(4)"
+                                onkeypress="return soloNumeros(event)">
+                        </div>
+                        <div class="col l3">
+                            <a onclick="disminuir_productos(4)">
+                                <i class="bx bx-minus negro"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!--Botón para comentarios-->
+        <div id="comentario" class="center-align seccion-comentario">
+            <a href="#comentarios" class="waves-effect waves-light btn modal-trigger valign-wrapper"><i
+                    class="material-icons">message</i>Comentarios</a>
+        </div>
+        </div>
+    </section>
+
+    <!--Modal para mostrar las valoraciones-->
+    <div id="comentarios" class="modal modal1">
+        <div class="modal-content" id="padding">
+            <h4 class="titulo_model">Valoraciones</h4>
+            <div id="cartas-valoraciones" class="col center-align">
+                <div class="card valoracion_card">
+                    <div class="row valign-wrapper">
+                        <div class="col l3 m3 s12">
+                            <p>usuario</p>
+                        </div>
+                        <div class="col l2 m2 s4">
+                            <div class="estrellas_contenedor">
+                                <input id="star1" type="radio" value="5" disabled="disabled" />
+                                <label for="star1"><i class="material-icons estrella">star</i></label>
+                                <input id="star2" type="radio" value="4" disabled="disabled" />
+                                <label for="star2"><i class="material-icons estrella">star</i></label>
+                                <input id="star3" type="radio" value="3" disabled="disabled" />
+                                <label for="star3"><i class="material-icons estrella">star</i></label>
+                                <input id="star4" type="radio" value="2" disabled="disabled" />
+                                <label for="star4"><i class="material-icons estrella">star</i></label>
+                                <input id="star5" type="radio" value="1" disabled="disabled" checked />
+                                <label for="star5"><i class="material-icons estrella">star</i></label>
+                                <input id="star0" type="radio" value="0" class="hide" />
+                            </div>
+                        </div>
+                        <div class="col l6 m7 s8">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id, perferendis totam.
+                                Aspernatur, recusandae!
+                                Mollitia ullam, accusamus nisi laborum provident sed hic nam quo architecto aut nemo
+                                cumque nostrum eius
+                                dolorum.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Se insertarán las valoraciones-->
+                <div class="aceptar_modal">
+                    <a class="modal-close"><i class="medium material-icons verde">check_circle</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="all-footer" class="page-footer green">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text"><img src="../../resources/img/home/Recurso 11.png" alt=""></h5>
+                    <p class="content-1 grey-text text-lighten-4"> Esta tienda ha sido creada con la funcionalidad de
+                        facilitarte tus compras de utensilios profesionales de cocina
+                        y de la mejor calidad, Para saber más de nosotros puedes ver nuestra historia en sobre nosotros.
+                    </p>
+                </div>
+                <div id="redes-container" class="col l4 offset-l2 s12">
+                    <h5 class="content-1 ">Redes Sociales</h5>
+                    <ul class="content">
+                        <li><a id="facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </li>
+                        <li><a id="twitter" href="#!"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a id="instagram" href="#!"><i class="fa-brands fa-instagram"></i></a>
+                        </li>
+                        <li><a id="whatsapp" href="#!"><i class="fa-brands fa-whatsapp"></i> </a></li> <br><br>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div id="footer-align" class="content container ">
+                © 2022 Departamento Técnico de Proculinaryshop
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../resources/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/components.js"></script>
+    <script type="text/javascript " src="../../controllers/Public/detalle.js"></script>
+    <script type="text/javascript " src="../../controllers/Public/zoom_detalle.js"></script>
+    <script type="text/javascript" src="../../controllers/verificador.js"></script>
+    <script type="text/javascript " src="../../controllers/Public/activaciones_publicas.js"></script>
+
+</body>
+
+</html>
