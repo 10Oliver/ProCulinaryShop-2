@@ -106,7 +106,7 @@ class inventario extends Verificador
 
     public function setDescripcion($valor)
     {
-        if ($this->validateAlphanumeric($valor, 5, 200)) {
+        if ($this->validateString   ($valor, 5, 200)) {
             $this->descripcion = $valor;
             return true;
         } else {

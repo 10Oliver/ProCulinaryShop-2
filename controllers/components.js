@@ -5,7 +5,7 @@
 /*
  *  Ruta del servidor
  */
-const SERVER = "http://localhost/ProCulinaryShop-Pro-Oficial/api/";
+const SERVER = "http://localhost/ProCulinaryShop-2/api/";
 
 
 /*
