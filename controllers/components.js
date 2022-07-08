@@ -365,3 +365,20 @@ function sweetAlert(type, text, url) {
         });
     }
 }
+
+//Función para crear una gráfica líneal con puntos interpolados
+function lineaI(CLASS) { //lineaI(CLASS, API)
+    var chart = new Chartist.Line(CLASS, {
+        labels: ['08/07/2022', '09/07/2022',  '10/07/2022',  '11/07/2022',  '12/07/2022',  '13/07/2022',  '14/07/2022',  '15/07/2022',  '16/07/2022',  '17/07/2022'],
+        series: [
+          [25, 5, 10, 8, 7, 5, 4, {x:4,y:0}],
+          [{x:4,y:0},4, null,5]
+        ]
+      }, {
+        fullWidth: true,
+        chartPadding: {
+          right: 10
+        },
+        low: 0
+      });
+}

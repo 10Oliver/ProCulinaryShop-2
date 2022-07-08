@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../resources/css/private.css" />
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
   </head>
@@ -119,58 +120,19 @@
         </div>
       </div>
       <!--Values box-->
-      <div class="values">
-        <div class="val-box-sale">
-          <i class="fa-solid fa-layer-group"></i>
-          <div class="content">
-            <h4>8,630</h4>
-            <span>Total Products</span>
-          </div>
-        </div>
-        <div class="val-box-sale">
-          <i class="fa-solid fa-cart-arrow-down"></i>
-          <div class="content">
-            <h4>14,530</h4>
-            <span>Total Sales</span>
-          </div>
-        </div>
-        <div class="val-box-sale">
-          <i class="fa-solid fa-clipboard-list"></i>
-          <div class="content">
-            <h4>10,270</h4>
-            <span>Total Orders</span>
-          </div>
-        </div>
-        <div class="val-box-sale">
-          <i class="fa-solid fa-users"></i>
-          <div class="content">
-            <h4>730</h4>
-            <span>Total Users</span>
-          </div>
-        </div>
+      <div class="container center">
+        <h6>¡Bienvenido de vuelta!</h6>
       </div>
-      <dir class="board">
-        <table width="100">
-          <thead>
-            <tr>
-              <td class="ID_datos_empleado">ID</td>
-              <td class="nombre_usuario_empleado">Nombre empleado</td>
-              <td class="correo_usuario_empleado">Teléfono</td>
-              <td class="hora_empleado">Correo</td>
-              <td class="intentos_empleado">Cargo</td>
-              <td class="habilitar_empleado"></td>
-              <td class="Active">Estado</td>
-            </tr>
-          </thead>
-          <!--Cuerpo de la tabla donde se guardarán los datos-->
-          <tbody id="tabla_cuerpo"></tbody>
-        </table>
-      </dir>
+      <div class="container center conexiones">
+
+      </div>
     </section>
 
     <script src="../../resources/js/materialize.min.js"></script>
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
-    <script src="../../controllers/private/empleados.js"></script>
+    <script src="../../controllers/components.js"></script>
+    <script src="../../controllers/private/dashboard.js"></script>
 
     <!-- <script src=""></script>-->
   </body>
