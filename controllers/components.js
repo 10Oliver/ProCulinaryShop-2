@@ -30,11 +30,11 @@ const SERVER = "http://localhost/ProCulinaryShop-2/api/";
 function leertablas(api, action) {
     fetch(api + action, {
         method: "get",
-    }).then(function(request) {
+    }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
             // Se obtiene la respuesta en formato JSON.
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se crea la variable donde se guardarán los datos
                 let data = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
@@ -70,11 +70,11 @@ function guardar_registro(api, action, form, modal) {
     fetch(api + action, {
         method: "post",
         body: new FormData(document.getElementById(form)),
-    }).then(function(request) {
+    }).then(function (request) {
         // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
         if (request.ok) {
             // Se obtiene la respuesta en formato JSON, servirá para el mensaje
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se confirma si la sentencia fue ejecutada correctamente
                 if (response.status) {
                     // Se cierra el modal del formulario
@@ -105,11 +105,11 @@ function guardar_registro(api, action, form, modal) {
 function cargar_select(endpoint, select, selected, active) {
     fetch(endpoint, {
         method: "get",
-    }).then(function(request) {
+    }).then(function (request) {
         //Se verifica si la ejecución es correcta, de lo contrario se mostrará el error en la consola
         if (request.ok) {
             //se convierte la respuesta a un JSON
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se crea la variable donde se guardará el HTML para inyectarlo en la página
                 let contenido = "";
                 //Se verifica si la respuesta es satisfactoria, de lo contrario se recibe el problema
@@ -125,7 +125,7 @@ function cargar_select(endpoint, select, selected, active) {
                             "<option disabled selected value='0'>Seleccione una opción</option>";
                     }
                     //Se recorre todo el vector devuelto para agregarlos al select
-                    response.dataset.map(function(fila) {
+                    response.dataset.map(function (fila) {
                         //Se desglosa el resultado obtenido en el valor y la opcion
                         valor = Object.values(fila)[0];
                         texto = Object.values(fila)[1];
@@ -172,11 +172,11 @@ function cargar_datos_actualizar(api, action, identificador) {
     fetch(api + action, {
         method: "post",
         body: identificador,
-    }).then(function(response) {
+    }).then(function (response) {
         //Se verifica si se ejecutó la sentencia
         if (response.ok) {
             //Se obtiene la respuesta en JSON
-            response.json().then(function(request) {
+            response.json().then(function (request) {
                 //Se verifica si el estado de la respuesta
                 if (request.status) {
                     return request;
@@ -207,11 +207,11 @@ function actualizar_registro(API, action, form, modal) {
     fetch(API + action, {
         method: "post",
         body: new FormData(document.getElementById(form)),
-    }).then(function(request) {
+    }).then(function (request) {
         //Se revisa si la sentencia pudo ser ejecutada
         if (request.ok) {
             //Se convierte el resultado a formato JSON
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se verifica que los datos obtenidos sean satisfactorios
                 if (response.status) {
                     //Se cierra el formulario
@@ -254,16 +254,16 @@ function eliminar_registro(API, action, form, mensaje, action2) {
         buttons: ["No", "Sí"],
         closeOnClickOutside: false,
         closeOnEsc: false,
-    }).then(function(valor) {
+    }).then(function (valor) {
         if (valor) {
             fetch(API + action, {
                 method: "post",
                 body: form,
-            }).then(function(request) {
+            }).then(function (request) {
                 //Se verifica si la sentencia fue ejecutada correctamente
                 if (request.ok) {
                     //Se convierte la petición a formato JSON
-                    request.json().then(function(response) {
+                    request.json().then(function (response) {
                         //Se verifica si la respuesta obtenida es satisfactoria
                         if (response.status) {
                             //Se le muestra la confirmación al usuario
@@ -298,11 +298,11 @@ function buscar(API, action, form) {
     fetch(API + action, {
         method: "post",
         body: form,
-    }).then(function(request) {
+    }).then(function (request) {
         //Se verifica que la sentencia se haya ejecutado
         if (request.ok) {
             //Se convierte la petición en formato JSON
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se crea la variable donde se guardarán los datos
                 let data = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
@@ -351,7 +351,7 @@ function sweetAlert(type, text, url) {
             button: "Aceptar",
             closeOnClickOutside: false,
             closeOnEsc: false,
-        }).then(function() {
+        }).then(function () {
             location.href = url;
         });
     } else {
@@ -367,18 +367,34 @@ function sweetAlert(type, text, url) {
 }
 
 //Función para crear una gráfica líneal con puntos interpolados
-function lineaI(CLASS) { //lineaI(CLASS, API)
+function lineaI(CLASS, API, datos) { //lineaI(CLASS)
+    //Se realiza la petición de los datos para la gráfica
+    fetch(API, {
+        method: 'post',
+        body: datos
+    }).then(function (request) {
+        //Se revisa el correcto funcionaminento
+        if (request.ok) {
+            //Se pasa a formato JSON
+            request.json().then( function (response) {
+                
+            })}
+        } else {
+            ///Se imprime el error en la consola
+        }
+    })
+
     var chart = new Chartist.Line(CLASS, {
-        labels: ['08/07/2022', '09/07/2022',  '10/07/2022',  '11/07/2022',  '12/07/2022',  '13/07/2022',  '14/07/2022',  '15/07/2022',  '16/07/2022',  '17/07/2022'],
+        labels: ['08/07/2022', '09/07/2022', '10/07/2022', '11/07/2022', '12/07/2022', '13/07/2022', '14/07/2022', '15/07/2022', '16/07/2022', '17/07/2022'],
         series: [
-          [25, 5, 10, 8, 7, 5, 4, {x:4,y:0}],
-          [{x:4,y:0},4, null,5]
+            [25, 5, 10, 8, 7, 5, 4, { x: 4, y: 0 }],
+            [{ x: 4, y: 0 }, 4, null, 5]
         ]
-      }, {
+    }, {
         fullWidth: true,
         chartPadding: {
-          right: 10
+            right: 10
         },
         low: 0
-      });
+    });
 }
