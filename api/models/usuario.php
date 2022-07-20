@@ -227,6 +227,37 @@ class usuario extends Verificador{
         }
     }
 
+
+    /*-----------------------------------Login (privada)----------------------------- */
+
+        //Función para revisar si la cuenta del usuario existe
+
+        public function revisarUsuarioPrivada()
+        {
+            $sql = 'SELECT id_empleado, id_estado_empleado FROM empleado WHERE id_empleado = ?;';
+            $params = array($this->usuarioCliente);
+            if ($data = Database::filaUnica($sql, $params)) {
+                $this->idCliente = $data['id_cliente'];
+                $this->estadoCliente = $data['estado_cliente'];
+                return true;
+            } else {
+                return false;
+            }
+        }
+    
+        //Función que revisa la contraseña del cliente
+        public function revisarPassPrivada()
+        {
+            $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
+            $params = array($this->idCliente);
+            $data = Database::filaUnica($sql, $params);
+            if (password_verify($this->passCliente, $data['contrasena_cliente'])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
 }
 
 ?>
