@@ -368,143 +368,15 @@ function sweetAlert(type, text, url) {
 
 
 //Función para crear una gráfica líneal con puntos interpolados
-function lineaI(CLASS, cabeceras, datos) { 
-    //Se crea la gráfica a base de la clase y los datos
+function lineaI(CLASS,cabeceras, datos) { //lineaI(CLASS)
     var chart = new Chartist.Line(CLASS, {
         labels: cabeceras,
-        series: [
-            datos
-        ],
+        series: datos,
     }, {
         fullWidth: true,
         chartPadding: {
-            right: 100
+            right: 10
         },
         low: 0
     });
-    /* --Código para que se encuentre animado---- */
-    var seq = 0,
-        delays = 80,
-        durations = 500;
-
-   //Se reinicia la animación
-    chart.on('created', function () {
-        seq = 0;
-    });
-
-    //Se dibuja los elementos usando la API de Chartist
-    chart.on('draw', function (data) {
-        seq++;
-
-        if (data.type === 'line') {
-            //Se especifican la opacidad y las animacion de las lineas usando ccs3
-            data.element.animate({
-                opacity: {
-                    //Se especifica el delay antes de seguir o cambiar de fase
-                    begin: seq * delays + 1000,
-                    //Duración de la animación
-                    dur: durations,
-                    //El valor donde se iniciará la animación
-                    from: 0,
-                    //El valor donde finalizará la animación
-                    to: 1
-                }
-            });
-        } else if (data.type === 'label' && data.axis === 'x') {
-            data.element.animate({
-                y: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.y + 100,
-                    to: data.y,
-                    easing: 'easeOutQuart'
-                }
-            });
-        } else if (data.type === 'label' && data.axis === 'y') {
-            data.element.animate({
-                x: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 100,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                }
-            });
-        } else if (data.type === 'point') {
-            data.element.animate({
-                x1: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 10,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                },
-                x2: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: data.x - 10,
-                    to: data.x,
-                    easing: 'easeOutQuart'
-                },
-                opacity: {
-                    begin: seq * delays,
-                    dur: durations,
-                    from: 0,
-                    to: 1,
-                    easing: 'easeOutQuart'
-                }
-            });
-        } else if (data.type === 'grid') {
-            //Animaciones para las líneas
-            var pos1Animation = {
-                begin: seq * delays,
-                dur: durations,
-                from: data[data.axis.units.pos + '1'] - 30,
-                to: data[data.axis.units.pos + '1'],
-                easing: 'easeOutQuart'
-            };
-
-            var pos2Animation = {
-                begin: seq * delays,
-                dur: durations,
-                from: data[data.axis.units.pos + '2'] - 100,
-                to: data[data.axis.units.pos + '2'],
-                easing: 'easeOutQuart'
-            };
-
-            var animations = {};
-            animations[data.axis.units.pos + '1'] = pos1Animation;
-            animations[data.axis.units.pos + '2'] = pos2Animation;
-            animations['opacity'] = {
-                begin: seq * delays,
-                dur: durations,
-                from: 0,
-                to: 1,
-                easing: 'easeOutQuart'
-            };
-
-            data.element.animate(animations);
-        }
-    });
-
-  //Reanimación de la gráfica
-    chart.on('created', function () {
-        if (window.__exampleAnimateTimeout) {
-            clearTimeout(window.__exampleAnimateTimeout);
-            window.__exampleAnimateTimeout = null;
-        }
-        window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 12000);
-    });
-}
-
-function barras(CLASS, cabeceras, datos) { 
-    new Chartist.Bar(CLASS, {
-        labels: cabeceras,
-        series: [
-            datos
-        ]
-    }, {
-        distributeSeries: true
-    });
-
 }

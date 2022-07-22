@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     //Se llena los datos para la gráfica
                     response.dataset.map(function (row) {
                         cabeceras.push(row.fecha);
-                        datos.push(Number(row.total));
+                        datos.push(row.total);
                     })
                     //Se envían los datos para ser gráficados
                     //console.log(cabeceras);
