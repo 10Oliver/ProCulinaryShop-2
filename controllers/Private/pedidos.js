@@ -3,7 +3,7 @@ const API_pedidos = SERVER + "private/api_pedidos.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function() {
-    leertablas(API_pedidos, "cargarDatos");
+    leertablas(API_pedidos, "cargarDatos", 1);
 });
 
 //Función que llenará la tabla

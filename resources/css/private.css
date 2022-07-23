@@ -84,6 +84,20 @@ body.dark {
     width: 100%;
 }
 
+
+.dashboardC{
+    height: 100% !important;
+    width: 100%;
+    position: fixed;
+
+    text-align: center;
+}
+
+.dashboardC .conexiones{
+    margin-top: 50px;
+    margin: 10%;
+}
+
 .imagen-contenedor-login{
     display: flex;
     justify-content: center;

@@ -16,7 +16,7 @@ document.getElementById("login").addEventListener('submit', function (event) {
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status) {
-                    sweetAlert(1, response.message, "index.html");
+                    sweetAlert(1, response.message, "dashboard.html");
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

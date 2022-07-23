@@ -72,11 +72,9 @@ function llenar_tabla(dataset) {
                         $${(row.precio * row.cantidad_producto_orden).toFixed(2)}</p>
                     </div>
                     <div class="col l1 m1 s12">
-                        <a class="tooltipped" id="tool${
-                            row.id_detalle_orden
-                        }" onclick="eliminarCarrito(${
-            row.id_detalle_orden
-        })" data-tooltip="Eliminar del carrito">
+                        <a class="tooltipped" id="tool${row.id_detalle_orden
+            }" onclick="eliminarCarrito(${row.id_detalle_orden
+            })" data-tooltip="Eliminar del carrito">
                             <i class='bx bxs-trash rojo' ></i>
                         </a>
                     </div>
@@ -161,7 +159,7 @@ function aumentar_productos(id) {
             request.json().then(function (response) {
                 //Se verifica que los datos sean satisfactorios
                 if (!response.status) {
-                    sweetAlert(3,response.exception, null);
+                    sweetAlert(3, response.exception, null);
                 } else {
                     //Se define el arreglo
                     let data = [];
@@ -198,7 +196,7 @@ function cambioManual(id, event) {
         componente.value = "1";
     }
     //Se verifica si ya es un 0
-    if (componente.value == 0 ) {
+    if (componente.value == 0) {
         sweetAlert(3, "La cantidad no puede ser 0", null);
         componente.value = "1";
         //Se abre el tooltip
@@ -235,7 +233,7 @@ function cambioManual(id, event) {
                                 //Se verifica que los datos obtenidos sean satisfactorios
                                 if (response.status) {
                                     //Se carga el dato del subtotal
-                                    document.getElementById("subtotal" + id).innerHTML = '$'+(
+                                    document.getElementById("subtotal" + id).innerHTML = '$' + (
                                         document.getElementById("precio" + id).innerHTML.slice(1) *
                                         componente.value).toFixed(2);
                                 } else {
@@ -317,7 +315,7 @@ function verificarExistencia() {
                     //Se inicia el bucle para verificiar cada cantidad del carrito
                     data.map(function (row) {
                         if (row.cantidad < row.cantidad_producto_orden) {
-                            sweetAlert(2, "La cantidad del producto : " + row.nombre_producto +" Debe ser menor o igual a: "+row.cantidad,null);
+                            sweetAlert(2, "La cantidad del producto : " + row.nombre_producto + " Debe ser menor o igual a: " + row.cantidad, null);
                             verificador = false;
                             return false;
                         }
@@ -368,7 +366,7 @@ function verificarExistencia() {
                                                         }
                                                     });
                                                 });
-                                                
+
                                             } else {
                                                 //Se muestra el error
                                                 sweetAlert(2, response.exception, null);

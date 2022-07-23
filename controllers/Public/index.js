@@ -115,8 +115,23 @@ function llenar_tabla(dataset) {
             //Se le insertan las filas a la tabla en la vista
             document.getElementById("contenedorVendidos").innerHTML = contenido;
         }
-        
+
     });
 }
 
+
+//función para enviar busquedas al catálogo
+
+document.getElementById('buscador_producto').addEventListener('keypress', function (key) {
+    //Se obtiene el código de la tecla
+    let tecla = key.keyCode;
+    //se revisa si es enter
+    if (tecla == 13 && document.getElementById('buscador_producto').value != "") {
+        //Se redirecciona al catalogo
+        window.location = "catalogo.html?id=" + document.getElementById('buscador_producto').value;
+    } else if (tecla == 13) {
+        //Se le notifica al usuario
+        sweetAlert(3, 'La busqueda no puede estar vacía', null);
+    }
+})
 

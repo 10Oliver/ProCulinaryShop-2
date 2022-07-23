@@ -2,7 +2,6 @@
 const API_detalle = SERVER + "public/api_detalle.php?action=";
 
 //Método que se ejecuta cuando se carga la página
-
 document.addEventListener("DOMContentLoaded", function () {
     // Se busca en la URL las variables (parámetros) disponibles.
     let params = new URLSearchParams(location.search);
@@ -46,12 +45,12 @@ function llenar_tabla(dataset) {
     //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
     contenido += `
             <div class="col l7 m5 s12">
-                <img src="../../api/images/productos/${dataset.imagen}" alt="" class="foto_detalle">
+                <img src="../../api/images/productos/${dataset.imagen}" alt="" class="foto">
             </div>
             <div class="col l5 m7 s12 " id="datos_productolg">
                 <!--Datos principales-->
-                <h2>${dataset.nombre_producto}</h2>
-                <h6>${dataset.descripcion}</h6>
+                <h4>${dataset.nombre_producto}</h4>
+                <p>${dataset.descripcion}</p>
                 <div class="col l12 m12 s12 ordenar_detalles">
                     <div class="ordenardetallesproducto">
                         <h6 class="titulos_datos" id="cantidadR">Restantes: ${dataset.cantidad}</h6>
@@ -86,6 +85,11 @@ function llenar_tabla(dataset) {
 
                 </div>
             </div>
+            <!--Botón para comentarios-->
+        <div class="center-align seccion-comentario">
+            <a href="#comentarios" onclick class="waves-effect waves-light btn modal-trigger valign-wrapper"><i
+                    class="material-icons">message</i>Comentarios</a>
+        </div>
 
         `;
 
@@ -610,6 +614,5 @@ function cargarComentarios(id) {
             //Se imprime el problema al ejecutar la sentencia
             console.log(request.status + " " + request.statusText);
         }
-
     });
 }

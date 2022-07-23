@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //función que cierra la sesión de la cuenta
 
 function cerrarSesion() {
-     swal({
+    swal({
         title: 'Advertencia',
         text: '¿Estás seguro de cerrar tu sesión?',
         icon: 'warning',

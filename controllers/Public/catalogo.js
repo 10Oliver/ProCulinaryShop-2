@@ -27,8 +27,14 @@ function llenar_tabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
-    dataset.map(function (row) {
-        contenido += `
+    //se verifica si está vacío o no
+    if (dataset.length == 0) {
+        sweetAlert(3, 'No hay coincidencias', null);
+        //se cargan todos los productos
+        leertablas(API_catalogo, 'cargarCatalogo');
+    } else {
+        dataset.map(function (row) {
+            contenido += `
              <div class="col s12 m6 l4">
                 <div class="card">
                     <div class="card-image">
@@ -56,10 +62,12 @@ function llenar_tabla(dataset) {
                     </div>
                 </div>
             </div>`;
-    });
-  
-    //Se le insertan las filas a la tabla en la vista
-    document.getElementById("contenedorProductos").innerHTML = contenido;
+
+        });
+        //Se le insertan las filas a la tabla en la vista
+        document.getElementById("contenedorProductos").innerHTML = contenido;
+    }
+
 }
 
 
@@ -73,7 +81,7 @@ document.getElementById('buscador_producto').addEventListener('keyup', function 
         //Se crea la variable de tipo formulario
         let dato = new FormData();
         //Se llena con el texto del input
-        dato.append('buscar', document.getElementById('buscador_producto').value);
+        dato.append('busqueda', document.getElementById('buscador_producto').value);
         //se busca el producto
         buscar(API_catalogo, 'buscarProducto', dato);
     } else {

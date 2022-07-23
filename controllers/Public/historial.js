@@ -97,7 +97,7 @@ function llenar_tabla(dataset) {
                     </div>
                 </div>    
         `;
-        
+
         }
     });
     //Se le insertan las filas a la tabla en la vista
@@ -190,11 +190,11 @@ function ver_productos(identificador) {
                             <div class="col l6 m6 s12">
                                 <div class="col l12 m12 s12">
                                     <h5>Precio</h5>
-                                    <p>${row.precio}</p>
+                                    <p>$${row.precio}</p>
                                 </div>
                                 <div class="col l12 m12 s12">
                                     <h5>Subtotal</h5>
-                                    <p>${row.subtotal}</p>
+                                    <p>$${row.subtotal}</p>
                                 </div>
                             </div>
                         </div>

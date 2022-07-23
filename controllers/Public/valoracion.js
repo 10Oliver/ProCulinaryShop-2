@@ -88,7 +88,7 @@ function enviar() {
             //se crea la variable del tipo form data
             let datos = new FormData();
             //se llena con los datos
-            datos.append("identificador", validacion[index] + 1);
+            datos.append("identificador", validacion[index]);
             datos.append(
                 "comentario",
                 document.getElementById("comentario" + validacion[index]).value
@@ -128,6 +128,6 @@ function enviar() {
             } else {
                 sweetAlert(1, "Tus valoraciones han sido guardadas con éxito", "index.html");
             }
-        }, 700);    
+        }, 700);
     }
 }

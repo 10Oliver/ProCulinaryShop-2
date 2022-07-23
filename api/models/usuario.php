@@ -16,6 +16,14 @@ class usuario extends Verificador{
     private $intentosEmpleado = null;
     private $idEmpleado = null;
     private $idCliente = null;
+    private $nombreUsuario = null;
+    private $apellidoUsuario = null;
+    private $correoUsuario = null;
+    private $telefonoUsuario = null;
+    private $direccionUsuario = null;
+    private $duiUsuario = null;
+    private $usuarioUsuario = null;
+    private $passUsuario = null;
     private $estadoCliente = null;
 
 
@@ -30,6 +38,86 @@ class usuario extends Verificador{
             return false;
         }
         
+    }
+
+    public function setNombreUsuario($valor)
+    {
+        if ($this->validateAlphabetic($valor, 5, 80)) {
+            $this->nombreUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setApellidoUsuario($valor)
+    {
+        if ($this->validateAlphabetic($valor, 5, 80)) {
+            $this->apellidoUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setCorreoUsuario($valor)
+    {
+        if ($this->validateEmail($valor)) {
+            $this->correoUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setTelefonoUsuario($valor)
+    {
+        if ($this->validatePhone($valor)) {
+            $this->telefonoUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setDUiUsuario($valor)
+    {
+        if ($this->validateDUI($valor)) {
+            $this->duiUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setUsuarioUsuario($valor)
+    {
+        if ($this->validateString($valor,5,80)) {
+            $this->usuarioUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setPassUsuario($valor)
+    {
+        if ($this->validatePassword($valor)) {
+            $this->passUsuario = password_hash($valor, PASSWORD_DEFAULT);;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setDireccionUsuario($valor)
+    {
+        if ($this->validateString($valor, 5, 80)) {
+            $this->direccionUsuario = $valor;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function setUsuariocliente($valor)
@@ -227,36 +315,17 @@ class usuario extends Verificador{
         }
     }
 
+    //función para crear un nuevo usuario
 
-    /*-----------------------------------Login (privada)----------------------------- */
-
-        //Función para revisar si la cuenta del usuario existe
-
-        public function revisarUsuarioPrivada()
-        {
-            $sql = 'SELECT id_empleado, id_estado_empleado FROM empleado WHERE id_empleado = ?;';
-            $params = array($this->usuarioCliente);
-            if ($data = Database::filaUnica($sql, $params)) {
-                $this->idCliente = $data['id_cliente'];
-                $this->estadoCliente = $data['estado_cliente'];
-                return true;
-            } else {
-                return false;
-            }
-        }
-    
-        //Función que revisa la contraseña del cliente
-        public function revisarPassPrivada()
-        {
-            $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
-            $params = array($this->idCliente);
-            $data = Database::filaUnica($sql, $params);
-            if (password_verify($this->passCliente, $data['contrasena_cliente'])) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+    public function crearCliente()
+    {
+        $sql = 'INSERT INTO cliente(
+	nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, direccion, dui, visto, usuario_cliente, contrasena_cliente, intento_cliente, hora_unlock_cliente, estado_cliente)
+	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $params = array($this->nombreUsuario, $this->apellidoUsuario, $this->correoUsuario, $this->telefonoUsuario, $this->direccionUsuario,
+    $this->duiUsuario, true, $this->usuarioUsuario, $this->passUsuario, 5,null,true);
+    return database::ejecutar($sql, $params);
+    }
 
 }
 

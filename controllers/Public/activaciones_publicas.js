@@ -22,4 +22,5 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Tooltip.init(document.querySelectorAll(".tooltipped"));
     var elems = document.querySelectorAll(".carousel");
     M.Carousel.init(elems, {});
+
 });

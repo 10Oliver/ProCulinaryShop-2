@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Dashboard</title>
@@ -11,129 +12,156 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
-  </head>
+</head>
 
-  <body>
+<body>
     <!--Estructura de la barra de navegación lateral-->
-    <div class="sidebar">
-      <div class="logo-details">
-        <i class="bx bxl-shopify icon"></i>
-        <div class="logo_name">ProculinaryShop</div>
-        <i class="bx bx-menu" id="btn"></i>
-      </div>
-      <ul class="nav-list">
-        <li>
-          <a href="#">
-            <i class="bx bx-grid-alt"></i>
-            <span class="links_name">Dashboard</span>
-          </a>
-          <span class="tooltip">Dashboard</span>
-        </li>
-        <li>
-          <a href="inventario.html">
-            <i class="bx bxs-book-open"></i>
-            <span class="links_name">Inventario</span>
-          </a>
-          <span class="tooltip">Inventario</span>
-        </li>
-        <li>
-          <a href="comentarios.html">
-            <i class="bx bxs-bell-ring"></i>
-            <span class="links_name">Avisos</span>
-          </a>
-          <span class="tooltip">Avisos</span>
-        </li>
-        <li>
-          <a href="control usuarios.html">
-            <i class="bx bxs-user"></i>
-            <span class="links_name">Usuarios</span>
-          </a>
-          <span class="tooltip">Usuarios</span>
-        </li>
-        <li>
-          <a href="pedidos.html">
-            <i class="bx bxs-package"></i>
-            <span class="links_name">Pedidos</span>
-          </a>
-          <span class="tooltip">Pedidos</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-bar-chart-alt"></i>
-            <span class="links_name">Gráficos</span>
-          </a>
-          <span class="tooltip">Gráficos</span>
-        </li>
-        <li class="profile">
-          <div class="profile-details">
-            <img src="../../resources/img/dashboard/Profile.jpeg" alt="profileImg" />
-            <div class="name_job">
-              <div class="name">Stephanie Salinas</div>
-              <div class="job">Web designer</div>
+        <div class="sidebar">
+            <div class="logo-details">
+                <i class='bx bxl-shopify icon'></i>
+                <div class="logo_name">ProculinaryShop</div>
+                <i class='bx bx-menu' id="btn"></i>
             </div>
-          </div>
-          <i class="bx bx-log-out" id="log_out"></i>
-        </li>
-      </ul>
-    </div>
+            <ul class="nav-list">
+                <li>
+                    <a href="dashboard.html">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="links_name">Dashboard</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+                </li>
+                <li>
+                    <a href="inventario.html">
+                        <i class='bx bxs-book-open'></i>
+                        <span class="links_name">Inventario</span>
+                    </a>
+                    <span class="tooltip">Inventario</span>
+                </li>
+                <li>
+                    <a href="noticias.html">
+                        <i class='bx bxs-bell-ring'></i>
+                        <span class="links_name">Noticias</span>
+                    </a>
+                    <span class="tooltip">Noticias</span>
+                </li>
+                <li>
+                    <a href="control_usuarios.html">
+                        <i class='bx bxs-user'></i>
+                        <span class="links_name">Empleados</span>
+                    </a>
+                    <span class="tooltip">Empleados</span>
+                </li>
+                <li>
+                    <a href="usuario.html">
+                        <i class='bx bxs-user-circle'></i>
+                        <span class="links_name">Usuarios</span>
+                    </a>
+                    <span class="tooltip">Usuarios</span>
+                </li>
+                <li>
+                    <a href="pedidos.html">
+                        <i class='bx bxs-package'></i>
+                        <span class="links_name">Pedidos</span>
+                    </a>
+                    <span class="tooltip">Pedidos</span>
+                </li>
+                <li>
+                    <a href="comentarios.html">
+                        <i class='bx bxs-message-dots'></i>
+                        <span class="links_name">Comentarios</span>
+                    </a>
+                    <span class="tooltip">Comentarios</span>
+                </li>
+                <li>
+                    <a href="clientes.html">
+                        <i class='bx bxs-user-rectangle'></i>
+                        <span class="links_name">Clientes</span>
+                    </a>
+                    <span class="tooltip">Clientes</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class='bx bx-bar-chart-alt'></i>
+                        <span class="links_name">Gráficos</span>
+                    </a>
+                    <span class="tooltip">Gráficos</span>
+                </li>
+                <li class="profile">
+                    <div class="profile-details">
+                        <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                        <div class="name_job">
+                            <div class="name">Stephanie Salinas</div>
+                            <div class="job">Web designer</div>
+                        </div>
+                    </div>
+                    <i class='bx bx-log-out' id="log_out"></i>
+                </li>
+            </ul>
+        </div>
+
     <!--fin de estructura de sidebar-->
     <!--Home section-->
     <section class="home-section">
-      <div class="nav">
-        <div class="sidebar-button">
-          <span class="dashboard">Dashboard</span>
-        </div>
-        <div class="time hide-on-med-and-down">
-          <div class="time-colon">
-            <div class="time-text">
-              <span class="num hour_num">09</span>
+        <div class="nav">
+            <div class="sidebar-button">
+                <span class="dashboard">Dashboard</span>
             </div>
-            <span class="colon">:</span>
-          </div>
-          <div class="time-colon">
-            <div class="time-text">
-              <span class="num min_num">06</span>
+            <div class="time hide-on-med-and-down">
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num hour_num">09</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num min_num">06</span>
+                    </div>
+                    <span class="colon">:</span>
+                </div>
+                <div class="time-colon">
+                    <div class="time-text">
+                        <span class="num sec_num">06</span>
+                    </div>
+                    <span class="am_pm">AM</span>
+                </div>
+                <span id="dia" class="dayweek"></span>
+                <span id="date" class="day"></span>
+                <span class="day-text">De</span>
+                <span id="month" class="month"></span>
+                <span class="month-text">Del</span>
+                <span id="year" class="year"></span>
             </div>
-            <span class="colon">:</span>
-          </div>
-          <div class="time-colon">
-            <div class="time-text">
-              <span class="num sec_num">06</span>
+            <div class="darkLight-searchBox">
+                <div class="settings">
+                    <i class="bx bx-cog"></i>
+                </div>
+                <div class="dark-light">
+                    <i class="bx bx-moon moon"></i>
+                    <i class="bx bx-sun sun"></i>
+                </div>
             </div>
-            <span class="am_pm">AM</span>
-          </div>
-          <span id="dia" class="dayweek"></span>
-          <span id="date" class="day"></span>
-          <span class="day-text">De</span>
-          <span id="month" class="month"></span>
-          <span class="month-text">Del</span>
-          <span id="year" class="year"></span>
         </div>
-        <div class="darkLight-searchBox">
-          <div class="settings">
-            <i class="bx bx-cog"></i>
-          </div>
-          <div class="dark-light">
-            <i class="bx bx-moon moon"></i>
-            <i class="bx bx-sun sun"></i>
-          </div>
-        </div>
-      </div>
-      <!--Values box-->
-      <div class="container center">
-        <h6>¡Bienvenido de vuelta!</h6>
-      </div>
-      <div class="container center conexiones">
+        <!--Values box-->
+        <div class="dashboardC">
+            <h5>¡Bienvenido de vuelta!</h5>
 
-      </div>
+            <div class="center conexiones ">
+                <h6>Periodos de conexión en tu cuenta</h6>
+            </div>
+        </div>
+
     </section>
 
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script type="text/javascript " src="../../controllers/Private/sidebar.js "></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="../../controllers/components.js"></script>
     <script src="../../controllers/private/dashboard.js"></script>
 
     <!-- <script src=""></script>-->
-  </body>
+</body>
+
 </html>

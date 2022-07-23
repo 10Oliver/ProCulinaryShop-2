@@ -19,5 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(elems);
     var elems = document.querySelectorAll(".datepicker");
 
-    var instances = M.Datepicker.init(elems,options);
+    var instances = M.Datepicker.init(elems, options);
+    var el = document.querySelector('.tabs');
+    var instance = M.Tabs.init(el, {});
 });
