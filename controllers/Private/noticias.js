@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     leertablas(API_noticia, "cargar_datos");
     cargar_select(API_noticia + "cargar_categorias", "selector_categoria", null, 1);
     //Se cargará la gráfica
-     barras(".grafica", ['noticia1'], [1,2,4,10]);
+     barras(".grafica", ['noticia1'], [1]);
 });
 
 //Función que llenará la tabla
