@@ -49,6 +49,7 @@ class Estadistica extends Verificador
         return database::multiFilas($sql, $params);
     }
 
+    //Función para obtener la cantidad de productos vendidos durante fechas
     public function cargarDatos($valor)
     {
 
@@ -71,6 +72,18 @@ class Estadistica extends Verificador
         }
         
         $sql = $sql." GROUP BY p.nombre_producto, deo.cantidad_producto_orden";
+        return database::multiFilas($sql, $params);
+    }
+
+    //Función para obtener el dinero recaudado por fechas
+    public function cargarDinero()
+    {
+        $sql = "SELECT CONCAT(TO_CHAR(fecha_hora, 'TMDay'), ' ',(EXTRACT(DAY FROM (fecha_hora))), ' de ',TO_CHAR(fecha_hora, 'TMMonth')) as fecha,
+        (AVG(calcular_subtotal(id_orden_compra))) as promedio,
+        SUM(calcular_subtotal(id_orden_compra)) AS dinero FROM orden_compra
+        WHERE fecha_hora BETWEEN ? AND ?
+        GROUP BY fecha_hora";
+        $params = array($this->fechaInicial, $this->fechaFinal);
         return database::multiFilas($sql, $params);
     }
 }

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
                     //Se inyecta a la tabla
                     document.getElementById("contenido").innerHTML = contenido;
-                     contar();
+                    contar();
                 } else {
                     //se imprime el error
                     sweetAlert(2, response.exception, null);
@@ -48,29 +48,28 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(request.status + " " + request.statusText);
         }
     });
-    //Se carga el slider con las fechas disponibles
-    var dateSlider = document.getElementById("slider-date");
+    //Se carga el componente de los sliders
+    var dateSlider = document.getElementById("slider-cantidad");
+    var dateSliderDinero = document.getElementById("slider-dinero");
 
     function timestamp(str) {
         return new Date(str).getTime();
     }
 
+    //Se le aplican las horas al slider
     noUiSlider.create(dateSlider, {
         // Rango máximo y minimo para el slider
-        
+
         range: {
             min: timestamp(moment().subtract(1, "months").format("YYYY-MM-DD")),
             max: timestamp(moment()),
         },
-        
+
         // Steps of one week
         step: 7 * 24 * 60 * 60 * 1000,
 
         // Posiciones iniciales
-        start: [
-            timestamp(moment().subtract(2, "days").format("YYYY-MM-DD")),
-            timestamp(moment()),
-        ],
+        start: [timestamp(moment().subtract(2, "days").format("YYYY-MM-DD")), timestamp(moment())],
 
         // Si se permitirán decimales o no
         format: wNumb({
@@ -78,9 +77,35 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
     });
 
-    //Obtención de los componentes a colocalres la hora
+    //Se le aplican las horas al slider
+    noUiSlider.create(dateSliderDinero, {
+        // Rango máximo y minimo para el slider
+
+        range: {
+            min: timestamp(moment().subtract(1, "months").format("YYYY-MM-DD")),
+            max: timestamp(moment()),
+        },
+
+        // Steps of one week
+        step: 7 * 24 * 60 * 60 * 1000,
+
+        // Posiciones iniciales
+        start: [timestamp(moment().subtract(2, "days").format("YYYY-MM-DD")), timestamp(moment())],
+
+        // Si se permitirán decimales o no
+        format: wNumb({
+            decimals: 0,
+        }),
+    });
+
+    //Obtención de los componentes a colocarles las fechas
     var dateValues = [document.getElementById("inicio"), document.getElementById("fin")];
     var valores = [document.getElementById("inicioI"), document.getElementById("finI")];
+    var dateValuesDinero = [
+        document.getElementById("inicioDinero"),
+        document.getElementById("finDinero"),
+    ];
+    var valoresDinero = [document.getElementById("inicioDineroI"), document.getElementById("finDineroI")];
 
     //Opciones
     var formatter = new Intl.DateTimeFormat("es-ES", {
@@ -95,10 +120,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     dateSlider.noUiSlider.on("update", function (values, handle) {
         valores[handle].value = formatter1.format(new Date(+values[handle]));
-        dateValues[handle].innerHTML = formatter.format(new Date(+values[handle])); 
+        dateValues[handle].innerHTML = formatter.format(new Date(+values[handle]));
         contar();
     });
+
     
+    dateSliderDinero.noUiSlider.on("update", function (values, handle) {
+        valoresDinero[handle].value = formatter1.format(new Date(+values[handle]));
+        dateValuesDinero[handle].innerHTML = formatter.format(new Date(+values[handle]));
+        dinero();
+    });
 });
 
 //Función que contará y llenará la gráfica
@@ -119,7 +150,6 @@ function contar() {
     datos.append("fechainicial", document.getElementById("inicioI").value);
     datos.append("fechafinal", document.getElementById("finI").value);
     datos.append("identificador", id);
-    console.log(id);
     //Se realiza la petición
     fetch(API_estadistica + "productosTiempo", {
         method: "post",
@@ -131,7 +161,7 @@ function contar() {
             request.json().then(function (response) {
                 //Se verifica el estado devuelto por la api
                 if (response.status) {
-                    //se crean las variables que almacerán los datos para la gráfica}
+                    //se crean las variables que almacerán los datos para la gráfica
                     let datos = [],
                         titulos = [];
                     //se guardan los datos por fila
@@ -139,7 +169,6 @@ function contar() {
                         titulos.push(row.nombre_producto + " (" + row.total + ")");
                         datos.push(row.total);
                     });
-                    console.log(datos);
                     //se envían para general la gráfica
                     semiPastel(".pastel", titulos, datos);
                 } else {
@@ -149,6 +178,48 @@ function contar() {
         } else {
             //Se imprime el error en la consola
             console.log(request.status + " " + request.statusText);
+        }
+    });
+}
+
+//Función para fechas de dinero
+function dinero() {
+    //Se crea una variable de tipo form
+    let datos = new FormData();
+    //Se llena con las fechas
+    datos.append("fechainicial", document.getElementById("inicioDineroI").value);
+    datos.append("fechafinal", document.getElementById("finDineroI").value);
+    //Se realiza la petición a la api
+    fetch(API_estadistica + "cargarDinero", {
+        method: 'post',
+        body: datos,
+    }).then(function (request) { 
+        //Se revisa el estado de la ejecución
+        if (request.ok) { 
+            //Se convierte a json
+            request.json().then(function (response) { 
+                //Se revisa el estado devuelto por la api
+                if (response.status) {
+                    //se crean las variables que almacerán los datos para la gráfica
+                    let datos = [],promedio = [], total = []
+                        titulos = [];
+                    //se guardan los datos por fila
+                    response.dataset.map(function (row) {
+                        titulos.push(row.fecha);
+                        total.push(row.dinero);
+                        promedio.push(row.promedio);
+                    });
+                    datos.push(promedio);
+                    datos.push(total);
+                    //se envían para general la gráfica
+                    barras(".barras", titulos, datos);
+                } else {
+                    barras(".barras", ["No hay datos disponibles"], [[0], [0]]);
+                }
+            })
+        } else { 
+            //Se imprime el error en la consola
+            console.log(request.status + ' ' + request.statusText);
         }
     });
 }
