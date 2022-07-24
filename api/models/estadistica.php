@@ -86,4 +86,15 @@ class Estadistica extends Verificador
         $params = array($this->fechaInicial, $this->fechaFinal);
         return database::multiFilas($sql, $params);
     }
+
+    //Función para obtener los clientes con más compras
+    public function cargarCliente()
+    {
+        $sql = "SELECT CONCAT(c.nombre_cliente, ' ' , c.apellido_cliente) as nombre, SUM(calcular_subtotal(id_orden_compra)) as total  FROM orden_compra oc
+        INNER JOIN cliente c ON c.id_cliente = oc.id_cliente
+        WHERE oc.fecha_hora BETWEEN (CURRENT_DATE-'30 days'::INTERVAL) AND CURRENT_DATE 
+        GROUP BY c.id_cliente LIMIT 5";
+        $params = null;
+        return database::multiFilas($sql, $params);
+    }
 }

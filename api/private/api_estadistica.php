@@ -56,6 +56,15 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay datos de momento';
             }
             break;
+        case 'cargarClientes':
+            if ($result['dataset'] = $estadistica->cargarCliente()) {
+                $result['status'] = 1;
+            } elseif (database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'No hay datos de momento';
+            }
+            break;
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');

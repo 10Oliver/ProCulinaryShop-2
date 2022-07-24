@@ -48,6 +48,40 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(request.status + " " + request.statusText);
         }
     });
+
+
+    //Se realiza la petición para cargar los clientes
+    fetch(API_estadistica + "cargarClientes", {
+        method: "get",
+    }).then(function (request) {
+        //Se verifica el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a JSON
+            request.json().then(function (response) {
+                //Se verifica el estado devuelto por la api
+                if (response.status) {
+                    //se crean las variables que almacerán los datos para la gráfica
+                    let datos = [],
+                        titulos = [];
+                    //se guardan los datos por fila
+                    response.dataset.map(function (row) {
+                        titulos.push(row.nombre);
+                        datos.push(row.total);
+                    });
+                    //vector general de datos
+                    let general = [];
+                    general.push(datos);
+                    //se envían para general la gráfica
+                    barras(".barras", titulos, general);
+                } else {
+                    barras(".barras", ["No se encontraron productos"], [0]);
+                }
+            });
+        } else {
+            //Se imprime el error en la consola
+            console.log(request.status + " " + request.statusText);
+        }
+    });
     //Se carga el componente de los sliders
     var dateSlider = document.getElementById("slider-cantidad");
     var dateSliderDinero = document.getElementById("slider-dinero");
@@ -212,9 +246,9 @@ function dinero() {
                     datos.push(promedio);
                     datos.push(total);
                     //se envían para general la gráfica
-                    linea(".barras", titulos, datos);
+                    linea(".lineas", titulos, datos);
                 } else {
-                    linea(".barras", ["No hay datos disponibles"], [[0], [0]]);
+                    linea(".lineas", ["No hay datos disponibles"], [[0], [0]]);
                 }
             })
         } else { 
