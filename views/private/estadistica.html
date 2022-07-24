@@ -10,94 +10,94 @@
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-
+    <link rel="stylesheet" href="../../resources/css/nouislider.css" />
     <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
 </head>
 
 <body>
     <!--Estructura de la barra de navegación lateral-->
-        <div class="sidebar">
-            <div class="logo-details">
-                <i class='bx bxl-shopify icon'></i>
-                <div class="logo_name">ProculinaryShop</div>
-                <i class='bx bx-menu' id="btn"></i>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="inventario.html">
-                        <i class='bx bxs-book-open'></i>
-                        <span class="links_name">Inventario</span>
-                    </a>
-                    <span class="tooltip">Inventario</span>
-                </li>
-                <li>
-                    <a href="noticias.html">
-                        <i class='bx bxs-bell-ring'></i>
-                        <span class="links_name">Noticias</span>
-                    </a>
-                    <span class="tooltip">Noticias</span>
-                </li>
-                <li>
-                    <a href="control_usuarios.html">
-                        <i class='bx bxs-user'></i>
-                        <span class="links_name">Empleados</span>
-                    </a>
-                    <span class="tooltip">Empleados</span>
-                </li>
-                <li>
-                    <a href="usuario.html">
-                        <i class='bx bxs-user-circle'></i>
-                        <span class="links_name">Usuarios</span>
-                    </a>
-                    <span class="tooltip">Usuarios</span>
-                </li>
-                <li>
-                    <a href="pedidos.html">
-                        <i class='bx bxs-package'></i>
-                        <span class="links_name">Pedidos</span>
-                    </a>
-                    <span class="tooltip">Pedidos</span>
-                </li>
-                <li>
-                    <a href="comentarios.html">
-                        <i class='bx bxs-message-dots'></i>
-                        <span class="links_name">Comentarios</span>
-                    </a>
-                    <span class="tooltip">Comentarios</span>
-                </li>
-                <li>
-                    <a href="clientes.html">
-                        <i class='bx bxs-user-rectangle'></i>
-                        <span class="links_name">Clientes</span>
-                    </a>
-                    <span class="tooltip">Clientes</span>
-                </li>
-                <li>
-                    <a href="estadistica.html">
-                        <i class='bx bx-bar-chart-alt'></i>
-                        <span class="links_name">Gráficos</span>
-                    </a>
-                    <span class="tooltip">Gráficos</span>
-                </li>
-                <li class="profile">
-                    <div class="profile-details">
-                        <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
-                        <div class="name_job">
-                            <div class="name">Stephanie Salinas</div>
-                            <div class="job">Web designer</div>
-                        </div>
-                    </div>
-                    <i class='bx bx-log-out' id="log_out"></i>
-                </li>
-            </ul>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-shopify icon'></i>
+            <div class="logo_name">ProculinaryShop</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
+        <ul class="nav-list">
+            <li>
+                <a href="dashboard.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="inventario.html">
+                    <i class='bx bxs-book-open'></i>
+                    <span class="links_name">Inventario</span>
+                </a>
+                <span class="tooltip">Inventario</span>
+            </li>
+            <li>
+                <a href="noticias.html">
+                    <i class='bx bxs-bell-ring'></i>
+                    <span class="links_name">Noticias</span>
+                </a>
+                <span class="tooltip">Noticias</span>
+            </li>
+            <li>
+                <a href="control_usuarios.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="links_name">Empleados</span>
+                </a>
+                <span class="tooltip">Empleados</span>
+            </li>
+            <li>
+                <a href="usuario.html">
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="pedidos.html">
+                    <i class='bx bxs-package'></i>
+                    <span class="links_name">Pedidos</span>
+                </a>
+                <span class="tooltip">Pedidos</span>
+            </li>
+            <li>
+                <a href="comentarios.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="links_name">Comentarios</span>
+                </a>
+                <span class="tooltip">Comentarios</span>
+            </li>
+            <li>
+                <a href="clientes.html">
+                    <i class='bx bxs-user-rectangle'></i>
+                    <span class="links_name">Clientes</span>
+                </a>
+                <span class="tooltip">Clientes</span>
+            </li>
+            <li>
+                <a href="estadistica.html">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="links_name">Gráficos</span>
+                </a>
+                <span class="tooltip">Gráficos</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details">
+                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name">Stephanie Salinas</div>
+                        <div class="job">Web designer</div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out"></i>
+            </li>
+        </ul>
+    </div>
 
     <!--fin de estructura de sidebar-->
     <!--Home section-->
@@ -142,21 +142,74 @@
                 </div>
             </div>
         </div>
-        <!--Values box-->
-        <div class="dashboardC">
-            <h5>¡Bienvenido de vuelta!</h5>
+        <main class="contenedor row ">
+                <h6>Venta de productos por fechas</h6>
+                <div class="col l8 m8 s12 cgrafica">
+                    <div class="center pastel grafica">
+                
+                    </div>
+                </div>
+                <div class="col l4 m4 s12 ">
+                    <div class="slider-styled" id="slider-date"></div>
+                    <ul>
+                        <li><span id="inicio"></span></li>
+                        <li><span id="fin"></span></li>
+                        <input type="text" id="inicioI" class="hide">
+                        <input type="text" id="finI" class="hide">
+                    </ul>
+                    <dir class="opciones">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Agregar</th>
+                                </tr>
+                            </thead>
+                        
 
-            <div class="center conexiones ">
-                <h6>Periodos de conexión en tu cuenta</h6>
-            </div>
-        </div>
+                                
+                                <tbody id="contenido">
+                                </tbody>
+                            
+                        </table>
+                    </dir>
+                    
+                
+                </div>
+                <h6 class="col l12 m12 s12">Venta de productos por fechas</h6>
+                <div class="col l8 m8 s12 cgrafica">
+                    <div class="center productoTiempo grafica">
+            
+                    </div>
+                </div>
+                <div class="col l4 m4 s12">
+                    <div class="slider-styled" id="slider-date1"></div>
+                    <ul>
+                        <li><span id="inicio"></span></li>
+                        <li><span id="fin"></span></li>
+                    </ul>
+                    <ul class="collection">
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                        <li class="collection-item">Alvin</li>
+                    </ul>
+            
+                </div>
+           
+        </main>
+
 
     </section>
 
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="../../resources/js/wNumb.js"></script>
+    <script src="../../resources/js/moment.js"></script>
+    <script src="../../resources/js/nouislider.js"></script>
     <script type="text/javascript " src="../../controllers/Private/sidebar.js "></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="../../controllers/components.js"></script>
     <script src="../../controllers/private/estadistica.js"></script>
