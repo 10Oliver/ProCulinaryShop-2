@@ -365,6 +365,8 @@ function sweetAlert(type, text, url) {
     }
 }
 
+
+
 //Función para crear una gráfica líneal con puntos interpolados
 function lineaI(CLASS, cabeceras, datos) {
     //Se crea la gráfica a base de la clase y los datos
@@ -497,12 +499,37 @@ function lineaI(CLASS, cabeceras, datos) {
     });
 }
 
+
+//función de línea simple
+function linea(CLASS, cabeceras, datos) { 
+    new Chartist.Line(
+        CLASS,
+        {
+            labels: cabeceras,
+            series: datos,
+        },
+        {
+            // Remove this configuration to see that chart rendered with cardinal spline interpolation
+            // Sometimes, on large jumps in data values, it's better to use simple smoothing.
+            lineSmooth: Chartist.Interpolation.simple({
+                divisor: 2,
+            }),
+            fullWidth: true,
+            chartPadding: {
+                right: 20,
+            },
+            low: 0,
+        }
+    );
+}
+
+//Función de barras
 function barras(CLASS, cabeceras, datos) {
     new Chartist.Bar(
         CLASS,
         {
             labels: cabeceras,
-            series: [datos[0], datos[1]],
+            series: datos,
         },
         {
             seriesBarDistance: 10,

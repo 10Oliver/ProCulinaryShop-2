@@ -212,9 +212,9 @@ function dinero() {
                     datos.push(promedio);
                     datos.push(total);
                     //se envían para general la gráfica
-                    barras(".barras", titulos, datos);
+                    linea(".barras", titulos, datos);
                 } else {
-                    barras(".barras", ["No hay datos disponibles"], [[0], [0]]);
+                    linea(".barras", ["No hay datos disponibles"], [[0], [0]]);
                 }
             })
         } else { 
