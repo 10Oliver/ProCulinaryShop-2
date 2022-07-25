@@ -25,6 +25,7 @@ class usuario extends Verificador{
     private $usuarioUsuario = null;
     private $passUsuario = null;
     private $estadoCliente = null;
+    private $estadoEmpleado = null;
 
 
     /*Métodos para asignar valores a las variables globales*/
@@ -141,6 +142,16 @@ class usuario extends Verificador{
         
     }
 
+    public function setPassEmpleadoS($pass)
+    {
+        if ($this->validatePassword($pass)) {
+            $this->passEmpleado = $pass;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function setPassClienteS($pass)
     {
         if ($this->validatePassword($pass)) {
@@ -199,14 +210,29 @@ class usuario extends Verificador{
         return $this->estadoCliente;
     }
 
+    public function getEstadoEmpleado()
+    {
+        return $this->estadoEmpleado;
+    }
+
     public function getIdCliente()
     {
         return $this->idCliente;
     }
 
+    public function getIdEmpleado()
+    {
+        return $this->idEmpleado;
+    }
+
     public function getUsuarioCliente()
     {
         return $this->usuarioCliente;
+    }
+
+    public function getUsuarioEmpleado()
+    {
+        return $this->usuarioEmpleado;
     }
 
 
@@ -282,6 +308,33 @@ class usuario extends Verificador{
         array_push($params, "-");
        
         return database::multiFilas($sql,$params);
+    }
+
+    public function revisarEmpleado()
+    {
+        $sql = '
+		SELECT id_empleado, id_estado_empleado FROM empleado WHERE usuario_empleado = ?;';
+        $params = array($this->usuarioEmpleado);
+        if ($data = Database::filaUnica($sql, $params)) {
+            $this->id_empleado = $data['id_empleado'];
+            $this->estadoEmpleado = $data['id_estado_empleado'];
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Función que revisa la contraseña del cliente
+    public function revisarPassEmpleado()
+    {
+        $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
+        $params = array($this->id_empleado);
+        $data = Database::filaUnica($sql, $params);
+        if (password_verify($this->passEmpleado, $data['contrasena_empleado'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /*---------------------- login (pública) ------------------- */
