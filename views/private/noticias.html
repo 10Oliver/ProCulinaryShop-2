@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link class="icon" rel="icon" href="../../resources/img/dashboard/shopping.png" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-
+    <link rel="stylesheet" href="../../resources/css/nouislider.css" />
     <!--Metas-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -183,16 +183,32 @@
                             <td class="acciones_noticia"></td>
                         </tr>
                     </thead>
-                
+
                     <tbody id="cuerpo_noticias">
                         <!--Contenido de la tabla, se cargará mediante una inyección HTML-->
                     </tbody>
                 </table>
             </div>
-            
-            <div class="grafica">
-
+            <!--Espacio para la gráfica-->
+            <div class="row center">
+                <h6 class="col l12 m12 s12">Venta de productos </h6>
+                <div class="col l8 m8 s12 offset-l2 offset-m2">
+                    <div class="slider-styled" id="slider-fecha"></div>
+                    <ul>
+                        <li><span id="inicio"></span></li>
+                        <li><span id="fin"></span></li>
+                        <input type="text" id="inicioI" class="hide">
+                        <input type="text" id="finI" class="hide">
+                    </ul>
+                
+                </div>
+                <div class="col l8 m8 s12 offset-l2 offset-m2 cgrafica">
+                    <div class="center barra grafica">
+                
+                    </div>
+                </div>
             </div>
+            
         </main>
 
     </section>
@@ -331,6 +347,9 @@
 
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="../../resources/js/wNumb.js"></script>
+    <script src="../../resources/js/moment.js"></script>
+    <script src="../../resources/js/nouislider.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script src="../../controllers/private/sidebar.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

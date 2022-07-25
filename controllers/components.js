@@ -538,6 +538,10 @@ function barras(CLASS, cabeceras, datos) {
             axisY: {
                 offset: 70,
             },
+            axisX: {
+                onlyInteger: true,
+                offset: 20,
+            },
         }
     );
 }
@@ -566,7 +570,7 @@ function semiPastel(CLASS, titulos, datos) {
             var animationDefinition = {
                 "stroke-dashoffset": {
                     id: "anim" + data.index,
-                    dur: 1000,
+                    dur: 450,
                     from: -pathLength + "px",
                     to: "0px",
                     easing: Chartist.Svg.Easing.easeOutQuint,
@@ -599,4 +603,42 @@ function semiPastel(CLASS, titulos, datos) {
         }
         window.__anim21278907124 = setTimeout(chart.update.bind(chart), 10000);
     });
+}
+
+
+//función para crear una gráfica de pastel completa
+function pastel(CLASS, cabeceras, datos) { 
+    var data = {
+        labels: cabeceras,
+        series: datos,
+    };
+
+    var options = {
+        labelInterpolationFnc: function (value) {
+            return value[0];
+        },
+    };
+
+    var responsiveOptions = [
+        [
+            "screen and (min-width: 640px)",
+            {
+                chartPadding: 30,
+                labelOffset: 100,
+                labelDirection: "explode",
+                labelInterpolationFnc: function (value) {
+                    return value;
+                },
+            },
+        ],
+        [
+            "screen and (min-width: 1024px)",
+            {
+                labelOffset: 80,
+                chartPadding: 20,
+            },
+        ],
+    ];
+
+    new Chartist.Pie(CLASS, data, options, responsiveOptions);
 }
