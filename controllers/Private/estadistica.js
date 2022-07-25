@@ -259,3 +259,8 @@ function dinero() {
 }
 
 
+//Función para generar un reporte con tablas
+function clientes() { 
+    event.preventDefault();
+    reporte_tablas(['Columan1','culumna 2'], [[1,2]], 'mi pdf');
+}

@@ -501,7 +501,7 @@ function lineaI(CLASS, cabeceras, datos) {
 
 
 //función de línea simple
-function linea(CLASS, cabeceras, datos) { 
+function linea(CLASS, cabeceras, datos) {
     new Chartist.Line(
         CLASS,
         {
@@ -552,7 +552,7 @@ function semiPastel(CLASS, titulos, datos) {
         series: datos,
     };
 
-   var chart =   new Chartist.Pie(CLASS, data, {
+    var chart = new Chartist.Pie(CLASS, data, {
         donut: true,
         showLabel: true,
     });
@@ -607,7 +607,7 @@ function semiPastel(CLASS, titulos, datos) {
 
 
 //función para crear una gráfica de pastel completa
-function pastel(CLASS, cabeceras, datos) { 
+function pastel(CLASS, cabeceras, datos) {
     var data = {
         labels: cabeceras,
         series: datos,
@@ -645,8 +645,13 @@ function pastel(CLASS, cabeceras, datos) {
 
 
 //Función para crear un pdf de tipo tabla
-function generate(cabeceras, datos, nombre) {
-    const doc = new jspdf.jsPDF("p", "pt", "letter");
+function reporte_tablas(cabeceras, datos, nombre) {
+    const doc = new jspdf.jsPDF("p", "pt", "letter"),
+        margin = {
+            top: 40,
+            bottom: 60,
+            left: 40,
+        };
 
     // Simple data example
     var head = [cabeceras];
@@ -662,14 +667,7 @@ function generate(cabeceras, datos, nombre) {
     doc.setFontSize(8);
     for (var i = 1; i <= pageCount; i++) {
         doc.setPage(i);
-        doc.text(
-            "Page " + String(i) + " of " + String(pageCount),
-            doc.internal.pageSize.width / 2,
-            750,
-            {
-                align: "center",
-            }
-        );
+        doc.text(520,760,"Página " + String(i) + " de " + String(pageCount));
     }
     doc.save(`${nombre}`.pdf);
 }
