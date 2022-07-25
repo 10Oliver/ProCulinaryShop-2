@@ -386,7 +386,7 @@ function lineaI(CLASS, cabeceras, datos) {
     );
     /* --Código para que se encuentre animado---- */
     var seq = 0,
-        delays = 80,
+        delays = 200,
         durations = 500;
 
     //Se reinicia la animación
@@ -403,7 +403,7 @@ function lineaI(CLASS, cabeceras, datos) {
             data.element.animate({
                 opacity: {
                     //Se especifica el delay antes de seguir o cambiar de fase
-                    begin: seq * delays + 1000,
+                    begin: seq * delays + 500,
                     //Duración de la animación
                     dur: durations,
                     //El valor donde se iniciará la animación
