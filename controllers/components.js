@@ -642,3 +642,34 @@ function pastel(CLASS, cabeceras, datos) {
 
     new Chartist.Pie(CLASS, data, options, responsiveOptions);
 }
+
+
+//Función para crear un pdf de tipo tabla
+function generate(cabeceras, datos, nombre) {
+    const doc = new jspdf.jsPDF("p", "pt", "letter");
+
+    // Simple data example
+    var head = [cabeceras];
+    var body = datos;
+    doc.autoTable({ head: head, body: body });
+
+    // Simple html example
+    doc.autoTable({ html: "#table" });
+
+    const pageCount = doc.internal.getNumberOfPages();
+
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(8);
+    for (var i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        doc.text(
+            "Page " + String(i) + " of " + String(pageCount),
+            doc.internal.pageSize.width / 2,
+            750,
+            {
+                align: "center",
+            }
+        );
+    }
+    doc.save(`${nombre}`.pdf);
+}

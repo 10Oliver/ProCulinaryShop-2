@@ -257,3 +257,9 @@ function dinero() {
         }
     });
 }
+
+
+//Función para generar el reporte del top productos
+function top() {
+    
+}
