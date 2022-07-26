@@ -315,10 +315,9 @@ function trafico() {
                             row.compras,
                             row.cantidad,
                             "$" + row.promedio,
-                            `${
-                                row.fecha < moment().subtract(1, "months").format("YYYY-MM-DD")
-                                    ? "Registrado: " + row.fecha
-                                    : "Nuevo cliente:  " + row.fecha
+                            `${row.fecha < moment().subtract(1, "months").format("YYYY-MM-DD")
+                                ? "Registrado: " + row.fecha
+                                : "Nuevo cliente:  " + row.fecha
                             }`
                         );
                         general.push(datos);
@@ -409,15 +408,15 @@ function ventas() {
                         //Se agrega el titulo de la página
                         titulo.push(
                             "Semana " +
-                                (index + 1) +
-                                " del " +
-                                moment()
-                                    .subtract(7 * (index + 1), "days")
-                                    .format("YYYY-MM-DD") +
-                                " al " +
-                                moment()
-                                    .subtract(7 * index, "days")
-                                    .format("YYYY-MM-DD")
+                            (index + 1) +
+                            " del " +
+                            moment()
+                                .subtract(7 * (index + 1), "days")
+                                .format("YYYY-MM-DD") +
+                            " al " +
+                            moment()
+                                .subtract(7 * index, "days")
+                                .format("YYYY-MM-DD")
                         );
                     } else {
                     }
@@ -427,6 +426,11 @@ function ventas() {
                 console.log(request.status + " " + request.statusText);
             }
         });
+    }
+    //se revisa si se encontraron datos o no
+    if (datos_tablas.length <= 0) {
+        titulo.push('No se encontraron resultados');
+        datos_tablas.push([''],['']);
     }
     //Se pasan los datos para generar un reporte
     reporte_multitablas(cabeceras, datos_tablas, "Intento de pdf", titulo);
