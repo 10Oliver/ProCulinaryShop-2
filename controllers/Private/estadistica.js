@@ -155,23 +155,11 @@ document.addEventListener("DOMContentLoaded", function () {
     //Obtención de los componentes a colocarles las fechas
     var dateValues = [document.getElementById("inicio"), document.getElementById("fin")];
     var valores = [document.getElementById("inicioI"), document.getElementById("finI")];
-    var dateValuesDinero = [
-        document.getElementById("inicioDinero"),
-        document.getElementById("finDinero"),
-    ];
-    var valoresDinero = [
-        document.getElementById("inicioDineroI"),
-        document.getElementById("finDineroI"),
-    ];
+    var dateValuesDinero = [document.getElementById("inicioDinero"), document.getElementById("finDinero")];
+    var valoresDinero = [document.getElementById("inicioDineroI"), document.getElementById("finDineroI")];
 
-    var dateValuesTrafico = [
-        document.getElementById("inicioTrafico"),
-        document.getElementById("finTrafico"),
-    ];
-    var valoresTrafico = [
-        document.getElementById("inicioTraficoI"),
-        document.getElementById("finTraficoI"),
-    ];
+    var dateValuesTrafico = [document.getElementById("inicioTrafico"), document.getElementById("finTrafico")];
+    var valoresTrafico = [document.getElementById("inicioTraficoI"), document.getElementById("finTraficoI")];
 
     //Opciones
     var formatter = new Intl.DateTimeFormat("es-ES", {
@@ -364,7 +352,7 @@ function trafico() {
                             row.nombre,
                             row.compras,
                             row.cantidad,
-                            '$'+row.promedio,
+                            "$" + row.promedio,
                             `${
                                 row.fecha < moment().subtract(1, "months").format("YYYY-MM-DD")
                                     ? "Registrado: " + row.fecha
@@ -376,7 +364,7 @@ function trafico() {
                     //Se agregan los titulos de las columnas
                     cabeceras.push("Cliente", "Compras", "Cantidad", "Promedio", "Registro");
                     //Se pasan los datos a un array general
-                   
+
                     //Se pasan los datos para generar un reporte
                     reporte_tablas(
                         cabeceras,
@@ -394,4 +382,86 @@ function trafico() {
             console.log(request.status + " " + request.statusText);
         }
     });
+}
+
+//Función de ventas semanales
+function ventas() {
+    //Se detiene la recarga de la página
+    event.preventDefault();
+    //Se crean los arreglos donde se guardarán los datos
+    let titulo = [],
+        cabeceras = [],
+        datos_tablas = [];
+
+    for (let index = 0; index < 4; index++) {
+        //Se crear una variable donde guardar las fechas
+        let datos = new FormData();
+        //Se cargan los datos de las fechas
+        datos.append(
+            "fechainicial",
+            moment()
+                .subtract(7 * (index + 1), "days")
+                .format("YYYY-MM-DD")
+        );
+        datos.append(
+            "fechafinal",
+            moment()
+                .subtract(7 * index, "days")
+                .format("YYYY-MM-DD")
+        );
+        //Se realiza la petición para obtener los datos
+        fetch(API_estadistica + "ventas", {
+            method: "post",
+            body: datos,
+        }).then(function (request) {
+            //Se revisa el estado de la ejecución
+            if (request.ok) {
+                //Se pasa a formato JSON
+                request.json().then(function (response) {
+                    //Se crea un variable para datos de una tabla
+                    let general = [];
+                    //Se crea una variable para el total
+                    let total = 0.0;
+                    //Se revisa el estado devuelto por la api
+                    if (response.status) {
+                        //Se revisa fila por fila y se guardan los datos
+                        response.dataset.map(function (row) {
+                            //Se declaran los arreglos donde se guardarán los datos
+                            let columnas = [],
+                                filas = [];
+                            //Se agregan los titulos de las columnas
+                            columnas.push("Producto", "Cantidad", "Precio", "Total por producto");
+                            filas.push(row.nombre_producto, row.cantidad, '$'+row.precio_producto_orden, '$'+row.total);
+                            cabeceras.push(columnas);
+                            general.push(filas);
+                            total = total + Number(row.total);
+                        });
+                        general.push(['','','Total','$'+total.toFixed(2)]);
+                        //Se pasan los datos a un array general
+                        datos_tablas.push(general);
+                        //Se agrega el titulo de la página
+                        titulo.push(
+                            "Semana " +
+                                (index + 1) +
+                                " del " +
+                                moment()
+                                    .subtract(7 * (index + 1), "days")
+                                    .format("YYYY-MM-DD") +
+                                " al " +
+                                moment()
+                                    .subtract(7 * index, "days")
+                                    .format("YYYY-MM-DD")
+                        );
+                    } else {
+                    }
+                });
+            } else {
+                //Se imprime el error en la consola
+                console.log(request.status + " " + request.statusText);
+            }
+        });
+      
+    }
+    //Se pasan los datos para generar un reporte
+    reporte_multitablas(cabeceras, datos_tablas, "Intento de pdf", titulo);
 }

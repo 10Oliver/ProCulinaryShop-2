@@ -120,8 +120,7 @@ function cargar_select(endpoint, select, selected, active) {
                     //Si no hay un opcion preseleccionada, se asignara la indicacion de que seleccione una
                     if (!selected && !active) {
                         //Se agrega la opción "Selecciona una opción" la cual estará deshabilitada
-                        contenido +=
-                            "<option disabled selected value='0'>Seleccione una opción</option>";
+                        contenido += "<option disabled selected value='0'>Seleccione una opción</option>";
                     }
                     //Se recorre todo el vector devuelto para agregarlos al select
                     response.dataset.map(function (fila) {
@@ -700,11 +699,111 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         doc.text("Usuario: " + response.dataset, 60, 80);
                         //Se cambia el idioma de la hora
                         moment.locale("es");
-                        doc.text(
-                            "Fecha: " + moment().format("dddd de MMMM YYYY, h:mm:ss a"),
-                            60,
-                            120
-                        );
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm:ss a"), 60, 120);
+                        //Se coloca el pie de página con el número de letra
+                        doc.setFontSize(10);
+                        doc.setTextColor(0, 0, 0);
+                        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
+                    }
+
+                    //Se guarda el documento
+                    doc.save(`${nombre}.pdf`);
+                } else {
+                    //Se muestra el error
+                    sweetAlert(3, response.exception, null);
+                }
+            });
+        } else {
+            //Se imprime el error en la consola
+            console.log(request.status + " " + request.statusText);
+        }
+    });
+}
+
+//Función para crear un pdf con multitablas
+function reporte_multitablas(cabeceras, datos, nombre, titulos) {
+    const doc = new jspdf.jsPDF("p", "pt", "letter"),
+        margin = {
+            top: 210,
+            bottom: 80,
+            left: 60,
+            right: 60,
+        };
+    //Petición para obtener el nombre actual del usuario
+    fetch(SERVER + "private/api_login.php?action=" + "obtenerSesion", {
+        method: "get",
+    }).then(function (request) {
+        //Se verifica el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a JSON
+            request.json().then(function (response) {
+                //Se verifica el estado devuelto por la api
+                if (response.status) {
+                    //Propiedades básicas del pdf
+
+                    for (let index = 0; index < (titulos.length - 1); index++) {
+                        //Se agregan estilos el titulo
+                        doc.setFont("courier-oblique");
+                        doc.setFontSize(22);
+                        doc.setTextColor(76, 175, 80);
+                        //Se coloca el titulo de la página
+                        doc.text(titulos[index], doc.internal.pageSize.getWidth() / 2, 185, {
+                            align: "center",
+                        });
+                        //Se cargan los datos a la tabla
+                        doc.autoTable({
+                            head: [cabeceras[index]],
+                            body: datos[index],
+                            margin,
+                            styles: { halign: "center", font: "courier-oblique" },
+                            headStyles: { fillColor: [18, 143, 35] },
+                            alternateRowStyles: { fillColor: [202, 247, 194] },
+                            tableLineColor: [132, 241, 136],
+                            tableLineWidth: 0.1,
+                        });
+                        //Se agrega una nueva página
+                        doc.addPage();
+                        console.log(datos[index]);     
+                    }
+
+                    //Se agrega la última tabla
+                    //Se coloca el titulo de la página
+                    doc.text(titulos[titulos.length-1], doc.internal.pageSize.getWidth() / 2, 185, {
+                        align: "center",
+                    });
+                    //Se cargan los datos a la tabla
+                    console.log(datos);
+                    doc.autoTable({
+                        head: [cabeceras[(cabeceras.length - 1)]],
+                        body: datos[datos.length - 1],
+                        margin,
+                        styles: { halign: "center", font: "courier-oblique" },
+                        headStyles: { fillColor: [18, 143, 35] },
+                        alternateRowStyles: { fillColor: [202, 247, 194] },
+                        tableLineColor: [132, 241, 136],
+                        tableLineWidth: 0.1,
+                    });
+
+                    //Se carga la imagen a colocoar como hader
+                    var logo = new Image();
+                    logo.src = "../../resources/img/reportes/cabecerawhite.png";
+
+                    //Se agrega el conteo de páginas
+                    const pageCount = doc.internal.getNumberOfPages();
+                    for (var i = 1; i <= pageCount; i++) {
+                        //Selección de la página para colocar los datos
+                        doc.setPage(i);
+
+                        //Se coloca el banner del header
+                        doc.addImage(logo, "PNG", 40, 40, 532, 110);
+
+                        //Se reestablecen los estilos
+                        doc.setFontSize(12);
+                        doc.setTextColor(255, 255, 255);
+                        doc.text("Usuario: " + response.dataset, 60, 80);
+                        //Se cambia el idioma de la hora
+                        moment.locale("es");
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm:ss a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
                         doc.setTextColor(0, 0, 0);
