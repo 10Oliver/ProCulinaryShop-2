@@ -393,7 +393,7 @@ function ventas() {
         cabeceras = [],
         datos_tablas = [];
 
-    for (let index = 0; index < 4; index++) {
+    for (let index = 0; index < document.getElementById("tiempo").value; index++) {
         //Se crear una variable donde guardar las fechas
         let datos = new FormData();
         //Se cargan los datos de las fechas
@@ -431,12 +431,17 @@ function ventas() {
                                 filas = [];
                             //Se agregan los titulos de las columnas
                             columnas.push("Producto", "Cantidad", "Precio", "Total por producto");
-                            filas.push(row.nombre_producto, row.cantidad, '$'+row.precio_producto_orden, '$'+row.total);
+                            filas.push(
+                                row.nombre_producto,
+                                row.cantidad,
+                                "$" + row.precio_producto_orden,
+                                "$" + row.total
+                            );
                             cabeceras.push(columnas);
                             general.push(filas);
                             total = total + Number(row.total);
                         });
-                        general.push(['','','Total','$'+total.toFixed(2)]);
+                        general.push(["", "", "Total", "$" + total.toFixed(2)]);
                         //Se pasan los datos a un array general
                         datos_tablas.push(general);
                         //Se agrega el titulo de la página
@@ -460,7 +465,6 @@ function ventas() {
                 console.log(request.status + " " + request.statusText);
             }
         });
-      
     }
     //Se pasan los datos para generar un reporte
     reporte_multitablas(cabeceras, datos_tablas, "Intento de pdf", titulo);
