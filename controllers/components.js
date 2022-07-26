@@ -638,14 +638,23 @@ function pastel(CLASS, cabeceras, datos) {
     new Chartist.Pie(CLASS, data, options, responsiveOptions);
 }
 
+
+
+/**
+ *  Explicación de margenes
+ *  1 cm = 28.34 pt
+ *  1.5 cm = 42 pt
+ */
+
+
 //Función para crear un pdf de tipo tabla
 function reporte_tablas(cabeceras, datos, nombre, titulo) {
     const doc = new jspdf.jsPDF("p", "pt", "letter"),
         margin = {
             top: 210,
             bottom: 80,
-            left: 60,
-            right: 60,
+            left: 43,
+            right: 43,
         };
     //Petición para obtener el nombre actual del usuario
     fetch(SERVER + "private/api_login.php?action=" + "obtenerSesion", {
@@ -691,7 +700,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         });
 
                         //Se coloca el banner del header
-                        doc.addImage(logo, "PNG", 40, 40, 532, 110);
+                        doc.addImage(logo, "PNG", 43, 43, 532, 110);
 
                         //Se reestablecen los estilos
                         doc.setFontSize(12);
@@ -726,8 +735,8 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
         margin = {
             top: 210,
             bottom: 80,
-            left: 60,
-            right: 60,
+            left: 43,
+            right: 43,
         };
     //Petición para obtener el nombre actual del usuario
     fetch(SERVER + "private/api_login.php?action=" + "obtenerSesion", {
@@ -795,7 +804,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.setPage(i);
 
                         //Se coloca el banner del header
-                        doc.addImage(logo, "PNG", 40, 40, 532, 110);
+                        doc.addImage(logo, "PNG", 43, 43, 532, 110);
 
                         //Se reestablecen los estilos
                         doc.setFontSize(12);
