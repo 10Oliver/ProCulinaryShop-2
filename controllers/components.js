@@ -645,29 +645,54 @@ function pastel(CLASS, cabeceras, datos) {
 
 
 //Función para crear un pdf de tipo tabla
-function reporte_tablas(cabeceras, datos, nombre) {
+function reporte_tablas(cabeceras, datos, nombre, titulo) {
+    //Propiedades básicas del pdf
     const doc = new jspdf.jsPDF("p", "pt", "letter"),
         margin = {
-            top: 40,
-            bottom: 60,
-            left: 40,
+            top: 210,
+            bottom: 80,
+            left: 60,
+            right: 60,
         };
 
-    // Simple data example
-    var head = [cabeceras];
-    var body = datos;
-    doc.autoTable({ head: head, body: body });
+    //Se cargan los datos a la tabla
+    doc.autoTable({ head: [cabeceras], body: datos, margin, styles: { halign: 'center' ,font: "courier-oblique"},  headStyles: { fillColor: [76, 175, 80] }, alternateRowStyles: { fillColor: [157, 247, 136] }, tableLineColor: [132, 241, 136], tableLineWidth: 0.1, });
 
-    // Simple html example
-    doc.autoTable({ html: "#table" });
+    //Se carga la imagen a colocoar como hader
+    var logo = new Image();
+    logo.src = '../../resources/img/home/Banner.png';
 
+
+
+    //Se agrega el conteo de páginas
     const pageCount = doc.internal.getNumberOfPages();
-
-    doc.setFont("helvetica", "italic");
-    doc.setFontSize(8);
     for (var i = 1; i <= pageCount; i++) {
+        //Selección de la página para colocar los datos
         doc.setPage(i);
-        doc.text(520,760,"Página " + String(i) + " de " + String(pageCount));
+
+        //Se agregan estilos el titulo
+        doc.setFont("courier-oblique");
+        doc.setFontSize(22);
+        doc.setTextColor(76, 175, 80);
+        //Se coloca el titulo de la página
+        doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 185, { align: "center" })
+
+
+        //Se coloca el header
+        doc.addImage(logo, 'PNG', 40, 40, 532, 110);
+        //Se agrega el borde (línea) a la página 
+        doc.setDrawColor('black');
+        doc.setLineWidth(1 / 72);
+        doc.line(40, 40, 40, 760);
+        doc.line(572, 40, 570, 760);
+        doc.line(40, 40, 572, 40);
+        doc.line(40, 760, 570, 760);
+        //Se coloca el pie de página con el número de letra
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
     }
+
+    //Se guarda el documento
     doc.save(`${nombre}`.pdf);
 }
