@@ -23,26 +23,29 @@ if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'iniciarSesion':
             $_POST = $usuario->validarFormularios($_POST);
-            if(!$usuario->setUsuarioEmpleado($_POST['usuario']))
-            {
+            if (!$usuario->setUsuarioEmpleado($_POST['usuario'])) {
                 $result['exception'] = 'Nombre de usuario no valido';
-            }elseif(!$usuario->revisarEmpleado())
-            {
+            } elseif (!$usuario->revisarEmpleado()) {
                 $result['exception'] = 'El nombre de usuario no existe';
-            }elseif($usuario->getEstadoEmpleado()!=1)
-            {
+            } elseif ($usuario->getEstadoEmpleado() != 1) {
                 $result['exception'] = 'Tu cuenta ha sido desactivada';
-            }elseif(!$usuario->setPassEmpleadoS($_POST['pass']))
-            {
+            } elseif (!$usuario->setPassEmpleadoS($_POST['pass'])) {
                 $result['exception'] = 'Contraseña no valida';
-            }elseif($usuario->revisarPassEmpleado())
-            {
+            } elseif ($usuario->revisarPassEmpleado()) {
                 $result['status'] = 1;
                 $result['message'] = 'Autentificación completada';
                 $_SESSION['id_empleado'] = $usuario->getIdEmpleado();
                 $_SESSION['usuario'] = $usuario->getUsuarioEmpleado();
-            }else{
+            } else {
                 $result['exception'] = 'Contraseña incorrecta';
+            }
+            break;
+        case 'obtenerSesion':
+            if (!isset($_SESSION['usuario'])) {
+                $result['exception'] = 'No hay una sesión iniciada, no se puede generar el reporte';
+            } else {
+                $result['status'] = 1;
+                $result['dataset'] = $_SESSION['usuario'];
             }
             break;
     }

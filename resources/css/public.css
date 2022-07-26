@@ -78,10 +78,7 @@ body::-webkit-scrollbar-thumb{
  
  
  .logo {
- 
-    margin: 5px 3px;
-    margin-top: 35px;
-    margin-left: 10px;
+   width: 50%;
  }
  
  .logo-2 {
