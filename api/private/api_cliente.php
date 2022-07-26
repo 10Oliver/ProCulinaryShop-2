@@ -35,28 +35,35 @@ if (isset($_GET['action'])) {
             break;
         case 'buscar':
             $_POST = $cliente->validarFormularios($_POST);
-            if(!$cliente->setBuscador(($_POST['buscador']))){
+            if (!$cliente->setBuscador(($_POST['buscador']))) {
                 $result['exception'] = 'El valor a buscar no es valido';
-            }elseif($result['dataset'] = $cliente->buscar()){
+            } elseif ($result['dataset'] = $cliente->buscar()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;
         case 'actualizarCliente':
-                if(!$cliente->setIdCliente($_POST['identificador_p']))
-                {
-                    $result['exception'] = 'No se logró identificar el comentario';
-                }elseif(!$cliente->setEstadoCliente($_POST['valor']))
-                {
-                    $result['exception'] = 'No se logró identificar el nuevo estado';
-                }elseif($cliente->actualizarEstado())
-                {
-                    $result['status'] = 1;
-                }else{
-                    $result['exception'] = database::obtenerProblema();
-                }
-                break;
+            if (!$cliente->setIdCliente($_POST['identificador_p'])) {
+                $result['exception'] = 'No se logró identificar el cliente';
+            } elseif (!$cliente->setEstadoCliente($_POST['valor'])) {
+                $result['exception'] = 'No se logró identificar el nuevo estado';
+            } elseif ($cliente->actualizarEstado()) {
+                $result['status'] = 1;
+            } else {
+                $result['exception'] = database::obtenerProblema();
+            }
+            break;
+        case 'reporte':
+            if (!$cliente->setIdCliente($_POST['identificador'])) {
+                $result['exception'] = 'No se logró identificar el cliente';
+            } elseif ($result['dataset'] = $cliente->reporte()) {
+                $result['status'] = 1;
+            } elseif (database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'No hay datos de momento';
+            }
             break;
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

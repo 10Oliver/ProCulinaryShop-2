@@ -1630,11 +1630,11 @@ input {
 }
 
 .producto_comentario_clientes {
-    width: 15%;
+    width: 12%;
 }
 
 .valoracion_comentario_clientes {
-    width: 15%;
+    width: 12%;
 }
 
 .comentarios_comentario_clientes {
@@ -1642,7 +1642,7 @@ input {
 }
 
 .habilitar_comentario_clientes {
-    width: 5%;
+    width: 4%;
 }
 
 /*-----Responsive noticias-------*/

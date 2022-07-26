@@ -330,7 +330,7 @@ function trafico() {
                     reporte_tablas(
                         cabeceras,
                         general,
-                        "Reporte, trafico" + moment().format("YYYY-MM-DD"),
+                        "Reporte de tráfico de compras" + moment().format("YYYY-MM-DD"),
                         "Tráfico de cliente"
                     );
                 } else {
@@ -433,7 +433,7 @@ function ventas() {
         datos_tablas.push([''],['']);
     }
     //Se pasan los datos para generar un reporte
-    reporte_multitablas(cabeceras, datos_tablas, "Intento de pdf", titulo);
+    reporte_multitablas(cabeceras, datos_tablas, `Ventas semanales ${moment().format("YYYY-MM-DD")}`, titulo);
 }
 
 //Función para obtener el top de productos

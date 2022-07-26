@@ -154,8 +154,7 @@
             <div class="buscador_clientes">
                 <div class="linea_buscador ">
                     <input id="buscador" onkeypress="return letras_numeros(event)"
-                        placeholder="Buscar por nombre, correo o usuario..." type="text"
-                        class="validate buscar ">
+                        placeholder="Buscar por nombre, correo o usuario..." type="text" class="validate buscar ">
                 </div>
                 <div class="btn boton_buscador">
                     <a href=""><i class="waves-effect medium material-icons blanco">search</i></a>
@@ -172,6 +171,7 @@
                             <td class="producto_comentario_clientes">Teléfono</td>
                             <td class="valoracion_comentario_clientes">Usuario</td>
                             <td class="habilitar_comentario_clientes">Habilitar</td>
+                            <td class="habilitar_comentario_clientes">Reporte</td>
                         </tr>
                     </thead>
 
@@ -189,6 +189,16 @@
     <script src="../../controllers/private/sidebar.js"></script>
     <script src="../../resources/js/sweetalert.min.js"></script>
     <script src="../../controllers/components.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"
+        integrity="sha512-Bw9Zj8x4giJb3OmlMiMaGbNrFr0ERD2f9jL3en5FmcTXLhkI+fKyXVeyGyxKMIl1RfgcCBDprJJt4JvlglEb3A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.js"
+        integrity="sha512-elg9Cs/wmju8u77pchpE2NsmBPARPaa5emzKtYheBWtLBMysQR+s4zMBuBdx30fSIP2W+MVH6YadKNrJxsOfbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../resources/js/wNumb.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+        integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="../../controllers/verificador.js"></script>
     <script type="text/javascript" src="../../controllers/private/cliente.js"></script>
     <script type="text/javascript" src="../../controllers/private/activaciones_privadas.js"></script>

@@ -94,4 +94,30 @@ class cliente extends Verificador
         return database::multiFilas($sql, $params);
     }
 
+    //Función para generar reporte
+    public function reporte()
+    {
+        $sql = "SELECT SUM(deo.cantidad_producto_orden) AS cantidad, ROUND(AVG(deo.precio_producto_orden),2) AS promedio,
+        calcular_subtotal(oc.id_orden_compra) as total, oc.fecha_hora, 
+        (SELECT nombre_producto FROM producto p
+        INNER JOIN detalle_orden deo ON deo.id_producto = p.id_producto
+        WHERE deo.id_orden_compra = oc.id_orden_compra
+        AND deo.cantidad_producto_orden =
+        (SELECT MAX(cantidad_producto_orden) FROM detalle_orden WHERE id_orden_compra = oc.id_orden_compra)
+        ORDER BY deo.id_detalle_Orden LIMIT 1) AS numeroso,
+        (SELECT nombre_producto FROM producto p
+        INNER JOIN detalle_orden deo ON deo.id_producto = p.id_producto
+        WHERE deo.id_orden_compra = oc.id_orden_compra
+        AND deo.precio_producto_orden =
+        (SELECT MAX(precio_producto_orden) FROM detalle_orden WHERE id_orden_compra = oc.id_orden_compra)
+        ORDER BY deo.id_detalle_Orden LIMIT 1) AS caro FROM detalle_orden deo
+        INNER JOIN orden_compra oc ON oc.id_orden_compra = deo.id_orden_compra
+        WHERE oc.fecha_hora > CURRENT_DATE - '30 days'::INTERVAL
+        AND id_cliente = ?
+        GROUP BY oc.id_orden_compra
+        ORDER BY oc.id_orden_compra";
+        $params = array($this->idCliente);
+        return database::multiFilas($sql, $params);
+    }
+
 }
