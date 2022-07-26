@@ -65,6 +65,19 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay datos de momento';
             }
             break;
+        case 'trafico':
+            if (!$estadistica->setFechaInicial($_POST['fechainicial'])) {
+                $result['exception'] = 'Fecha inicial incorrecta';
+            } elseif (!$estadistica->setFechaFinal($_POST['fechafinal'])) {
+                $result['exception'] = 'Fecha final incorrecta';
+            } elseif ($result['dataset'] = $estadistica->trafico()) {
+                $result['status'] = 1;
+            } elseif (database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'No hay datos de momento';
+            }
+            break;
     }
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');

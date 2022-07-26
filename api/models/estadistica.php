@@ -97,4 +97,18 @@ class Estadistica extends Verificador
         $params = null;
         return database::multiFilas($sql, $params);
     }
+
+    //Función para obtener los datos del tráfico de clientes
+    public function trafico()
+    {
+        $sql = "SELECT CONCAT(c.nombre_cliente , ' ', c.apellido_cliente) AS nombre, ROUND(AVG(calcular_subtotal(oc.id_orden_compra)),2) AS promedio,
+        SUM(deo.cantidad_producto_orden) AS cantidad,c.fecha, COUNT(oc.id_orden_compra) AS compras  FROM cliente c
+        INNER JOIN orden_compra oc ON oc.id_cliente = c.id_cliente
+        INNER JOIN detalle_orden deo ON deo.id_orden_compra = oc.id_orden_compra
+        WHERE oc.fecha_hora BETWEEN ? AND ?
+        GROUP BY nombre, c.fecha
+        ORDER BY c.fecha";
+        $params = array($this->fechaInicial, $this->fechaFinal);
+        return database::multiFilas($sql, $params);
+    }
 }

@@ -207,10 +207,22 @@
                     <a href="" onclick="clientes()" class="btn">Generar</a>
                 </div>
                 <div class="col l6 m6 s12">
-                    <h6>Tráfico de clientes</h6>
-                    <a href="" onclick="trafico()" class="btn">Generar</a>
+                    <div class="col l8 m8 s10 offset-l2 offset-m2 offset-s1">
+                        <div class="slider-styled" id="slider-trafico"></div>
+                        <ul>
+                            <li><span id="inicioTrafico"></span></li>
+                            <li><span id="finTrafico"></span></li>
+                            <input type="text" id="inicioTraficoI" class="hide">
+                            <input type="text" id="finTraficoI" class="hide">
+                        </ul>
+                    </div>
+                    <div class="col l8 m8 s10 offset-l2 offset-m2 offset-s1">
+                        <h6>Tráfico de clientes</h6>
+                        <a href="" onclick="trafico()" class="btn">Generar</a>
+                    </div>
+
+
                 </div>
-                <table id="table"></table>
             </div>
 
         </main>
