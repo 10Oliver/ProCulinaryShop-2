@@ -124,4 +124,18 @@ class Estadistica extends Verificador
         $params = array($this->fechaInicial, $this->fechaFinal);
         return database::multiFilas($sql, $params);
     }
+
+    //Función para obtener el top producto
+    public function top()
+    {
+        $sql = "SELECT p.nombre_producto, SUM(deo.cantidad_producto_orden) as cantidad, 
+        ( SUM(deo.cantidad_producto_orden) * deo.precio_producto_orden) AS total FROM producto p
+        INNER JOIN detalle_orden deo ON deo.id_producto = p.id_producto
+        INNER JOIN orden_compra oc ON oc.id_orden_compra = deo.id_orden_compra
+        WHERE oc.fecha_hora > CURRENT_DATE-'30 days'::INTERVAL
+        GROUP BY p.nombre_producto, deo.precio_producto_orden
+        ORDER BY cantidad DESC LIMIT 10";
+        $params = null;
+        return database::multiFilas($sql, $params);
+    }
 }

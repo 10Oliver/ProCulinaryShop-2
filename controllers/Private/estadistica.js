@@ -284,45 +284,7 @@ function dinero() {
     });
 }
 
-//Función para generar un reporte con tablas
-function clientes() {
-    event.preventDefault();
-    reporte_tablas(
-        ["Columan1", "culumna 2"],
-        [
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-            [1, 2],
-        ],
-        "mi pdf",
-        "El gran titulo de mi reporte"
-    );
-}
-
+//FUnción para obtener el trafico de clientes
 function trafico() {
     //Se detiene la recarga de la página
     event.preventDefault();
@@ -468,4 +430,51 @@ function ventas() {
     }
     //Se pasan los datos para generar un reporte
     reporte_multitablas(cabeceras, datos_tablas, "Intento de pdf", titulo);
+}
+
+//Función para obtener el top de productos
+function top_productos() {
+    //Se detiene la recarga de la página
+    event.preventDefault();
+    //Se realiza la petición para obtener los datos
+    fetch(API_estadistica + "top", {
+        method: "get",
+    }).then(function (request) {
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a formato JSON
+            request.json().then(function (response) {
+                //Se revisa el estado devuelto por la api
+                if (response.status) {
+                    //Se declaran los arreglos donde se guardarán los datos
+                    let cabeceras = [],
+                        general = [];
+                    //Se revisa fila por fila y se guardan los datos
+                    response.dataset.map(function (row) {
+                        //Se cargan los datos a un fila
+                        datos = [];
+                        datos.push(row.nombre_producto, row.cantidad, "$" + row.total);
+                        general.push(datos);
+                    });
+                    //Se agregan los titulos de las columnas
+                    cabeceras.push("Producto", "Cantidad", "Total");
+                    //Se pasan los datos a un array general
+
+                    //Se pasan los datos para generar un reporte
+                    reporte_tablas(
+                        cabeceras,
+                        general,
+                        "Reporte top producto" + moment().format("YYYY-MM-DD"),
+                        "Top 10 productos más vendidos"
+                    );
+                } else {
+                    //Se le muestra el error
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else {
+            //Se imprime el error en la consola
+            console.log(request.status + " " + request.statusText);
+        }
+    });
 }
