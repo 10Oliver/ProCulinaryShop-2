@@ -155,6 +155,15 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay datos de momento';
             }
             break;
+        case 'reporte':
+            if ($result['dataset'] = $noticia->reporte()) {
+                $result['status'] = 1;
+            } elseif (database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'No hay datos de momento';
+            }
+            break;
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

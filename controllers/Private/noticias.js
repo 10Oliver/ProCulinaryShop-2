@@ -65,7 +65,7 @@ function llenar_tabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
-    dataset.map(function(row) {
+    dataset.map(function (row) {
         //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
         contenido += `
         <tr>
@@ -99,7 +99,7 @@ function cargar_modal() {
 
 //Método que guardará la nueva noticia
 
-document.getElementById("guardar_noticia").addEventListener('submit', function(event) {
+document.getElementById("guardar_noticia").addEventListener('submit', function (event) {
     //Se evita que se recargue la página
     event.preventDefault();
     //Se ejecuta la función para guardar, está en components.js
@@ -120,11 +120,11 @@ function modal_actualizar(identificador) {
     fetch(API_noticia + "obtener_actualizar", {
         method: "post",
         body: identificador_principal,
-    }).then(function(request) {
+    }).then(function (request) {
         //Se verifica si la sentencia se ejecutó adecuadamente
         if (request.ok) {
             //Se pasa a formato JSOn
-            request.json().then(function(response) {
+            request.json().then(function (response) {
                 //Se  verifica el estado de la respuesta
                 if (response.status) {
                     //Se cargan los datos con el registro seleccionado
@@ -167,7 +167,7 @@ function modal_actualizar(identificador) {
 
 //Método para actualizar los datos en la noticia
 
-document.getElementById('actualizar_noticia').addEventListener('submit', function(event) {
+document.getElementById('actualizar_noticia').addEventListener('submit', function (event) {
     //Se evita que se recargue la página
     event.preventDefault();
     //Se ejecuta el método qu actulizará
@@ -189,7 +189,7 @@ function modal_eliminar(identificador) {
 }
 
 //Función que buscará los datos
-document.getElementById('buscador').addEventListener("keyup", function() {
+document.getElementById('buscador').addEventListener("keyup", function () {
     //Se obtiene el valor del buscador y del cargo
     let texto = document.getElementById("buscador").value;
     let categoria = document.getElementById("selector_categoria").value;
@@ -204,7 +204,7 @@ document.getElementById('buscador').addEventListener("keyup", function() {
 
 
 //Función que buscará los datos
-document.getElementById('selector_categoria').addEventListener("change", function(event) {
+document.getElementById('selector_categoria').addEventListener("change", function (event) {
     //Se obtiene el valor del buscador y del cargo
     let texto = document.getElementById("buscador").value;
     let categoria = document.getElementById("selector_categoria").value;
@@ -254,6 +254,47 @@ function noticias() {
         } else {
             //Se imprime el error en la consola
             console.log(request.status + " " + request.statusText);
+        }
+    });
+}
+
+//Función para generar un reporte de noticias terminadas
+function reporte() {
+    //Se detiene la recarga de la página
+    event.preventDefault();
+    //Se crea la petición para obtener los datos
+    fetch(API_noticia + 'reporte', {
+        method: 'get',
+    }).then(function (request) {
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se temrina de pasar a formato JSON
+            request.json().then(function (response) {
+                //Se revisa el estado devuelto por la api
+                if (response.status) {
+                    //Se crean las variables donde se guardarán los datos
+                    let cabeceras = [], general = [];
+                    //Se extraen los datos fila por fila
+                    response.dataset.map(function (row) {
+                        //Se crea un arreglo con las filas
+                        let fila = [];
+                        //Se llena de datos
+                        fila.push(row.nombre_producto, '$' + row.total, row.fecha_inicial, row.fecha_final);
+                        //Se agrega al contenedor de filas
+                        general.push(fila);
+                    });
+                    //Se crean los titulos de las cabeceras
+                    cabeceras.push('Nombre del producto', 'Total recaudado', 'Inicio de la noticia', 'Fin de la noticia');
+                    //Se envian los datos para generar el reporte
+                    reporte_tablas(cabeceras, general, `Reporte de noticias terminadas ${moment().format("YYYY-MM-DD")}`, 'Dinero recaudado por noticias finalizadas')
+                } else {
+                    //Se muestra el error
+                    sweetAlert(2, response.exception, null);
+                }
+            })
+        } else {
+            //Se imprime el error en la consola
+            console.log(request.status + ' ' + request.statusText);
         }
     });
 }

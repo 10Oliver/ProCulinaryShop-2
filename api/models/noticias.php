@@ -239,6 +239,22 @@ class noticia extends Verificador
         return database::multiFilas($sql, $params);
     }
 
+
+    //Función para obtener datos para el reporte
+    public function reporte()
+    {
+        $sql = "SELECT p.nombre_producto, (deo.cantidad_producto_orden * deo.precio_producto_orden) as total,
+            n.fecha_inicial, n.fecha_final FROM noticia n
+            INNER JOIN producto p ON p.id_producto = n.id_producto
+            INNER JOIN detalle_orden deo ON deo.id_producto = p.id_producto
+            INNER JOIN orden_compra oc ON oc.id_orden_compra = deo.id_orden_compra
+            AND oc.fecha_hora < n.fecha_final
+            AND oc.fecha_hora > n.fecha_inicial
+            AND n.fecha_final > CURRENT_DATE - '365 days'::INTERVAL
+            GROUP BY n.fecha_inicial, n.fecha_final, p.nombre_producto, total";
+        $params = null;
+        return database::multiFilas($sql, $params);
+    }
     /*------------ index (pública)---------------- */
 
     public function cargarNoticias()
