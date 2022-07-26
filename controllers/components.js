@@ -656,11 +656,20 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
         };
 
     //Se cargan los datos a la tabla
-    doc.autoTable({ head: [cabeceras], body: datos, margin, styles: { halign: 'center' ,font: "courier-oblique"},  headStyles: { fillColor: [76, 175, 80] }, alternateRowStyles: { fillColor: [157, 247, 136] }, tableLineColor: [132, 241, 136], tableLineWidth: 0.1, });
+    doc.autoTable({
+        head: [cabeceras],
+        body: datos,
+        margin,
+        styles: { halign: "center", font: "courier-oblique" },
+        headStyles: { fillColor: [18, 143, 35] },
+        alternateRowStyles: { fillColor: [202, 247, 194] },
+        tableLineColor: [132, 241, 136],
+        tableLineWidth: 0.1,
+    });
 
     //Se carga la imagen a colocoar como hader
     var logo = new Image();
-    logo.src = '../../resources/img/home/Banner.png';
+    logo.src = '../../resources/img/reportes/cabecerawhite.png';
 
 
 
