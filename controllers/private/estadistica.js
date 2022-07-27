@@ -427,11 +427,6 @@ function ventas() {
             }
         });
     }
-    //se revisa si se encontraron datos o no
-    if (datos_tablas.length <= 0) {
-        titulo.push('No se encontraron resultados');
-        datos_tablas.push([''],['']);
-    }
     //Se pasan los datos para generar un reporte
     reporte_multitablas(cabeceras, datos_tablas, 'Ventas semanales '+ moment().format("YYYY-MM-DD"), titulo);
 }

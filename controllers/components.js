@@ -683,7 +683,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                     //Se carga la imagen a colocar como header
                     var logo = new Image();
                     logo.src = "../../resources/img/reportes/cabecerawhite.png";
-
+                    
                     //Se agrega el conteo de páginas
                     const pageCount = doc.internal.getNumberOfPages();
                     for (var i = 1; i <= pageCount; i++) {
@@ -702,6 +702,11 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         //Se coloca el banner del header
                         doc.addImage(logo, "PNG", 43, 43, 532, 110);
 
+                        //Se agrega la decoración y pie de página
+                        doc.setDrawColor(0);
+                        doc.setFillColor(18, 143, 36);
+                        doc.rect(42, 700, 530, 50, "F");
+
                         //Se reestablecen los estilos
                         doc.setFontSize(12);
                         doc.setTextColor(255, 255, 255);
@@ -711,8 +716,9 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
+                        doc.setTextColor(255, 255, 255);
+                        doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 
                     //Se guarda el documento
@@ -750,7 +756,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                 if (response.status) {
                     //Propiedades básicas del pdf
 
-                    for (let index = 0; index < (titulos.length - 1); index++) {
+                    for (let index = 0; index < titulos.length - 1; index++) {
                         //Se agregan estilos el titulo
                         doc.setFont("courier-oblique");
                         doc.setFontSize(22);
@@ -772,18 +778,17 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         });
                         //Se agrega una nueva página
                         doc.addPage();
-                        console.log(datos[index]);     
+                        console.log(datos[index]);
                     }
 
                     //Se agrega la última tabla
                     //Se coloca el titulo de la página
-                    doc.text(titulos[titulos.length-1], doc.internal.pageSize.getWidth() / 2, 185, {
+                    doc.text(titulos[titulos.length - 1], doc.internal.pageSize.getWidth() / 2, 185, {
                         align: "center",
                     });
                     //Se cargan los datos a la tabla
-                    console.log(datos);
                     doc.autoTable({
-                        head: [cabeceras[(cabeceras.length - 1)]],
+                        head: [cabeceras[cabeceras.length - 1]],
                         body: datos[datos.length - 1],
                         margin,
                         styles: { halign: "center", font: "courier-oblique" },
@@ -792,6 +797,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         tableLineColor: [132, 241, 136],
                         tableLineWidth: 0.1,
                     });
+
 
                     //Se carga la imagen a colocar como header
                     var logo = new Image();
@@ -806,6 +812,11 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         //Se coloca el banner del header
                         doc.addImage(logo, "PNG", 43, 43, 532, 110);
 
+                        //Se agrega la decoración y pie de página
+                        doc.setDrawColor(0);
+                        doc.setFillColor(18, 143, 36);
+                        doc.rect(42, 700, 530, 50, "F");
+
                         //Se reestablecen los estilos
                         doc.setFontSize(12);
                         doc.setTextColor(255, 255, 255);
@@ -815,8 +826,9 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
+                        doc.setTextColor(255, 255, 255);
+                        doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 
                     //Se guarda el documento
@@ -886,10 +898,11 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                             align: "center",
                         });
 
-                        //Se agrega la decoración
+                        //Se agrega la decoración y pie de página
                         doc.setDrawColor(0);
                         doc.setFillColor(18, 143, 36);
-                        doc.rect(320, 43, 350, 70, "F"); // filled red square
+                        doc.rect(320, 43, 350, 70, "F");
+                        doc.rect(42, 700, 530, 50, "F");
 
                         //Se coloca el banner del header
                         doc.addImage(logo, "PNG", 43, 30, 250, 90);
@@ -898,8 +911,8 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         doc.setFontSize(12);
                         doc.setTextColor(0, 0, 0);
 
-                        doc.text("Cliente: " + response.dataset.cliente, 80, 150);
-                        doc.text("N° de factura: " + response.dataset.id_orden_compra, 80, 175);
+                        doc.text("Cliente: " + response.dataset.cliente, 80, 175);
+                        doc.text("N° de factura: " + response.dataset.id_orden_compra, 370, 150);
 
                         //Se cambia el idioma de la hora
                         moment.locale("es");
@@ -910,8 +923,9 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         doc.text("ProCulinaryShop S.A. de C.V", 80, 125);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
+                        doc.setTextColor(255, 255, 255);
+                        doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 
                     //Se guarda el documento
