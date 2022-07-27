@@ -22,34 +22,37 @@
 <body>
     <nav id="sticky-nav" class="nav-wrapper green ">
         <div class="row">
-            <div class="col s1">
-                <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <div class="col l3 m3 s12 hide-on-small-only hide-on-med-and-down">
+                <div class="col s1 hide-on-large-only">
+                    <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                </div>
+                <img src="../../resources/img/logowhite.png" class="responsive-img  ">
             </div>
-            <div class="col s2">
-                <img src="../../resources/img/home/Recurso 11.png"
-                    class="logo  hide-on-small-only hide-on-med-and-down">
-            </div>
-            <div class="col s8 hide-on-small-only hide-on-med-and-down">
+            <div class="col l7 m7 s12">
                 <div class="section-2">
                     <form class="form" autocomplete="off">
                         <div class="buscar">
-                            <input id="input-field" type="text " placeholder="Buscar...">
+                            <input id="buscador_producto" name="buscador" placeholder="Buscar por nombre" type="text"
+                                onkeypress="return soloLetras(event)" class="validate buscar">
                         </div>
                     </form>
                 </div>
             </div>
-            <div id="nav_down" class="col s12 m6 12">
-                <img src="../../resources/img/home/Recurso 11.png" class="logo-2 hide-on-large-only ">
+            <div id="nav" class="col l7 m7 s12">
+                <img src="../../resources/img/logowhite.png" class="log hide-on-large-only ">
                 </a>
-                <ul class=" left hide-on-med-and-down">
+                <ul class="hide-on-med-and-down">
+                    <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
                     <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
                     <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
                     <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
-                    <li><a href="#"><i class=" material-icons left">add_shopping_cart</i><span
-                                class="new badge">1</span></a></li>
-                    <li><a href="#"><i class="material-icons left">group</i>Acceso a cuenta</a>
+                    <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
+                    <li id="sesion"></li>
+                    <ul id='opciones' class='dropdown-content'>
+                    </ul>
                 </ul>
             </div>
+    
         </div>
     </nav>
     <ul class="sidenav" id="sidenav-list">
@@ -106,6 +109,7 @@
     <script type="text/javascript " src="../../controllers/public/valoracion.js"></script>
     <script type="text/javascript" src="../../controllers/verificador.js"></script>
     <script type="text/javascript " src="../../controllers/public/activaciones_publicas.js"></script>
+    <script type="text/javascript " src="../../controllers/public/opciones_perfil.js"></script>
 
 </body>
 
