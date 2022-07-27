@@ -683,7 +683,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                     //Se carga la imagen a colocar como header
                     var logo = new Image();
                     logo.src = "../../resources/img/reportes/cabecerawhite.png";
-                    
+
                     //Se agrega el conteo de páginas
                     const pageCount = doc.internal.getNumberOfPages();
                     for (var i = 1; i <= pageCount; i++) {
@@ -818,6 +818,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.rect(42, 700, 530, 50, "F");
 
                         //Se reestablecen los estilos
+                        doc.setFont("courier-oblique");
                         doc.setFontSize(12);
                         doc.setTextColor(255, 255, 255);
                         doc.text("Usuario: " + response.dataset, 60, 80);
@@ -909,6 +910,7 @@ function comprobante(cabeceras, datos, nombre, titulo) {
 
                         //Se reestablecen los estilos
                         doc.setFontSize(12);
+                        doc.setFont("courier-oblique");
                         doc.setTextColor(0, 0, 0);
 
                         doc.text("Cliente: " + response.dataset.cliente, 80, 175);
