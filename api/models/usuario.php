@@ -316,7 +316,7 @@ class usuario extends Verificador{
 		SELECT id_empleado, id_estado_empleado FROM empleado WHERE usuario_empleado = ?;';
         $params = array($this->usuarioEmpleado);
         if ($data = Database::filaUnica($sql, $params)) {
-            $this->id_empleado = $data['id_empleado'];
+            $this->idEmpleado = $data['id_empleado'];
             $this->estadoEmpleado = $data['id_estado_empleado'];
             return true;
         } else {
@@ -328,7 +328,7 @@ class usuario extends Verificador{
     public function revisarPassEmpleado()
     {
         $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
-        $params = array($this->id_empleado);
+        $params = array($this->idEmpleado);
         $data = Database::filaUnica($sql, $params);
         if (password_verify($this->passEmpleado, $data['contrasena_empleado'])) {
             return true;
@@ -366,6 +366,16 @@ class usuario extends Verificador{
         } else {
             return false;
         }
+    }
+
+    //Función para obtener los datos de la sesión
+    public function obtenerSesion()
+    {
+        $sql = "SELECT CONCAT(e.nombre_empleado, ' ',e.apellido_empleado) AS nombre, nombre_cargo  FROM empleado e
+        INNER JOIN cargo_empleado ce ON ce.id_cargo_empleado = e.id_cargo_empleado
+        WHERE e.id_empleado = ?";
+        $params = array($this->idEmpleado);
+        return database::filaUnica($sql, $params);
     }
 
     //función para crear un nuevo usuario

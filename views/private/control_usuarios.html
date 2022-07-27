@@ -22,88 +22,88 @@
 
 <body>
     <!--Estructura de la barra de navegación lateral-->
-        <div class="sidebar">
-            <div class="logo-details">
-                <i class='bx bxl-shopify icon'></i>
-                <div class="logo_name">ProculinaryShop</div>
-                <i class='bx bx-menu' id="btn"></i>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="dashboard.html">
-                        <i class='bx bx-grid-alt'></i>
-                        <span class="links_name">Dashboard</span>
-                    </a>
-                    <span class="tooltip">Dashboard</span>
-                </li>
-                <li>
-                    <a href="inventario.html">
-                        <i class='bx bxs-book-open'></i>
-                        <span class="links_name">Inventario</span>
-                    </a>
-                    <span class="tooltip">Inventario</span>
-                </li>
-                <li>
-                    <a href="noticias.html">
-                        <i class='bx bxs-bell-ring'></i>
-                        <span class="links_name">Noticias</span>
-                    </a>
-                    <span class="tooltip">Noticias</span>
-                </li>
-                <li>
-                    <a href="control_usuarios.html">
-                        <i class='bx bxs-user'></i>
-                        <span class="links_name">Empleados</span>
-                    </a>
-                    <span class="tooltip">Empleados</span>
-                </li>
-                <li>
-                    <a href="usuario.html">
-                        <i class='bx bxs-user-circle'></i>
-                        <span class="links_name">Usuarios</span>
-                    </a>
-                    <span class="tooltip">Usuarios</span>
-                </li>
-                <li>
-                    <a href="pedidos.html">
-                        <i class='bx bxs-package'></i>
-                        <span class="links_name">Pedidos</span>
-                    </a>
-                    <span class="tooltip">Pedidos</span>
-                </li>
-                <li>
-                    <a href="comentarios.html">
-                        <i class='bx bxs-message-dots'></i>
-                        <span class="links_name">Comentarios</span>
-                    </a>
-                    <span class="tooltip">Comentarios</span>
-                </li>
-                <li>
-                    <a href="clientes.html">
-                        <i class='bx bxs-user-rectangle'></i>
-                        <span class="links_name">Clientes</span>
-                    </a>
-                    <span class="tooltip">Clientes</span>
-                </li>
-                <li>
-                    <a href="estadistica.html">
-                        <i class='bx bx-bar-chart-alt'></i>
-                        <span class="links_name">Gráficos</span>
-                    </a>
-                    <span class="tooltip">Gráficos</span>
-                </li>
-                <li class="profile">
-                    <div class="profile-details">
-                        <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
-                        <div class="name_job">
-                            <div class="name">Stephanie Salinas</div>
-                            <div class="job">Web designer</div>
-                        </div>
-                    </div>
-                    <i class='bx bx-log-out' id="log_out"></i>
-                </li>
-            </ul>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-shopify icon'></i>
+            <div class="logo_name">ProculinaryShop</div>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
+        <ul class="nav-list">
+            <li>
+                <a href="dashboard.html">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
+            <li>
+                <a href="inventario.html">
+                    <i class='bx bxs-book-open'></i>
+                    <span class="links_name">Inventario</span>
+                </a>
+                <span class="tooltip">Inventario</span>
+            </li>
+            <li>
+                <a href="noticias.html">
+                    <i class='bx bxs-bell-ring'></i>
+                    <span class="links_name">Noticias</span>
+                </a>
+                <span class="tooltip">Noticias</span>
+            </li>
+            <li>
+                <a href="control_usuarios.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="links_name">Empleados</span>
+                </a>
+                <span class="tooltip">Empleados</span>
+            </li>
+            <li>
+                <a href="usuario.html">
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="links_name">Usuarios</span>
+                </a>
+                <span class="tooltip">Usuarios</span>
+            </li>
+            <li>
+                <a href="pedidos.html">
+                    <i class='bx bxs-package'></i>
+                    <span class="links_name">Pedidos</span>
+                </a>
+                <span class="tooltip">Pedidos</span>
+            </li>
+            <li>
+                <a href="comentarios.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="links_name">Comentarios</span>
+                </a>
+                <span class="tooltip">Comentarios</span>
+            </li>
+            <li>
+                <a href="clientes.html">
+                    <i class='bx bxs-user-rectangle'></i>
+                    <span class="links_name">Clientes</span>
+                </a>
+                <span class="tooltip">Clientes</span>
+            </li>
+            <li>
+                <a href="estadistica.html">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span class="links_name">Gráficos</span>
+                </a>
+                <span class="tooltip">Gráficos</span>
+            </li>
+            <li class="profile">
+                <div class="profile-details" id="datosPerfil">
+                    <img src="../../resources/img/dashboard/Profile.jpeg" alt="profileImg">
+                    <div class="name_job">
+                        <div class="name"></div>
+                        <div class="job"></div>
+                    </div>
+                </div>
+                <i class='bx bx-log-out' id="log_out" onclick="cerrarSesion()"></i>
+            </li>
+        </ul>
+    </div>
 
     <!--fin de estructura de sidebar-->
     <!--Home section-->
@@ -153,7 +153,8 @@
             <div class="buscador_empleado center-align">
                 <div class="bus_empleado">
                     <div class="linea_buscador">
-                        <input id="buscador" name="buscador" onkeypress="return letras_numeros(event)" placeholder="Buscar..." type="text" class="validate buscar">
+                        <input id="buscador" name="buscador" onkeypress="return letras_numeros(event)"
+                            placeholder="Buscar..." type="text" class="validate buscar">
                     </div>
                     <div class="btn boton_buscador">
                         <a href=""><i class="waves-effect medium material-icons blanco">search</i></a>
@@ -197,29 +198,34 @@
         <div class="modal-content " id="padding">
             <h4 class="titulo_model ">Agregar empleado</h4>
             <div class="row sin_marge">
-                <form method="post" id="guardar_empleado" enctype="multipart/form-data"  autocomplete="off">
+                <form method="post" id="guardar_empleado" enctype="multipart/form-data" autocomplete="off">
                     <div class="col l6 m6 s12">
                         <div class="input-field col l12 m12 s12">
-                            <input id="nombre_empleado" type="text" name="nombre_empleado" onkeypress="return soloLetras(event)" class="validate" required>
+                            <input id="nombre_empleado" type="text" name="nombre_empleado"
+                                onkeypress="return soloLetras(event)" class="validate" required>
                             <label for="nombre_empleado">Nombres</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="dui_empleado">DUI</label>
-                            <input id="dui_empleado" type="text" name="dui_empleado" onkeypress="return verificarDUI(event, 'dui_empleado')" class="validate" required>
+                            <input id="dui_empleado" type="text" name="dui_empleado"
+                                onkeypress="return verificarDUI(event, 'dui_empleado')" class="validate" required>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="correo_empleado">Correo</label>
-                            <input id="correo_empleado" type="email" name="correo_empleado" onkeypress="return revisarTexto(event)" class="validate" required>
+                            <input id="correo_empleado" type="email" name="correo_empleado"
+                                onkeypress="return revisarTexto(event)" class="validate" required>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="telefono_empleado">Teléfono</label>
-                            <input id="telefono_empleado" type="tel" name="telefono_empleado" onkeypress="return soloNumeros(event)" class="validate" required>
+                            <input id="telefono_empleado" type="tel" name="telefono_empleado"
+                                onkeypress="return soloNumeros(event)" class="validate" required>
                         </div>
                     </div>
                     <div class="col l6 m6 s12">
                         <div class="input-field col l12 m12 s12">
 
-                            <input id="apellido_empleado" type="text" name="apellido_empleado" onkeypress="return soloLetras(event)" class="validate" required>
+                            <input id="apellido_empleado" type="text" name="apellido_empleado"
+                                onkeypress="return soloLetras(event)" class="validate" required>
                             <label for="apellido_empleado">Apellidos</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
@@ -233,7 +239,8 @@
                             <label>Estado</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
-                            <input id="direccion_empleado" type="text" name="direccion_empleado" onkeypress="return revisarTexto(event)" class="validate" required>
+                            <input id="direccion_empleado" type="text" name="direccion_empleado"
+                                onkeypress="return revisarTexto(event)" class="validate" required>
                             <label for="direccion_empleado">Dirección del empleado</label>
                         </div>
                     </div>
@@ -252,31 +259,37 @@
         <div class="modal-content " id="padding">
             <h4 class="titulo_model ">Modificar empleado</h4>
             <div class="row sin_marge">
-                <form method="post" id="actualizar_empleado_f" enctype="multipart/form-data"  autocomplete="off">
+                <form method="post" id="actualizar_empleado_f" enctype="multipart/form-data" autocomplete="off">
                     <!--Campo oculto para guardar el id-->
                     <input class="hide" type="number" id="identificadorM" name="identificador">
                     <div class="col l6 m6 s12">
                         <div class="input-field col l12 m12 s12">
-                            <input id="nombre_empleadoM" type="text" onkeypress="return soloLetras(event)" name="nombre_empleado" class="validate" required>
+                            <input id="nombre_empleadoM" type="text" onkeypress="return soloLetras(event)"
+                                name="nombre_empleado" class="validate" required>
                             <label for="nombre_empleadoM">Nombres</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="dui_empleadoM">DUI</label>
-                            <input id="dui_empleadoM" type="text" onkeypress="return verificarDUI(event, 'dui_empleadoM')" name="dui_empleado" class="validate" required>
+                            <input id="dui_empleadoM" type="text"
+                                onkeypress="return verificarDUI(event, 'dui_empleadoM')" name="dui_empleado"
+                                class="validate" required>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="correo_empleadoM">Correo</label>
-                            <input id="correo_empleadoM" type="email" onkeypress="return revisarTexto(event)" name="correo_empleado" class="validate" required>
+                            <input id="correo_empleadoM" type="email" onkeypress="return revisarTexto(event)"
+                                name="correo_empleado" class="validate" required>
                         </div>
                         <div class="input-field col l12 m12 s12">
                             <label for="telefono_empleado">Teléfono</label>
-                            <input id="telefono_empleadoM" type="tel" onkeypress="return revisarTexto(event)" name="telefono_empleado" class="validate" required>
+                            <input id="telefono_empleadoM" type="tel" onkeypress="return revisarTexto(event)"
+                                name="telefono_empleado" class="validate" required>
                         </div>
                     </div>
                     <div class="col l6 m6 s12">
                         <div class="input-field col l12 m12 s12">
 
-                            <input id="apellido_empleadoM" type="text" onkeypress="return soloLetras(event)" name="apellido_empleado" class="validate" required>
+                            <input id="apellido_empleadoM" type="text" onkeypress="return soloLetras(event)"
+                                name="apellido_empleado" class="validate" required>
                             <label for="apellido_empleadoM">Apellidos</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
@@ -290,12 +303,14 @@
                             <label>Estado</label>
                         </div>
                         <div class="input-field col l12 m12 s12">
-                            <input id="direccion_empleadoM" type="text" onkeypress="return revisarTexto(event)" name="direccion_empleado" class="validate" required>
+                            <input id="direccion_empleadoM" type="text" onkeypress="return revisarTexto(event)"
+                                name="direccion_empleado" class="validate" required>
                             <label for="direccion_empleadoM">Dirección del empleado</label>
                         </div>
                     </div>
                     <div class="container center-align">
-                        <button id="btn_modificar_empleado" class=" transparent confirmacion_boton_modal" type="submit"><i class="material-icons medium">check_circle</i></button>
+                        <button id="btn_modificar_empleado" class=" transparent confirmacion_boton_modal"
+                            type="submit"><i class="material-icons medium">check_circle</i></button>
                         <button class="transparent confirmacion_boton_modal" type="submit"><i
                                 class="material-icons medium">cancel</i></button>
                     </div>
@@ -332,6 +347,7 @@
     <script type="text/javascript " src="../../controllers/private/sidebar.js "></script>
     <script type="text/javascript" src="../../controllers/verificador.js"></script>
     <script type="text/javascript " src="../../controllers/private/activaciones_privadas.js"></script>
+    <script src="../../controllers/private/opciones_perfil.js"></script>
 
 </body>
 

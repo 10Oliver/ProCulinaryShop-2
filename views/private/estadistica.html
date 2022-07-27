@@ -88,14 +88,14 @@
                 <span class="tooltip">Gráficos</span>
             </li>
             <li class="profile">
-                <div class="profile-details">
-                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                <div class="profile-details" id="datosPerfil">
+                    <img src="../../resources/img/dashboard/Profile.jpeg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Stephanie Salinas</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"></div>
+                        <div class="job"></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out"></i>
+                <i class='bx bx-log-out' id="log_out" onclick="cerrarSesion()"></i>
             </li>
         </ul>
     </div>
@@ -224,7 +224,7 @@
 
                 </div>
                 <div class="col l8 m8 s10 offset-l2 offset-m2 offset-s1">
-                   
+
                     <div class="col l4 m4 s6 offset-l4 offset-m4 offset-s1 row">
                         <select id="tiempo">
                             <option value="1">1 semana</option>
@@ -235,15 +235,15 @@
                             <option value="6">6 semanas</option>
                             <option value="7">7 semanas</option>
                             <option value="8">8 semanas</option>
-                        
+
                         </select>
                     </div>
-                    
+
                     <div class=" col l12 m12 s12 center">
                         <h6>Ventas por semanas</h6>
                         <a href="" onclick="ventas()" class="btn">Generar</a>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -268,8 +268,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="../../controllers/components.js"></script>
+    <script type="text/javascript " src="../../controllers/private/sidebar.js "></script>
     <script src="../../controllers/private/activaciones_privadas.js"></script>
     <script src="../../controllers/private/estadistica.js"></script>
+    <script src="../../controllers/private/opciones_perfil.js"></script>
 
     <!-- <script src=""></script>-->
 </body>

@@ -93,14 +93,14 @@
                 <span class="tooltip">Gráficos</span>
             </li>
             <li class="profile">
-                <div class="profile-details">
-                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                <div class="profile-details" id="datosPerfil">
+                    <img src="../../resources/img/dashboard/Profile.jpeg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Stephanie Salinas</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"></div>
+                        <div class="job"></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out"></i>
+                <i class='bx bx-log-out' id="log_out" onclick="cerrarSesion()"></i>
             </li>
         </ul>
     </div>
@@ -203,7 +203,7 @@
     <div id="agregar" class="modal ">
         <div class="modal-content sin_marge">
             <h4 class="titulo_model ">Agregar usuario</h4>
-            <form id="agregar_usuario_f" method="post" enctype="multipart/form-data"  autocomplete="off">
+            <form id="agregar_usuario_f" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="row sin_marge">
                     <div class="col l6 m6 s12">
                         <div class="input-field col l12 m12 s12">
@@ -243,7 +243,7 @@
     <div id="modificar" class="modal expandir_modal_usuario">
         <div class="modal-content ">
             <h4 class="titulo_model ">Modificar usuario</h4>
-            <form id="actualizar_f" method="post" enctype="multipart/form-data"  autocomplete="off">
+            <form id="actualizar_f" method="post" enctype="multipart/form-data" autocomplete="off">
                 <input id="identificador_m" name="identificador_m" type="text" class="hide">
                 <div class="row sin_marge">
                     <div class="col l6 m6 s12">
@@ -296,18 +296,20 @@
         </div>
     </div>
     </div>
-    < <script src="../../resources/js/materialize.min.js">
-        </script>
-        <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
-        <script src="../../controllers/private/sidebar.js"></script>
-        <script src="../../resources/js/sweetalert.min.js"></script>
-        <script src="../../controllers/components.js"></script>
-        <script type="text/javascript" src="../../controllers/verificador.js"></script>
-        <script type="text/javascript" src="../../controllers/private/usuarios.js"></script>
-        <script type="text/javascript" src="../../controllers/private/activaciones_privadas.js"></script>
+    <script src="../../resources/js/materialize.min.js">
+    </script>
+    <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="../../controllers/private/sidebar.js"></script>
+    <script src="../../resources/js/sweetalert.min.js"></script>
+    <script src="../../controllers/components.js"></script>
+    <script type="text/javascript" src="../../controllers/verificador.js"></script>
+    <script type="text/javascript" src="../../controllers/private/usuarios.js"></script>
+    <script type="text/javascript" src="../../controllers/private/activaciones_privadas.js"></script>
+    
+    <script src="../../controllers/private/opciones_perfil.js"></script>
 
 
-        <!-- <script src=""></script>-->
+    <!-- <script src=""></script>-->
 
 </body>
 

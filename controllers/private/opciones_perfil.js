@@ -1,10 +1,10 @@
 // Constantes para establecer rutas de archivos esenciales y parametros de la API
-const API_perfil = SERVER + "public/api_index.php?action=";
+const API_perfil = SERVER + "private/api_login.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function () {
     //Se busca si se ha iniciado sesión o no
-    fetch(API_perfil + "obtenerSesion", {
+    fetch(API_perfil + "datosSesion", {
         method: "get",
     }).then(function (request) {
         //Se verifica que la sentencia se haya ejecutado
@@ -15,36 +15,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 let data = [];
                 //se crea la variable donde se guardará el HTML a inyectar
                 let contenido = [];
-                let opciones = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status == 1) {
                     data = response.dataset;
                     //Si hay sesión se reeemplazan las opciones
                     contenido = `
-                    <a class='dropdown-trigger' data-target='opciones'><i class="material-icons left" >group</i>${data}</a>
-                    `;
-                    opciones = `
-                        <li><a href="historial.html">Historial de pedidos</a></li>
-                        <li><a onclick="cerrarSesion()">Cerrar sesión</a></li>
+                        <div class="name_job">
+                            <div class="name">${data.nombre}</div>
+                            <div class="job">${data.nombre_cargo}</div>
+                        </div>
                     `;
                     //se incrustan en el html
-                    document.getElementById("sesion").innerHTML = contenido;
-                    document.getElementById("opciones").innerHTML = opciones;
-                    //se reinicializa el componente
-                    M.Dropdown.init(document.querySelectorAll(".dropdown-trigger"));
+                    document.getElementById("datosPerfil").innerHTML = contenido;
                 } else {
-                    console.log("No hay sessión");
-                    //si no hay sesión se coloca la opción para iniciar sesión
-                    contenido = `
-                    <a href="login.html"><i class="material-icons left">group</i>Iniciar sesión</a>
-                    `;
-                    document.getElementById("sesion").innerHTML = contenido;
+                    //Se le notifica al usuario
+                    sweetAlert(2, response.exception,null);
                 }
-                // Se envían los datos a la función del controlador para llenar la tabla en la vista.
             });
         } else {
+             sweetAlert(2, "No se logró iniciar sesión", "index.html");
             //Se imprime el problema al ejecutar la sentencia
             console.log(request.status + " " + request.statusText);
+           
         }
     });
 });

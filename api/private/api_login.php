@@ -48,6 +48,28 @@ if (isset($_GET['action'])) {
                 $result['dataset'] = $_SESSION['usuario'];
             }
             break;
+        case 'datosSesion':
+            if(!isset($_SESSION['id_empleado'])) {
+                $result['exception'] = 'Debes iniciar sesión';
+            }elseif (!$usuario->setIdEmpleado($_SESSION['id_empleado'])) {
+                $result['exception'] = 'No se logró localizar tu usuario';
+            } elseif($result['dataset'] = $usuario->obtenerSesion()) {
+                $result['status'] = 1;
+            } elseif(database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'Tu cuenta no se ha encontrado';
+            }
+            break;
+        case 'CerrarSesion':
+            if (session_destroy()) {
+                $result['status'] = 1;
+                $result['message'] = 'La sesión ha finalizado';
+            } else {
+                $result['exception'] = 'La sesión no se pudo finalizar';
+            }
+            break;
+
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

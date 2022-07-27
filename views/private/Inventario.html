@@ -94,14 +94,14 @@
                 <span class="tooltip">Gráficos</span>
             </li>
             <li class="profile">
-                <div class="profile-details">
-                    <img src="../../resources/img/dashboard employee/Profile.jpeg" alt="profileImg">
+                <div class="profile-details" id="datosPerfil">
+                    <img src="../../resources/img/dashboard/Profile.jpeg" alt="profileImg">
                     <div class="name_job">
-                        <div class="name">Stephanie Salinas</div>
-                        <div class="job">Web designer</div>
+                        <div class="name"></div>
+                        <div class="job"></div>
                     </div>
                 </div>
-                <i class='bx bx-log-out' id="log_out"></i>
+                <i class='bx bx-log-out' id="log_out" onclick="cerrarSesion()"></i>
             </li>
         </ul>
     </div>
@@ -155,7 +155,8 @@
                         <div class=" icon-container">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <input id="buscador" name="buscador" placeholder="Buscar por nombre o descripción..." type="text" onkeypress="return soloLetras(event)" class="validate buscar">
+                        <input id="buscador" name="buscador" placeholder="Buscar por nombre o descripción..."
+                            type="text" onkeypress="return soloLetras(event)" class="validate buscar">
                     </div>
                     <div class="btn btn-add" onclick="abrir_modal_crear()">
                         <div class="icon">
@@ -191,23 +192,30 @@
         <div id="agregar" class="modal fondo_modal  ">
             <div class="modal-content " id="padding">
                 <h4 class="titulo_model ">Agregar producto</h4>
-                <form id="agregar_producto" method="post" enctype="multipart/form-data"  autocomplete="off">
+                <form id="agregar_producto" method="post" enctype="multipart/form-data" autocomplete="off">
                     <div class="row sin_marge">
                         <div class="col l6 m6 s12">
                             <div class="input-field col l12 m12 s12">
-                                <input id="nombre_producto" onkeypress="return letras_numeros(event)" type="text" name="nombre_producto" class="validate input_modal" required>
+                                <input id="nombre_producto" onkeypress="return letras_numeros(event)" type="text"
+                                    name="nombre_producto" class="validate input_modal" required>
                                 <label for="nombre_producto">Nombre del producto</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="cantidad" onkeypress="return soloNumeros(event)" type="text" name="cantidad" class="validate input_modal" required>
+                                <input id="cantidad" onkeypress="return soloNumeros(event)" type="text" name="cantidad"
+                                    class="validate input_modal" required>
                                 <label for="cantidad">Cantidad</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="precio_producto" onkeypress="return verificarDinero(event, 'precio_producto' )" onpaste="return false" type="text" name="precio_producto" class="validate input_modal" required>
+                                <input id="precio_producto"
+                                    onkeypress="return verificarDinero(event, 'precio_producto' )"
+                                    onpaste="return false" type="text" name="precio_producto"
+                                    class="validate input_modal" required>
                                 <label for="precio_producto">Precio</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="descuento" onkeypress="return validadPorcentajes(event, 'descuento' )" onpaste="return false" type="text" name="descuento" class="validate input_modal" required>
+                                <input id="descuento" onkeypress="return validadPorcentajes(event, 'descuento' )"
+                                    onpaste="return false" type="text" name="descuento" class="validate input_modal"
+                                    required>
                                 <label for="descuento">Descuento</label>
                             </div>
                         </div>
@@ -234,7 +242,8 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>Imagen</span>
-                                        <input id="imagen_producto" type="file" name="imagen_producto" accept=".jpg, .png">
+                                        <input id="imagen_producto" type="file" name="imagen_producto"
+                                            accept=".jpg, .png">
                                     </div>
                                     <div class="file-path-wrapper ">
                                         <input class="file-path validate" type="text">
@@ -243,7 +252,8 @@
                             </div>
                         </div>
                         <div class="input-field col l10 m10 s12 offset-l1">
-                            <input id="descripcion_producto" onkeypress="return letras_numeros(event)" type="text" name="descripcion_producto" class="validate input_modal" required>
+                            <input id="descripcion_producto" onkeypress="return letras_numeros(event)" type="text"
+                                name="descripcion_producto" class="validate input_modal" required>
                             <label for="descripcion_producto">Descripción</label>
                         </div>
                     </div>
@@ -260,24 +270,29 @@
         <div id="modificar" class="modal fondo_modal  ">
             <div class="modal-content " id="padding">
                 <h4 class="titulo_model ">Modificar producto</h4>
-                <form id="modificar_producto" method="post" enctype="multipart/form-data"  autocomplete="off">
+                <form id="modificar_producto" method="post" enctype="multipart/form-data" autocomplete="off">
                     <input class="hide" type="number" id="identificadorM" name="identificadorM">
                     <div class="row sin_marge">
                         <div class="col l6 m6 s12">
                             <div class="input-field col l12 m12 s12">
-                                <input id="nombre_productoM" onkeypress="return letras_numeros(event)" type="text" name="nombre_productoM" class="validate input_modal" required>
+                                <input id="nombre_productoM" onkeypress="return letras_numeros(event)" type="text"
+                                    name="nombre_productoM" class="validate input_modal" required>
                                 <label for="nombre_usuarioM">Nombre del producto</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="cantidadM" onkeypress="return soloNumeros(event)" type="text" name="cantidadM" class="validate input_modal" required>
+                                <input id="cantidadM" onkeypress="return soloNumeros(event)" type="text"
+                                    name="cantidadM" class="validate input_modal" required>
                                 <label for="cantidadM">Cantidad</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="precio_productoM" onkeypress="return verificarDinero(event, 'precio_productoM' )" type="text" name="precio_productoM" class="validate input_modal" required>
+                                <input id="precio_productoM"
+                                    onkeypress="return verificarDinero(event, 'precio_productoM' )" type="text"
+                                    name="precio_productoM" class="validate input_modal" required>
                                 <label for="precio_productoM">Precio</label>
                             </div>
                             <div class="input-field col l12 m12 s12">
-                                <input id="descuentoM" onkeypress="return validadPorcentajes(event, 'descuentoM' )" type="text" name="descuentoM" class="validate input_modal" required>
+                                <input id="descuentoM" onkeypress="return validadPorcentajes(event, 'descuentoM' )"
+                                    type="text" name="descuentoM" class="validate input_modal" required>
                                 <label for="descuentoM">Descuento</label>
                             </div>
                         </div>
@@ -304,7 +319,8 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>File</span>
-                                        <input id="imagen_productoM" type="file" name="imagen_productoM" accept=".jpg, .png">
+                                        <input id="imagen_productoM" type="file" name="imagen_productoM"
+                                            accept=".jpg, .png">
                                     </div>
                                     <div class="file-path-wrapper ">
                                         <input class="file-path validate" type="text">
@@ -313,7 +329,8 @@
                             </div>
                         </div>
                         <div class="input-field col l10 m10 s12 offset-l1">
-                            <input id="descripcion_productoM" onkeypress="return soloLetras(event)" type="text" name="descripcion_productoM" class="validate input_modal" required>
+                            <input id="descripcion_productoM" onkeypress="return soloLetras(event)" type="text"
+                                name="descripcion_productoM" class="validate input_modal" required>
                             <label for="descripcion_productoM">Descripción</label>
                         </div>
                     </div>
@@ -336,6 +353,7 @@
         <script type="text/javascript " src="../../controllers/private/inventario.js "></script>
         <script type="text/javascript" src="../../controllers/verificador.js"></script>
         <script type="text/javascript " src="../../controllers/private/activaciones_privadas.js"></script>
+        <script src="../../controllers/private/opciones_perfil.js"></script>
 </body>
 
 </html>
