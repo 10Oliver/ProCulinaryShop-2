@@ -71,7 +71,7 @@ class Estadistica extends Verificador
             $sql = $sql." AND p.id_producto = 0";
         }
         
-        $sql = $sql." GROUP BY p.nombre_producto, deo.cantidad_producto_orden";
+        $sql = $sql." GROUP BY p.nombre_producto";
         return database::multiFilas($sql, $params);
     }
 

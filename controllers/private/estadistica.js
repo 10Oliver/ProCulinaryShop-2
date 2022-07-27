@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             <td>${row.nombre_producto}</td>
                             <td>
                                 <p>
-                                    <label>
-                                        <input type="checkbox" id="check${row.id_producto}"
+                                    <label >
+                                        <input type="checkbox"id="check${row.id_producto}"
                                          onclick="contar()"/>
-                                        <span></span>
+                                        <span class="titulos"></span>
                                     </label>
                                     </p>
                             </td>
