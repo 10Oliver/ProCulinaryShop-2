@@ -29,14 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("datosPerfil").innerHTML = contenido;
                 } else {
                     //Se le notifica al usuario
-                    sweetAlert(2, response.exception,null);
+                    sweetAlert(2, response.exception, "index.html");
                 }
             });
         } else {
-             sweetAlert(2, "No se logró iniciar sesión", "index.html");
+            sweetAlert(2, "No se logró iniciar sesión", "index.html");
             //Se imprime el problema al ejecutar la sentencia
             console.log(request.status + " " + request.statusText);
-           
         }
     });
 });
@@ -45,17 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cerrarSesion() {
     swal({
-        title: 'Advertencia',
-        text: '¿Estás seguro de cerrar tu sesión?',
-        icon: 'warning',
-        buttons: ['No', 'Sí'],
+        title: "Advertencia",
+        text: "¿Estás seguro de cerrar tu sesión?",
+        icon: "warning",
+        buttons: ["No", "Sí"],
         closeOnClickOutside: false,
-        closeOnEsc: false
+        closeOnEsc: false,
     }).then(function (value) {
         // Se verifica si fue cliqueado el botón Sí para hacer la petición de cerrar sesión, de lo contrario se muestra un mensaje.
         if (value) {
-            fetch(API_perfil + 'CerrarSesion', {
-                method: 'get'
+            fetch(API_perfil + "CerrarSesion", {
+                method: "get",
             }).then(function (request) {
                 // Se verifica si la petición es correcta, de lo contrario se muestra un mensaje en la consola indicando el problema.
                 if (request.ok) {
@@ -64,7 +63,7 @@ function cerrarSesion() {
                         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
                         if (response.status) {
                             //Se da el mensaje y se redirecciona al index
-                            sweetAlert(1, response.message, 'index.html');
+                            sweetAlert(1, response.message, "index.html");
                         } else {
                             //se menciona el error
                             sweetAlert(2, response.exception, null);
@@ -72,13 +71,11 @@ function cerrarSesion() {
                     });
                 } else {
                     //Se envia el error a la consola
-                    console.log(request.status + ' ' + request.statusText);
+                    console.log(request.status + " " + request.statusText);
                 }
             });
         } else {
-            sweetAlert(4, 'Puede continuar con la sesión', null);
+            sweetAlert(4, "Puede continuar con la sesión", null);
         }
     });
-
 }
-
