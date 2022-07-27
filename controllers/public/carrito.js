@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response.status) {
                     data = response.dataset;
                 } else {
-                    sweetAlert(3, response.exception, null);
+                    sweetAlert(3, response.exception, 'index.html');
                 }
                 // Se envían los datos al método para cargar los productos
                 llenar_tabla(data);
@@ -349,6 +349,8 @@ function verificarExistencia() {
                                                     closeOnClickOutside: false,
                                                     closeOnEsc: false,
                                                 }).then(function () {
+                                                    //Se genera la factura
+                                                    factura();
                                                     //Se le pregunta al usuario si desea valorar o no
                                                     swal({
                                                         title: "Etapa de valoración",
@@ -393,5 +395,48 @@ function verificarExistencia() {
 
 //Función para generar la factura
 function factura() { 
-    comprobante(["titulo 1"], [["datos"]], "factura", "Comprobante de compra");
+    //Se crea la petición
+    fetch(API_carrito + "obtenerFactura", {
+        method: 'get',
+    }).then(function (request) { 
+        //Se verifica el estado de la ejecución
+        if (request.ok) {
+            //Se termina de pasar a JSON
+            request.json().then(function (response) {
+                //Se verifica el estado devuelto por la API
+                if (response.status) {
+                    //Se crea los vectores donde se guardarán los datos
+                    let cabeceras = [], general = [];
+                    //Se crea una variable de conteo
+                    let total = 0.0;
+                    //Se extraen los datos fila por fila
+                    response.dataset.map(function (row) {
+                        //Se crea un vector para guardar los datos por fila
+                        let fila = [];
+                        fila.push(
+                            row.nombre_producto,
+                            row.cantidad_producto_orden,
+                            "$" + row.precio_producto_orden,
+                            "$" + row.subtotal
+                        );
+                        total = total + Number(row.subtotal);
+                        //Se agrega al contenedor de filas
+                        general.push(fila);
+                    });
+                    //Se agregan los titulos para las cabeceras
+                    cabeceras.push('Nombre del producto', 'Cantidad', 'Precio', 'subtotal');
+                    //Se agrega el total
+                    general.push(["", "", "Total", "$" + total.toFixed(2)]);
+                    //Se envian los datos para generar la factura
+                    comprobante(cabeceras, general, "Comprobante de venta " + moment().format("YYYY-MM-DD"), 'Comprobante de venta');
+                } else { 
+                    //Se muestra el error
+                    sweetAlert(2, response.exception, 'index.html');
+                }
+            })
+        } else { 
+            //Se imprime el error en la consola
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
 }

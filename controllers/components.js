@@ -882,7 +882,7 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         doc.setFontSize(22);
                         doc.setTextColor(76, 175, 80);
                         //Se coloca el titulo de la página
-                        doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 235, {
+                        doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 230, {
                             align: "center",
                         });
 

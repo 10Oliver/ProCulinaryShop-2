@@ -433,7 +433,7 @@ function ventas() {
         datos_tablas.push([''],['']);
     }
     //Se pasan los datos para generar un reporte
-    reporte_multitablas(cabeceras, datos_tablas, `Ventas semanales ${moment().format("YYYY-MM-DD")}`, titulo);
+    reporte_multitablas(cabeceras, datos_tablas, 'Ventas semanales '+ moment().format("YYYY-MM-DD"), titulo);
 }
 
 //Función para obtener el top de productos

@@ -133,6 +133,17 @@ if (isset($_GET['action'])) {
                 $result['exception'] = database::obtenerProblema();
             }
             break;
+        case 'obtenerFactura':
+            if (!$inventario->setIdCliente($_SESSION['id_cliente'])) {
+                $result['exception'] = 'No se encontró la cuenta';
+            } elseif ($result['dataset'] = $inventario->factura()) {
+                $result['status'] = 1;
+            } elseif (database::obtenerProblema()) {
+                $result['exception'] = database::obtenerProblema();
+            } else {
+                $result['exception'] = 'No se encontraron datos con la factura solicitada';
+            }
+            break;
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

@@ -497,4 +497,15 @@ class inventario extends Verificador
         $params = array($this->buscador);
         return database::multiFilas($sql, $params);
     }
+
+    //Función para obtener el detalle del producto
+    public function factura()
+    {
+        $sql = 'SELECT p.nombre_producto, deo.cantidad_producto_orden, deo.precio_producto_orden,
+        (deo.cantidad_producto_orden * deo.precio_producto_orden) AS subtotal FROM detalle_orden deo
+        INNER JOIN producto p ON p.id_producto = deo.id_producto
+        WHERE deo.id_orden_compra = (SELECT MAX (id_orden_compra) FROM orden_compra WHERE id_cliente = ? AND id_estado_orden = 2)';
+        $params = array($this->idCliente);
+        return database::multiFilas($sql, $params);
+    }
 }
