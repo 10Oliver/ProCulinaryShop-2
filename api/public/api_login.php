@@ -65,6 +65,22 @@ if (isset($_GET['action'])) {
                 $result['exception'] = database::obtenerProblema();
             }
             break;
+        case 'obtenerSesion':
+            if (!isset($_SESSION['usuario'])) {
+                $result['exception'] = 'No hay una sesión iniciada, no se puede generar el reporte';
+            } else {
+                if(!$usuario->setIdCliente($_SESSION['id_cliente'])) {
+                    $result['exception'] = 'No se encontró el cliente';
+                } elseif($result['dataset'] = $usuario->factura()) {
+                    $result['status'] = 1;
+                } elseif(database::obtenerProblema()) {
+                    $result['exception'] = database::obtenerProblema();
+                } else {
+                    $result['exception'] = 'No se encontraron los datos adecuados';
+                }
+                
+            }
+            break;
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

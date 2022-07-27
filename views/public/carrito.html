@@ -59,6 +59,7 @@
     <section class="contenedor_detalle center-align row">
         <div class="col l10 offset-l1">
             <h5>Carrito de compras</h5>
+                    <a class="btn" onclick="factura()">Generar</a>
             <div class="row">
                 <div class="col l6 m6 s12">
                     <h6>Nombre producto</h6>
@@ -121,6 +122,16 @@
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="../../controllers/components.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"
+        integrity="sha512-Bw9Zj8x4giJb3OmlMiMaGbNrFr0ERD2f9jL3en5FmcTXLhkI+fKyXVeyGyxKMIl1RfgcCBDprJJt4JvlglEb3A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.js"
+        integrity="sha512-elg9Cs/wmju8u77pchpE2NsmBPARPaa5emzKtYheBWtLBMysQR+s4zMBuBdx30fSIP2W+MVH6YadKNrJxsOfbA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../../resources/js/wNumb.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+        integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript " src="../../controllers/public/carrito.js"></script>
     <script type="text/javascript" src="../../controllers/verificador.js"></script>
     <script type="text/javascript " src="../../controllers/public/activaciones_publicas.js"></script>

@@ -380,6 +380,17 @@ class usuario extends Verificador{
     return database::ejecutar($sql, $params);
     }
 
+    //Función para obtener el id de la orden
+    public function factura()
+    {
+        $sql = "SELECT id_orden_compra, CONCAT(nombre_cliente, ' ',apellido_cliente) AS cliente FROM orden_compra oc
+            INNER JOIN cliente c ON c.id_cliente = oc.id_cliente
+            WHERE oc.id_cliente = ?
+            AND id_orden_compra = (SELECT MAX(id_orden_compra) FROM orden_compra WHERE id_cliente = ?)";
+        $params = array($this->idCliente, $this->idCliente);
+        return database::filaUnica($sql, $params);
+    }
+
 }
 
 ?>

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (response.status) {
                     data = response.dataset;
                 } else {
-                    sweetAlert(3, response.exception, 'index.html');
+                    sweetAlert(3, response.exception, null);
                 }
                 // Se envían los datos al método para cargar los productos
                 llenar_tabla(data);
@@ -389,4 +389,9 @@ function verificarExistencia() {
             console.log(request.status + " " + request.statusText);
         }
     });
+}
+
+//Función para generar la factura
+function factura() { 
+    comprobante(["titulo 1"], [["datos"]], "factura", "Comprobante de compra");
 }

@@ -680,7 +680,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         tableLineWidth: 0.1,
                     });
 
-                    //Se carga la imagen a colocoar como hader
+                    //Se carga la imagen a colocar como header
                     var logo = new Image();
                     logo.src = "../../resources/img/reportes/cabecerawhite.png";
 
@@ -708,7 +708,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         doc.text("Usuario: " + response.dataset, 60, 80);
                         //Se cambia el idioma de la hora
                         moment.locale("es");
-                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm:ss a"), 60, 120);
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
                         doc.setTextColor(0, 0, 0);
@@ -793,7 +793,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         tableLineWidth: 0.1,
                     });
 
-                    //Se carga la imagen a colocoar como hader
+                    //Se carga la imagen a colocar como header
                     var logo = new Image();
                     logo.src = "../../resources/img/reportes/cabecerawhite.png";
 
@@ -812,7 +812,102 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.text("Usuario: " + response.dataset, 60, 80);
                         //Se cambia el idioma de la hora
                         moment.locale("es");
-                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm:ss a"), 60, 120);
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
+                        //Se coloca el pie de página con el número de letra
+                        doc.setFontSize(10);
+                        doc.setTextColor(0, 0, 0);
+                        doc.text(508, 750, "Página " + String(i) + " de " + String(pageCount));
+                    }
+
+                    //Se guarda el documento
+                    doc.save(`${nombre}.pdf`);
+                } else {
+                    //Se muestra el error
+                    sweetAlert(3, response.exception, null);
+                }
+            });
+        } else {
+            //Se imprime el error en la consola
+            console.log(request.status + " " + request.statusText);
+        }
+    });
+}
+
+//Función para crear un reporte de tipo factura
+
+function comprobante(cabeceras, datos, nombre, titulo) {
+    const doc = new jspdf.jsPDF("p", "pt", "letter"),
+        margin = {
+            top: 250,
+            bottom: 80,
+            left: 43,
+            right: 43,
+        };
+    //Petición para obtener el nombre actual del usuario
+    fetch(SERVER + "public/api_login.php?action=" + "obtenerSesion", {
+        method: "get",
+    }).then(function (request) {
+        //Se verifica el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a JSON
+            request.json().then(function (response) {
+                //Se verifica el estado devuelto por la api
+                if (response.status) {
+                    //Propiedades básicas del pdf
+
+                    //Se cargan los datos a la tabla
+                    doc.autoTable({
+                        head: [cabeceras],
+                        body: datos,
+                        margin,
+                        styles: { halign: "center", font: "courier-oblique" },
+                        headStyles: { fillColor: [18, 143, 35] },
+                        alternateRowStyles: { fillColor: [202, 247, 194] },
+                        tableLineColor: [132, 241, 136],
+                        tableLineWidth: 0.1,
+                    });
+
+                    //Se carga la imagen a colocar como header
+                    var logo = new Image();
+                    logo.src = "../../resources/img/logoblack.png";
+
+                    //Se agrega el conteo de páginas
+                    const pageCount = doc.internal.getNumberOfPages();
+                    for (var i = 1; i <= pageCount; i++) {
+                        //Selección de la página para colocar los datos
+                        doc.setPage(i);
+
+                        //Se agregan estilos el titulo
+                        doc.setFont("courier-oblique");
+                        doc.setFontSize(22);
+                        doc.setTextColor(76, 175, 80);
+                        //Se coloca el titulo de la página
+                        doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 235, {
+                            align: "center",
+                        });
+
+                        //Se agrega la decoración
+                        doc.setDrawColor(0);
+                        doc.setFillColor(18, 143, 36);
+                        doc.rect(320, 43, 350, 70, "F"); // filled red square
+
+                        //Se coloca el banner del header
+                        doc.addImage(logo, "PNG", 43, 30, 250, 90);
+
+                        //Se reestablecen los estilos
+                        doc.setFontSize(12);
+                        doc.setTextColor(0, 0, 0);
+
+                        doc.text("Cliente: " + response.dataset.cliente, 80, 150);
+                        doc.text("N° de factura: " + response.dataset.id_orden_compra, 80, 175);
+
+                        //Se cambia el idioma de la hora
+                        moment.locale("es");
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 370, 175);
+                        //Se reestablecen los estilos
+                        doc.setFontSize(14);
+                        doc.setTextColor(0, 0, 0);
+                        doc.text("ProCulinaryShop S.A. de C.V", 80, 125);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
                         doc.setTextColor(0, 0, 0);
