@@ -272,7 +272,7 @@ function eliminarRegistro(API, action, form, mensaje, action2) {
                         }
                     });
                     //S refresca la tabla de datos
-                    leertablas(API, action2);
+                    leerTablas(API, action2);
                 } else {
                     console.log(request.status + " " + request.statusText);
                 }

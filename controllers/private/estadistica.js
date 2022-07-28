@@ -331,7 +331,7 @@ function trafico() {
                     //Se pasan los datos a un array general
 
                     //Se pasan los datos para generar un reporte
-                    reporte_tablas(
+                    reporteTablas(
                         cabeceras,
                         general,
                         "Reporte de tráfico de compras" + moment().format("YYYY-MM-DD"),

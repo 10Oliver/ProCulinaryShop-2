@@ -25,15 +25,15 @@ function llenarTabla(dataset) {
         <td>${row.direccion}</td>
         <td>${row.fecha_hora}</td>
         <td>${row.calcular_subtotal}</td>
-        <td><a href="#mostrar" class="modal-trigger desplegar_lista" onclick="cargar_lista(${row.id_orden_compra})"><i class="material-icons">remove_red_eye</i></a></td>
+        <td><a href="#mostrar" class="modal-trigger desplegar_lista" onclick="cargarLista(${row.id_orden_compra})"><i class="material-icons">remove_red_eye</i></a></td>
         <td>
-            <select disabled id="estado_pedido${row.id_orden_compra}" onchange="actualizar_pedido(${row.id_orden_compra})">
+            <select disabled id="estado_pedido${row.id_orden_compra}" onchange="actualizarPedido(${row.id_orden_compra})">
             </select>
         </td>
         <td>
             <p>
                 <label>
-                    <input id="eliminar_pedido${row.id_orden_compra}" type="checkbox" class="filled-in" onchange="eliminar_pedido(${row.id_orden_compra})" />
+                    <input id="eliminar_pedido${row.id_orden_compra}" type="checkbox" class="filled-in" onchange="eliminarPedido(${row.id_orden_compra})" />
                     <span>${row.estado_orden}</span>
                 </label>
             </p>
@@ -49,15 +49,15 @@ function llenarTabla(dataset) {
         <td>${row.direccion}</td>
         <td>${row.fecha_hora}</td>
         <td>${row.calcular_subtotal}</td>
-        <td><a href="#mostrar" class="modal-trigger desplegar_lista" onclick="cargar_lista(${row.id_orden_compra})"><i class="material-icons">remove_red_eye</i></a></td>
+        <td><a href="#mostrar" class="modal-trigger desplegar_lista" onclick="cargarLista(${row.id_orden_compra})"><i class="material-icons">remove_red_eye</i></a></td>
         <td>
-            <select id="estado_pedido${row.id_orden_compra}" onchange="actualizar_pedido(${row.id_orden_compra}) ">
+            <select id="estado_pedido${row.id_orden_compra}" onchange="actualizarPedido(${row.id_orden_compra}) ">
             </select>
         </td>
         <td>
             <p>
                 <label>
-                    <input id="eliminar_pedido${row.id_orden_compra}" type="checkbox" class="filled-in" checked="checked" onchange="eliminar_pedido(${row.id_orden_compra})" />
+                    <input id="eliminar_pedido${row.id_orden_compra}" type="checkbox" class="filled-in" checked="checked" onchange="eliminarPedido(${row.id_orden_compra})" />
                     <span>${row.estado_orden}</span>
                 </label>
             </p>
@@ -102,7 +102,7 @@ function actualizarPedido(identificador) {
                     sweetAlert(2, respose.exception, null);
                 } else {
                     //Se actualiza la tabla de datos
-                    leertablas(API_pedidos, "cargarDatos");
+                    leerTablas(API_pedidos, "cargarDatos");
                 }
             });
         } else {
@@ -146,7 +146,7 @@ function eliminarPedido(identificador) {
                     sweetAlert(2, respose.exception, null);
                 } else {
                     //Se actualiza la tabla de datos
-                    leertablas(API_pedidos, "cargarDatos");
+                    leerTablas(API_pedidos, "cargarDatos");
                 }
             });
         } else {

@@ -5,7 +5,7 @@ const API_comentario = SERVER + "private/api_comentarios.php?action=";
 
 document.addEventListener("DOMContentLoaded", function () {
     //Se cargan los datos en la tabla, la función está en components.js
-    leertablas(API_comentario, "cargarDatos");
+    leerTablas(API_comentario, "cargarDatos");
 });
 
 //Función que carga los datos en la tabla

@@ -131,7 +131,7 @@ function disminuirProductos(id) {
                             (
                                 parseFloat(
                                     document.getElementById("precio" + id).innerHTML.slice(1)
-                                ) * parseFloat(cantidad_actual)
+                            ) * parseFloat(cantidadActual)
                             ).toFixed(2);
                     }
                 });

@@ -5,7 +5,7 @@ const API_cliente = SERVER + "private/api_cliente.php?action=";
 
 document.addEventListener("DOMContentLoaded", function () {
     //Se cargan los datos en la tabla, la función está en components.js
-    leertablas(API_cliente, "cargarDatos");
+    leerTablas(API_cliente, "cargarDatos");
 });
 
 //Función que carga los datos en la tabla
@@ -145,7 +145,7 @@ function reporte(id) {
                     //Se colocan las cabeceras del reporte
                     cabeceras.push('Producto más númeroso', 'Producto más caro', 'Total de producto', 'Costo promedio de productos', 'Total de factura', 'Fecha de compra');
                     //Se envian los datos para generar un reporte
-                    reporte_tablas(cabeceras, general,  "Historial de compras de cliente "+ moment().format("YYYY-MM-DD"), 'Historial de compras');
+                    reporteTablas(cabeceras, general,  "Historial de compras de cliente "+ moment().format("YYYY-MM-DD"), 'Historial de compras');
                 } else {
                     //Se muestra el error
                     sweetAlert(2, response.exception, null);

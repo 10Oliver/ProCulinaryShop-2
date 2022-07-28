@@ -6,7 +6,7 @@ const API_empleado = SERVER + "private/api_empleado.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function() {
-    leertablas(API_empleado, "cargarDatos");
+    leerTablas(API_empleado, "cargarDatos");
     cargarSelect(API_empleado + "cargarCargos", "selector_cargo", null, 1);
 });
 
@@ -149,7 +149,7 @@ document.getElementById("actualizar_empleado_f").addEventListener("submit", func
     // Se Llama la función que actualizará el registro, están en components.js
     actualizarRegistro(API_empleado, "actualizarEmpleado", "actualizar_empleado_f", "modificar");
     //Se actualizan la tabla
-    leertablas(API_empleado, "cargarDatos");
+    leerTablas(API_empleado, "cargarDatos");
 });
 
 //Función que eliminará un registro
