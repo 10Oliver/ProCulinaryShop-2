@@ -4,22 +4,14 @@ const API_inventario = SERVER + "private/api_inventario.php?action=";
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function () {
     leerTablas(API_inventario, "cargarDatos");
-    leerTablas(API_inventario, "CargarTablaCategoria");
-    leerTablas(API_inventario, "cargarDatos");
 });
 //Función que llenará la tabla
-/**
- * function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
-    //variable para identificar el componente al cual se le asignará
-    let componente = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
     dataset.map(function (row) {
-        //se revisa si existe el nombre correcto
-        switch (row.length) { 
-            case 5:
-                contenido += `
+        contenido += `
                     <tr>
                     <td>${row.id_producto}</td>
                     <td>${row.nombre_producto}</td>
@@ -31,56 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
                         <img src="../../api/images/productos/${row.imagen}" alt="">
                     </td>
                     <td>
-                        <a onclick="modal_actualizar(${row.id_producto})" class="btn editar"><i
+                        <a onclick="modalActualizar(${row.id_producto})" class="btn editar"><i
                             class="material-icons ">create</i></a>
-                        <a onclick="modal_eliminar(${row.id_producto})" class=" btn eliminar"><i
+                        <a onclick="modalEliminar(${row.id_producto})" class=" btn eliminar"><i
                             class="material-icons ">delete</i></a></td>
                     </tr>
                     `;
-                
-                componente = 'cuerpo_inventario_producto';
-                break;
-            case 3:
-                contenido += `
-                    <tr>
-                    <td>${row.id_categoria}</td>
-                    <td>${row.nombre_categoria}</td>
-                    <td>
-                        <img src="../../api/images/productos/${row.imagen}" alt="">
-                    </td>
-                    <td>
-                        <a onclick="modal_actualizar(${row.id_categoria})" class="btn editar"><i
-                            class="material-icons ">create</i></a>
-                        <a onclick="modal_eliminar(${row.id_categoria})" class=" btn eliminar"><i
-                            class="material-icons ">delete</i></a></td>
-                    </tr>
-                    `;
-                componente = 'cuerpo_inventario_categoria';
-                break;
-            case 1:
-                contenido += `
-                    <tr>
-                    <td>${row.id_material}</td>
-                    <td>${row.material}</td>
-                    <td>
-                        <a onclick="modal_actualizar(${row.id_material})" class="btn editar"><i
-                            class="material-icons ">create</i></a>
-                        <a onclick="modal_eliminar(${row.id_material})" class=" btn eliminar"><i
-                            class="material-icons ">delete</i></a></td>
-                    </tr>
-                    `;
-                componente = 'cuerpo_inventario_material';
-                break;
-        }
         //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
     });
 
-    //Se le insertan las filas a la tabla en la vista
-    document.getElementById(componente).innerHTML = contenido;
+//Se le insertan las filas a la tabla en la vista
+document.getElementById('cuerpo_inventario_producto').innerHTML = contenido;
 
 }
- */
 
+
+/*
 const mostrarDato = (dato) => {
     return dato != undefined ? `<td>${dato}</td>` : '';
 }
@@ -112,10 +70,11 @@ function llenarTabla(dataset) {
         `;
     });
 
-    //Se le insertan las filas a la tabla en la vista
-    document.getElementById("cuerpo_inventario_producto").innerHTML = contenido;
 
-}
+//Se le insertan las filas a la tabla en la vista
+document.getElementById("cuerpo_inventario_producto").innerHTML = contenido;
+
+}    */
 
 //Función que carga los datos en el modal para crear
 
@@ -252,7 +211,7 @@ function modalEliminar(identificador) {
     //Se llena con el name y el valor
     identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para eliminar el registro
-    eliminar_registro(
+    eliminarRegistro(
         API_inventario,
         "eliminarProducto",
         identificadorPrincipal,

@@ -62,7 +62,7 @@ if (isset($_GET['action'])) {
             } elseif (database::obtenerProblema()) {
                 $result['exception'] = database::obtenerProblema();
             } else {
-                $result['exception'] = 'No hay datos de momento';
+                $result['exception'] = 'El cliente no ha adquirido ningún producto recientemente';
             }
             break;
     }
