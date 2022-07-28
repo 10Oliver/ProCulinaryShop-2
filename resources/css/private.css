@@ -1204,7 +1204,8 @@ input {
 .cgrafica {
     height: 300px !important;
     position: relative;
-    margin-top: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .grafica {
