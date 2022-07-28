@@ -79,7 +79,7 @@ class Estadistica extends Verificador
     public function cargarDinero()
     {
         $sql = "SELECT CONCAT(TO_CHAR(fecha_hora, 'TMDay'), ' ',(EXTRACT(DAY FROM (fecha_hora))), ' de ',TO_CHAR(fecha_hora, 'TMMonth')) as fecha,
-        (AVG(calcular_subtotal(id_orden_compra))) as promedio,
+        calcular_promedio(fecha_hora) as promedio,
         SUM(calcular_subtotal(id_orden_compra)) AS dinero FROM orden_compra
         WHERE fecha_hora BETWEEN ? AND ?
         GROUP BY fecha_hora";

@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Rango máximo y minimo para el slider
 
         range: {
-            min: timestamp(moment().subtract(1, "months").format("YYYY-MM-DD")),
+            min: timestamp(moment().subtract(2, "months").format("YYYY-MM-DD")),
             max: timestamp(moment()),
         },
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Rango máximo y minimo para el slider
 
         range: {
-            min: timestamp(moment().subtract(1, "months").format("YYYY-MM-DD")),
+            min: timestamp(moment().subtract(2, "months").format("YYYY-MM-DD")),
             max: timestamp(moment()),
         },
 

@@ -40,6 +40,17 @@
     --button-background-color: #b2bebf;
 }
 
+
+.titulo1{
+    color: var(--fa-users);
+}
+
+.titulo2{
+    color: var(--box-rounded);
+   
+}
+
+
 /*Definiendo atributos de etiqueta body*/
 
 body {
@@ -1193,6 +1204,7 @@ input {
 .cgrafica {
     height: 300px !important;
     position: relative;
+    margin-top: 20px;
 }
 
 .grafica {
