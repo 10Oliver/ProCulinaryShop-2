@@ -10,7 +10,7 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/css/materialize.min.css">
-    <link rel="stylesheet" href="../../resources/css/public.css">
+    <link rel="stylesheet" href="../../resources/css/private.css">
 
 
 
@@ -19,24 +19,41 @@
     <link rel="icon" href="../../resources/img/home/shopping.png">
 </head>
 
-<body>
-    <main class="container alinear-login  valign-wrapper">
-        <div class="card-inicio  ">
-            <form id="login" method="post" enctype="multipart/form-data" autocomplete="off">
-
-                <div class="row">
-                    <div class="input-field col l10 m10 s12">
-                        <input placeholder="Nombre de usuario" id="usuario" name="usuario" type="text" class="validate" >
-                        <label for="usuario">Nombre de usuario</label>
-                    </div>
-                    <div class="input-field col l10 m10 s12">
-                        <input id="pass" type="password" class="validate" name="pass">
-                        <label for="pass">Password</label>
-                    </div>
-                    <button class="waves-effect waves-light btn green" type="submit">Iniciar sesión</button>
+<body class="fondo-login">
+    <main class="row container">
+        <div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1 card contenedor-login ">
+            <div class="col l12 m12 s12 center titulo-login">
+                <h5>Inicio de sesión</h5>
+                <hr>
+            </div>
+            <div class="contenedor-datos-login">
+                <div class="card col l5 m5 s12 center formulario-login">
+                    <form id="login" method="post" enctype="multipart/form-data" autocomplete="off">
+                        <div class="row">
+                            <div class="input-field col l10 m10 s12 offset-l1 offset-m1">
+                                <input placeholder="Nombre de usuario" id="usuario" name="usuario" type="text"
+                                    class="validate">
+                                <label for="usuario">Nombre de usuarios</label>
+                            </div>
+                            <div class="input-field col l10 m10 s12 offset-l1 offset-m1">
+                                <input id="pass" type="password" class="validate" name="pass">
+                                <label for="pass">Password</label>
+                            </div>
+                            <button class="waves-effect waves-light btn green" type="submit">Iniciar sesión</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col l6 m5 s12  offset-l1 offset-m1  center bienvenida-login">
+                    <h4>¡Bienvenido!</h4>
+                    <hr>
+                    <a href="" class="green-text">¿Olvidaste tu contraseña?</a>
+
+
+                </div>
+            </div>
+
         </div>
+
     </main>
 
     <script src="../../resources/js/materialize.min.js"></script>
