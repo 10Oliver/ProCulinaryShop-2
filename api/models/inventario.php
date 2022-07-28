@@ -106,7 +106,7 @@ class inventario extends Verificador
 
     public function setDescripcion($valor)
     {
-        if ($this->validateString   ($valor, 5, 200)) {
+        if ($this->validateString($valor, 5, 200)) {
             $this->descripcion = $valor;
             return true;
         } else {
@@ -431,7 +431,7 @@ class inventario extends Verificador
 		INNER JOIN cliente c ON c.id_cliente = oc.id_cliente
 		WHERE id_producto = ?';
         $params = array($this->idProducto);
-        return database::multiFilas($sql,$params);
+        return database::multiFilas($sql, $params);
     }
 
     //función para crear una nueva orden

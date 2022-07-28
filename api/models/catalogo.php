@@ -21,32 +21,29 @@ class catalogo extends Verificador
 
     public function setTextoBusqueda($valor)
     {
-        if($this->validateString($valor,2,150))
-        {
+        if ($this->validateString($valor, 2, 150)) {
             $this->textoBusqueda = $valor;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     public function setCategoria($valor)
     {
-        if($this->validateNaturalNumber($valor))
-        {
+        if ($this->validateNaturalNumber($valor)) {
             $this->categoria = $valor;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
     public function setFiltro($valor)
     {
-        if($this->validateNaturalNumber($valor))
-        {
+        if ($this->validateNaturalNumber($valor)) {
             $this->filtro = $valor;
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -402,5 +402,3 @@ class usuario extends Verificador{
     }
 
 }
-
-?>

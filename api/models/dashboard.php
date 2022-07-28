@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 //Modelo para el dashboard empleados
-    class Dashboard extends Verificador
-    {
-        //variables generales para las operaciones Scrud
+class Dashboard extends Verificador
+{
+    //variables generales para las operaciones Scrud
 
-        private $identificador = null;
-        private $nombre_empleado = null;
-        private $apellido_empleado = null;
-        private $direccion_empleado = null;
+    private $identificador = null;
+    private $nombre_empleado = null;
+    private $apellido_empleado = null;
+    private $direccion_empleado = null;
 
     //Se crean los métodos para interactuar con la base de datos}
     public function InicioSesion()
@@ -19,7 +19,4 @@
         $params = null;
         return database::multiFilas($sql, $params);
     }
-        
-    }
-?>
-
+}

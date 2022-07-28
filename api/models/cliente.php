@@ -20,24 +20,20 @@ class cliente extends Verificador
 
     public function setIdCliente($valor)
     {
-        if($this->validateNaturalNumber($valor))
-        {
+        if ($this->validateNaturalNumber($valor)) {
             $this->idCliente = $valor;
             return true;
         }
-        
     }
 
     public function setEstadoCliente($valor)
     {
-        if($this->validateBoolean($valor))
-        {
+        if ($this->validateBoolean($valor)) {
             $this->estadoCliente = $valor;
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setIdComentario($valor)
@@ -119,5 +115,4 @@ class cliente extends Verificador
         $params = array($this->idCliente);
         return database::multiFilas($sql, $params);
     }
-
 }

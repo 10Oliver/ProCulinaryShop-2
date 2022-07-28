@@ -23,7 +23,7 @@ class Estadistica extends Verificador
 
     public function setFechaInicial($valor)
     {
-        if($this->validateDate($valor)) {
+        if ($this->validateDate($valor)) {
             $this->fechaInicial = $valor;
             return true;
         } else {
@@ -53,7 +53,7 @@ class Estadistica extends Verificador
     public function cargarDatos($valor)
     {
 
-        $vector = explode(",",$valor);
+        $vector = explode(",", $valor);
         $sql = "SELECT p.nombre_producto,SUM(deo.cantidad_producto_orden) AS total FROM detalle_orden deo
         INNER JOIN producto p ON p.id_producto = deo.id_producto
         INNER JOIN orden_compra oc ON oc.id_orden_compra = deo.id_orden_compra
@@ -61,17 +61,17 @@ class Estadistica extends Verificador
         $params = array($this->fechaInicial, $this->fechaFinal);
         if (count($vector) > 0 && $vector[0] != "") {
             $sql = $sql . " AND (";
-            for ($i = 0; $i < count($vector)-1; $i++) {
+            for ($i = 0; $i < count($vector) - 1; $i++) {
                 $sql = $sql . "p.id_producto = ? OR ";
                 array_push($params, $vector[$i]);
             }
             $sql = $sql . " p.id_producto = ?)";
-            array_push($params, end($vector) );
+            array_push($params, end($vector));
         } else {
-            $sql = $sql." AND p.id_producto = 0";
+            $sql = $sql . " AND p.id_producto = 0";
         }
-        
-        $sql = $sql." GROUP BY p.nombre_producto";
+
+        $sql = $sql . " GROUP BY p.nombre_producto";
         return database::multiFilas($sql, $params);
     }
 

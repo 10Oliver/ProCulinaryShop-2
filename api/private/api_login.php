@@ -49,13 +49,13 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'datosSesion':
-            if(!isset($_SESSION['id_empleado'])) {
+            if (!isset($_SESSION['id_empleado'])) {
                 $result['exception'] = 'Debes iniciar sesión';
-            }elseif (!$usuario->setIdEmpleado($_SESSION['id_empleado'])) {
+            } elseif (!$usuario->setIdEmpleado($_SESSION['id_empleado'])) {
                 $result['exception'] = 'No se logró localizar tu usuario';
-            } elseif($result['dataset'] = $usuario->obtenerSesion()) {
+            } elseif ($result['dataset'] = $usuario->obtenerSesion()) {
                 $result['status'] = 1;
-            } elseif(database::obtenerProblema()) {
+            } elseif (database::obtenerProblema()) {
                 $result['exception'] = database::obtenerProblema();
             } else {
                 $result['exception'] = 'Tu cuenta no se ha encontrado';
@@ -69,7 +69,6 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'La sesión no se pudo finalizar';
             }
             break;
-
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

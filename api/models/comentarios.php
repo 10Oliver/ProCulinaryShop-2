@@ -91,7 +91,6 @@ class comentarios extends Verificador
         } else {
             return false;
         }
-        
     }
 
 

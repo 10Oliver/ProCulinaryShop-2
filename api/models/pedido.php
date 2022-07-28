@@ -156,7 +156,7 @@ class pedido extends Verificador
         INNER JOIN estado_orden eo ON eo.id_estado_orden = oc.id_estado_orden
         WHERE oc.id_estado_orden NOT IN (4) AND id_cliente = ?';
         $params = array($this->identificador);
-        return database::multiFilas($sql,$params);
+        return database::multiFilas($sql, $params);
     }
 
     //función para cancelar el pedido

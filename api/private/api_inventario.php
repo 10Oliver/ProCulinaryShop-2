@@ -166,7 +166,6 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No hay datos de momento';
             }
             break;
-            
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
