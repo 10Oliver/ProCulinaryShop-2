@@ -383,7 +383,7 @@ function lineaI(CLASS, cabeceras, datos) {
     );
     /* --Código para que se encuentre animado---- */
     var seq = 0,
-        delays = 200,
+        delays = 100,
         durations = 500;
 
     //Se reinicia la animación
@@ -492,7 +492,7 @@ function lineaI(CLASS, cabeceras, datos) {
             clearTimeout(window.__exampleAnimateTimeout);
             window.__exampleAnimateTimeout = null;
         }
-        window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 12000);
+        window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 18000);
     });
 }
 
@@ -505,8 +505,6 @@ function linea(CLASS, cabeceras, datos) {
             series: datos,
         },
         {
-            // Remove this configuration to see that chart rendered with cardinal spline interpolation
-            // Sometimes, on large jumps in data values, it's better to use simple smoothing.
             lineSmooth: Chartist.Interpolation.simple({
                 divisor: 2,
             }),
@@ -521,6 +519,7 @@ function linea(CLASS, cabeceras, datos) {
 
 //Función de barras
 function barras(CLASS, cabeceras, datos) {
+    //Se crea el gráfico
     new Chartist.Bar(
         CLASS,
         {
@@ -543,26 +542,28 @@ function barras(CLASS, cabeceras, datos) {
 }
 
 function semiPastel(CLASS, titulos, datos) {
+    //Se crea un arreglo donde guardar todos los datos
     var data = {
         labels: titulos,
         series: datos,
     };
 
+    //Se crean los datos
     var chart = new Chartist.Pie(CLASS, data, {
         donut: true,
         showLabel: true,
     });
     chart.on("draw", function (data) {
         if (data.type === "slice") {
-            // Get the total path length in order to use for dash array animation
+           //Se obtiene la ruta
             var pathLength = data.element._node.getTotalLength();
 
-            // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+           //Se toman las coordenadas y limites de dónde puede llegar
             data.element.attr({
                 "stroke-dasharray": pathLength + "px " + pathLength + "px",
             });
 
-            // Create animation definition while also assigning an ID to the animation for later sync usage
+            //Preferencias de animación
             var animationDefinition = {
                 "stroke-dashoffset": {
                     id: "anim" + data.index,
@@ -570,34 +571,31 @@ function semiPastel(CLASS, titulos, datos) {
                     from: -pathLength + "px",
                     to: "0px",
                     easing: Chartist.Svg.Easing.easeOutQuint,
-                    // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
                     fill: "freeze",
                 },
             };
 
-            // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+            //Tiempo de animación entre cambios
             if (data.index !== 0) {
                 animationDefinition["stroke-dashoffset"].begin = "anim" + (data.index - 1) + ".end";
             }
 
-            // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
             data.element.attr({
                 "stroke-dashoffset": -pathLength + "px",
             });
 
-            // We can't use guided mode as the animations need to rely on setting begin manually
-            // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+            //Animaciones
             data.element.animate(animationDefinition, false);
         }
     });
 
-    // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
+    //Repetición de la animación
     chart.on("created", function () {
         if (window.__anim21278907124) {
             clearTimeout(window.__anim21278907124);
             window.__anim21278907124 = null;
         }
-        window.__anim21278907124 = setTimeout(chart.update.bind(chart), 10000);
+        window.__anim21278907124 = setTimeout(chart.update.bind(chart), 18000);
     });
 }
 
@@ -942,7 +940,7 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         //Se cambia el idioma de la hora
                         moment.locale("es");
                         //Se coloca la hora de emisión
-                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 370, 175);
+                        doc.text("Fecha: " + moment().format("dd de MMMM YYYY, h:mm a"), 370, 175);
                         //Se reestablecen los estilos
                         doc.setFontSize(14);
                         doc.setTextColor(0, 0, 0);

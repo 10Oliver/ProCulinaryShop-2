@@ -35,6 +35,12 @@ body::-webkit-scrollbar-thumb{
    margin-top: 25px;
 }
 
+.opciones-nav{
+   display: flex;
+   justify-content: space-around;
+   flex-wrap: wrap;
+}
+
 /*Aplicación de estilos para el navbar y sidenav*/
 
 
@@ -77,16 +83,9 @@ body::-webkit-scrollbar-thumb{
  
  
  
- .logo {
-   width: 50%;
- }
- 
- .logo-2 {
-    margin: 5px 2px;
-    margin-top: 35px;
-    margin-left: 55%;
- 
- }
+.sin-margen{
+   margin: 0px !important;
+}
  
  
  #nav_down {
@@ -354,7 +353,7 @@ h7 a{
    
     .nav-wrapper {
        
-       height: 145px;
+       height: 150px;
     }
  
     #nav_down {
@@ -398,7 +397,7 @@ h7 a{
  @media only screen and (max-width: 1366px) {
    .nav-wrapper {
 
-      height: 145px;
+      height: 180px;
    }
 
    #nav_down {

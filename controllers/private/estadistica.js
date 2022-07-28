@@ -199,6 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function contar() {
     //Se declará el array donde se guardarán los id que si usarán
     let id = [];
+    //Se revisa todos los id obtenidod para guardar los que están seleccionados
     for (let index = 0; index < identificador.length; index++) {
         //Se revisa si el checkbox está seleccionado
         if (document.getElementById("check" + identificador[index]).checked) {
@@ -450,8 +451,7 @@ function topProductos() {
                 //Se revisa el estado devuelto por la api
                 if (response.status) {
                     //Se declaran los arreglos donde se guardarán los datos
-                    let cabeceras = [],
-                        general = [];
+                    let cabeceras = [], general = [];
                     //Se revisa fila por fila y se guardan los datos
                     response.dataset.map(function (row) {
                         //Se cargan los datos a un fila
@@ -461,8 +461,6 @@ function topProductos() {
                     });
                     //Se agregan los titulos de las columnas
                     cabeceras.push("Producto", "Cantidad", "Total");
-                    //Se pasan los datos a un array general
-
                     //Se pasan los datos para generar un reporte
                     reporteTablas(
                         cabeceras,
