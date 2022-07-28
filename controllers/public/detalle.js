@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     sweetAlert(2, response.exception, null);
                 }
                 // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                llenar_tabla(data);
+                llenarTabla(data);
             });
         } else {
             //Se imprime el problema al ejecutar la sentencia
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
@@ -68,7 +68,7 @@ function llenar_tabla(dataset) {
                     <h5 id="precio" class="precio_detalle">$${dataset.precio}</h5>
                     <div class="col l12 m12 s12 valign-wrapper">
                         <div class="col l3">
-                            <a id="add" onclick="aumentar_productos()" onblur="">
+                            <a id="add" onclick="aumentarProductos()" onblur="">
                                 <i class="bx bx-plus negro"></i>
                             </a>
                         </div>
@@ -77,7 +77,7 @@ function llenar_tabla(dataset) {
                                 onkeypress="return soloNumeros(event)">
                         </div>
                         <div class="col l3">
-                            <a onclick="disminuir_productos()">
+                            <a onclick="disminuirProductos()">
                                 <i class="bx bx-minus negro"></i>
                             </a>
                         </div>
@@ -104,55 +104,55 @@ function llenar_tabla(dataset) {
 }
 
 //Funcion para disminuir la cantidad de productos en el carrito de uno en uno
-function disminuir_productos() {
+function disminuirProductos() {
     //Se obtiene el valor actual
-    let cantidad_actual = document.getElementById("cantidad");
+    let cantidadActual = document.getElementById("cantidad");
     //Se verifica si la cantidad será igual a cero
-    if (cantidad_actual.value < 1) {
+    if (cantidadActual.value < 1) {
         //se le notifica al usuario
         sweetAlert(3, "La cantidad no puede ser inferior a 1", null);
         //Se establece como 1
-        cantidad_actual.value = 1;
+        cantidadActual.value = 1;
     } else {
-        cantidad_actual.value = cantidad_actual.value - 1;
+        cantidadActual.value = cantidadActual.value - 1;
     }
     //se limpia de ceros inncesarios
-    cantidad_actual.value = Number(cantidad_actual.value);
+    cantidadActual.value = Number(cantidadActual.value);
 }
 
 //Funcion para aumentar la cantidad de productos en el carrito de uno en uno
-function aumentar_productos() {
+function aumentarProductos() {
     //Se obtiene el valor actual
-    let cantidad_actual = document.getElementById("cantidad");
+    let cantidadActual = document.getElementById("cantidad");
     //se verifica si la cantidad es superior a la cantidad mostrada
     if (
-        Number(cantidad_actual.value) + 1 >
+        Number(cantidadActual.value) + 1 >
         document.getElementById("cantidadR").innerHTML.slice(11)
     ) {
         //se le notifica al usuario
         sweetAlert(3, "Has superado la cantidad máxima", null);
         //se coloca la cantidad máxima
-        cantidad_actual.value = document.getElementById("cantidadR").innerHTML.slice(11);
+        cantidadActual.value = document.getElementById("cantidadR").innerHTML.slice(11);
     } else {
-        cantidad_actual.value = Number(cantidad_actual.value) + 1;
+        cantidadActual.value = Number(cantidadActual.value) + 1;
     }
     //se limpia de ceros inncesarios
-    cantidad_actual.value = Number(cantidad_actual.value);
+    cantidadActual.value = Number(cantidadActual.value);
 }
 
 //función que verifica la existencia cuando se agrega manualmente
 function cambioManual() {
     //se obtiene el componente
-    let cantidad_actual = document.getElementById("cantidad");
+    let cantidadActual = document.getElementById("cantidad");
     //Se verifica si se superaría la cantidad máxima
-    if (Number(cantidad_actual.value) > document.getElementById("cantidadR").innerHTML.slice(11)) {
+    if (Number(cantidadActual.value) > document.getElementById("cantidadR").innerHTML.slice(11)) {
         //se le notifica al usuario
         sweetAlert(3, "Has superado la cantidad máxima", null);
         //se coloca la cantidad máxima
-        cantidad_actual.value = document.getElementById("cantidadR").innerHTML.slice(11);
+        cantidadActual.value = document.getElementById("cantidadR").innerHTML.slice(11);
     }
     //se limpia de ceros inncesarios
-    cantidad_actual.value = Number(cantidad_actual.value);
+    cantidadActual.value = Number(cantidadActual.value);
 }
 
 //función que envia el producto al carrito

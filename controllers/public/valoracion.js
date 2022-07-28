@@ -6,11 +6,11 @@ var identificadores = [];
 //Se crea el método que cargará los datos al carrito cuando se cargue la página
 document.addEventListener("DOMContentLoaded", function () {
     //Se cargan los datos en la vista, la función está en components.js
-    leertablas(API_valoracion, "cargarDatos");
+    leerTablas(API_valoracion, "cargarDatos");
 });
 
 //Funcion que llena la vista
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
     //Se explora el vector fila por fila

@@ -12,10 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //Se convierte la petición en formato JSON
             request.json().then(function (response) {
                 //Se crea la variable donde se guardarán los datos
-                let data = [];
-                //se crea la variable donde se guardará el HTML a inyectar
-                let contenido = [];
-                let opciones = [];
+                let data, opciones, contenido = [];
                 // Se comprueba si la respuesta es satisfactoria para obtener los datos, de lo contrario se muestra un mensaje con la excepción.
                 if (response.status == 1) {
                     data = response.dataset;

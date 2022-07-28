@@ -3,11 +3,11 @@ const API_index = SERVER + "public/api_index.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function () {
-    leertablas(API_index, "cargarNoticias");
+    leerTablas(API_index, "cargarNoticias");
 });
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let promo = "", lanzamiento = "", vendido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros

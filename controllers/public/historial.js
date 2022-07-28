@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     sweetAlert(3, response.exception, "index.html");
                 }
                 // Se envían los datos al método para cargar los productos
-                llenar_tabla(data);
+                llenarTabla(data);
             });
         } else {
             //Se imprime el problema al ejecutar la sentencia
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que carga los datos del historial
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
     //Se explora el vector fila por fila
@@ -66,13 +66,13 @@ function llenar_tabla(dataset) {
                             <h6>${fechaFormato}</h6>
                         </div>
                         <div class="col l2">
-                            <a href="#mostrar" class="modal-trigger" onclick="ver_productos(${row.id_orden_compra})"><i class='bx bxs-basket verde'></i></a>
+                            <a href="#mostrar" class="modal-trigger" onclick="verProductos(${row.id_orden_compra})"><i class='bx bxs-basket verde'></i></a>
                         </div>
                         <div class="col l3">
                             <h6>$${row.calcular_subtotal}</h6>
                         </div>
                         <div class="col l4">
-                        <a class="btn red darken-3" onclick="cancelar_pedido(${row.id_orden_compra})">Cancelar</a>
+                        <a class="btn red darken-3" onclick="cancelarPedido(${row.id_orden_compra})">Cancelar</a>
                         </div>
                     </div>
                 </div>    
@@ -86,7 +86,7 @@ function llenar_tabla(dataset) {
                             <h6>${fechaFormato}</h6>
                         </div>
                         <div class="col l2">
-                            <a href="#mostrar" class="modal-trigger"  onclick="ver_productos(${row.id_orden_compra})"><i class='bx bxs-basket verde'></i></a>
+                            <a href="#mostrar" class="modal-trigger"  onclick="verProductos(${row.id_orden_compra})"><i class='bx bxs-basket verde'></i></a>
                         </div>
                         <div class="col l3">
                             <h6>$${row.calcular_subtotal}</h6>
@@ -106,7 +106,7 @@ function llenar_tabla(dataset) {
 
 //función para cancelar el pedido
 
-function cancelar_pedido(id) {
+function cancelarPedido(id) {
     //se crea la variable del tipo form data
     let datos = new FormData();
     //se llena con los datos
@@ -133,7 +133,7 @@ function cancelar_pedido(id) {
                             //Se le muestra la confirmación al usuario
                             sweetAlert(1, response.message, null);
                             //S refresca la tabla de datos
-                            leertablas(API_historial, "obtenerPedidos");
+                            leerTablas(API_historial, "obtenerPedidos");
                         } else {
                             //Se muestra el error
                             sweetAlert(2, response.exception, null);
@@ -149,7 +149,7 @@ function cancelar_pedido(id) {
 }
 
 //Función que carga los datos de un pedido
-function ver_productos(identificador) {
+function verProductos(identificador) {
     //Se crea un objeto de tipo form para guardar los datos
     let datos = new FormData();
     //Se llena con el name y el valor

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     sweetAlert(3, response.exception, 'index.html');
                 }
                 // Se envían los datos al método para cargar los productos
-                llenar_tabla(data);
+                llenarTabla(data);
             });
         } else {
             //Se imprime el problema al ejecutar la sentencia
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que carga los datos del carrito
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
     //Se explora el vector fila por fila
@@ -50,7 +50,7 @@ function llenar_tabla(dataset) {
                     <div class="col l2 m1 s12 valign-wrapper">
                         <div class="col l3">
                             <a id="add${row.id_detalle_orden}" 
-                            onclick="aumentar_productos(${row.id_detalle_orden})"
+                            onclick="aumentarProductos(${row.id_detalle_orden})"
                             onblur="">
                                 <i class='bx bx-plus negro' ></i>
                             </a>
@@ -62,7 +62,7 @@ function llenar_tabla(dataset) {
                             onkeypress="return soloNumeros(event)">
                         </div>
                         <div class="col l3">
-                            <a  onclick="disminuir_productos(${row.id_detalle_orden})">
+                            <a  onclick="disminuirProductos(${row.id_detalle_orden})">
                             <i class='bx bx-minus negro' ></i>
                             </a>
                         </div>
@@ -87,11 +87,11 @@ function llenar_tabla(dataset) {
 }
 
 //Funcion para disminuir la cantidad de productos en el carrito de uno en uno
-function disminuir_productos(id) {
+function disminuirProductos(id) {
     //Se obtiene el valor actual
-    let cantidad_actual = document.getElementById("cantidad" + id).value;
+    let cantidadActual = document.getElementById("cantidad" + id).value;
     //Se verifica si la cantidad será igual a cero
-    if (cantidad_actual < 2 || cantidad_actual == 0) {
+    if (cantidadActual < 2 || cantidadActual == 0) {
         //se le notifica al usuario
         sweetAlert(3, "La cantidad no puede ser inferior a 0", null);
         //Se inicia el tooltip
@@ -143,7 +143,7 @@ function disminuir_productos(id) {
 }
 
 //Funcion para aumentar la cantidad de productos en el carrito de uno en uno
-function aumentar_productos(id) {
+function aumentarProductos(id) {
     //Se crea la variable de tipo form
     let datos = new FormData();
     //Se llena con el name y el valor
@@ -267,7 +267,7 @@ function eliminarCarrito(id) {
     //Se llena con el name y el valor
     datos.append("identificador", id);
     //Se ejecuta la función para reestablecerlo, está en components.js
-    eliminar_registro(API_carrito, "EliminarProductoCarrito", datos, null, "cargarDatos");
+    eliminarRegistro(API_carrito, "EliminarProductoCarrito", datos, null, "cargarDatos");
 }
 
 //función para eliminar todo el pedido del carrito

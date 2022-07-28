@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     } else {
         //se cargan todos los productos
-        leertablas(API_catalogo, 'cargarCatalogo');
+        leerTablas(API_catalogo, 'cargarCatalogo');
     }
 });
 
 
 //Función que llenará los datos en el catálogo
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
@@ -31,7 +31,7 @@ function llenar_tabla(dataset) {
     if (dataset.length == 0) {
         sweetAlert(3, 'No hay coincidencias', null);
         //se cargan todos los productos
-        leertablas(API_catalogo, 'cargarCatalogo');
+        leerTablas(API_catalogo, 'cargarCatalogo');
     } else {
         dataset.map(function (row) {
             contenido += `
