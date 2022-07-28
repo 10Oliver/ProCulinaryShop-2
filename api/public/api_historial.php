@@ -25,26 +25,23 @@ if (isset($_GET['action'])) {
     // Elección del proceso a realizar
     switch ($_GET['action']) {
         case 'obtenerPedidos':
-            if(!$pedido->setIden($_SESSION['id_cliente']))
-            {
+            if (!$pedido->setIden($_SESSION['id_cliente'])) {
                 $result['exception'] = 'No se encontraron tu listado de pedidos';
-            }elseif($result['dataset'] = $pedido->cargarPedidos()){
+            } elseif ($result['dataset'] = $pedido->cargarPedidos()) {
                 $result['status'] = 1;
-            }elseif(database::obtenerProblema()){
+            } elseif (database::obtenerProblema()) {
                 $result['exception'] = database::obtenerProblema();
-            }else{
+            } else {
                 $result['exception'] = 'No tienes pedidos actualmente';
             }
             break;
         case 'cancelarPedido':
-            if(!$pedido->setIden($_POST['identificador']))
-            {
+            if (!$pedido->setIden($_POST['identificador'])) {
                 $result['exception'] = 'No se pudo cancelar el pedido seleccionado';
-            }elseif($pedido->cancelarPedido())
-            {
+            } elseif ($pedido->cancelarPedido()) {
                 $result['status'] = 1;
                 $result['message'] = 'Pedido cancelado';
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;

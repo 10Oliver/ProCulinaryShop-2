@@ -19,33 +19,29 @@ if (isset($_GET['action'])) {
     $inventario = new inventario;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
-
     //Se debería crear un método para confirmar si el usuario tiene permitido, todavía en cuestionamiento
+
     // Elección del proceso a realizar
     switch ($_GET['action']) {
         case 'cargarCatalogo':
-            if($result['dataset'] = $inventario->buscarTodo())
-            {
+            if ($result['dataset'] = $inventario->buscarTodo()) {
                 $result['status'] = 1;
-            }elseif(database::obtenerProblema())
-            {
+            } elseif (database::obtenerProblema()) {
                 $result['exception'] = database::obtenerProblema();
-            }else{
+            } else {
                 $result['exception'] = 'No hay productos que mostrar';
             }
             break;
         case 'buscarProducto':
             $_POST = $inventario->validarFormularios($_POST);
-            if(!$inventario->setBuscador($_POST['buscar']))
-            {
+            if (!$inventario->setBuscador($_POST['buscar'])) {
                 $result['exception'] = 'Registro invalido';
-            }elseif($result['dataset'] = $inventario->buscarEspecifico())
-            {
+            } elseif ($result['dataset'] = $inventario->buscarEspecifico()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
-        break;
+            break;
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

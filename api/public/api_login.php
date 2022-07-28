@@ -69,16 +69,15 @@ if (isset($_GET['action'])) {
             if (!isset($_SESSION['usuario'])) {
                 $result['exception'] = 'No hay una sesión iniciada, no se puede generar el reporte';
             } else {
-                if(!$usuario->setIdCliente($_SESSION['id_cliente'])) {
+                if (!$usuario->setIdCliente($_SESSION['id_cliente'])) {
                     $result['exception'] = 'No se encontró el cliente';
-                } elseif($result['dataset'] = $usuario->factura()) {
+                } elseif ($result['dataset'] = $usuario->factura()) {
                     $result['status'] = 1;
-                } elseif(database::obtenerProblema()) {
+                } elseif (database::obtenerProblema()) {
                     $result['exception'] = database::obtenerProblema();
                 } else {
                     $result['exception'] = 'No se encontraron los datos adecuados';
                 }
-                
             }
             break;
     }

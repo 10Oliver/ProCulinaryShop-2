@@ -105,7 +105,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'eliminarPedidoTotal':
-            if (!$inventario->setIdCliente($_SESSION['id_cliente'])) { 
+            if (!$inventario->setIdCliente($_SESSION['id_cliente'])) {
                 $result['exception']  = 'No se logró cargar el pedido a eliminar';
             } elseif ($inventario->eliminarPedido()) {
                 $result['status'] = 1;
@@ -117,9 +117,9 @@ if (isset($_GET['action'])) {
         case 'ObtenerCantidades':
             if (!$inventario->setIdCliente($_SESSION['id_cliente'])) {
                 $result['exception'] = 'No se encontró el pedido para su verificación';
-            }elseif($result['dataset'] = $inventario->obtenerCantidades()){
+            } elseif ($result['dataset'] = $inventario->obtenerCantidades()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;

@@ -25,22 +25,19 @@ if (isset($_GET['action'])) {
     //Se escoge el proceso que se ejecutará en el modelo
     switch ($_GET['action']) {
         case 'cargarNoticias':
-            if($result['dataset'] = $noticia->cargarNoticias())
-            {
+            if ($result['dataset'] = $noticia->cargarNoticias()) {
                 $result['status'] = 1;
-            }elseif(database::obtenerProblema())
-            {
+            } elseif (database::obtenerProblema()) {
                 $result['exception'] = database::obtenerProblema();
-            }else{
+            } else {
                 $result['exception'] = 'No hay noticias disponibles';
             }
             break;
         case 'obtenerSesion':
-            if(isset($_SESSION['id_cliente']))
-            {
+            if (isset($_SESSION['id_cliente'])) {
                 $result['dataset'] = $_SESSION['usuario'];
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['status'] = 2;
             }
             break;

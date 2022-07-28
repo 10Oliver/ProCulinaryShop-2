@@ -4,7 +4,7 @@
 
 use LDAP\Result;
 
-require_once('../helpers/database.php');   
+require_once('../helpers/database.php');
 require_once('../helpers/verificador.php');
 require_once('../models/inventario.php');
 
@@ -18,8 +18,8 @@ require_once('../models/inventario.php');
 if (isset($_GET['action'])) {
     //Se crea o reiniciar una sesión
     session_start();
-    if($_SESSION['id_cliente']==null){
-        $_SESSION['id_cliente']='No conectado';
+    if ($_SESSION['id_cliente'] == null) {
+        $_SESSION['id_cliente'] = 'No conectado';
     }
     //Se instancia la clase correspondiente en la variable
     $inventario = new inventario;
@@ -92,8 +92,7 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'cantidad':
-            if(!$inventario->setIdCliente($_SESSION['id_cliente']))
-            {
+            if (!$inventario->setIdCliente($_SESSION['id_cliente'])) {
                 $result['exception'] = 'Debes iniciar sesión para agregar productos al carrito';
                 $result['status'] = 2;
             } elseif (!$inventario->setIdProducto($_POST['identificador'])) {
@@ -123,13 +122,11 @@ if (isset($_GET['action'])) {
                 $result['exception'] = 'No se logró cargar el identificador del producto';
             } elseif (!$inventario->setIdDetalle($_POST['identificador'])) {
                 $result['exception'] = 'No se logró cargar tu orden';
-            } elseif ((implode("", $inventario->verificarExistencia())) == $_POST['producto'])
-            {
-                if($inventario->actualizarExistencia())
-                {
+            } elseif ((implode("", $inventario->verificarExistencia())) == $_POST['producto']) {
+                if ($inventario->actualizarExistencia()) {
                     $result['status'] = 1;
                     $result['message'] = 'Producto agregado correctamente (Actualizado)';
-                }else{
+                } else {
                     $result['exception'] = 'problema';
                 }
             } elseif ($inventario->agregarProducto()) {
@@ -142,8 +139,7 @@ if (isset($_GET['action'])) {
             break;
         case 'crearOrden':
             $_POST = $inventario->validarFormularios($_POST);
-            if (!$inventario->setIdCliente($_SESSION['id_cliente']))
-            {
+            if (!$inventario->setIdCliente($_SESSION['id_cliente'])) {
                 $result['exception'] = 'No se logró identificar tu usuario';
             } elseif (!$inventario->setCantidad($_POST['cantidad'])) {
                 $result['exception'] = 'No se logró cargar la cantidad a añadir';
@@ -157,13 +153,11 @@ if (isset($_GET['action'])) {
             }
             break;
         case 'obtenerComentarios':
-            if(!$inventario->setIdProducto($_POST['producto']))
-            {
+            if (!$inventario->setIdProducto($_POST['producto'])) {
                 $result['exception'] = 'No se logró identificar el producto';
-            }elseif($result['dataset'] = $inventario->comentarios())
-            {
+            } elseif ($result['dataset'] = $inventario->comentarios()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;

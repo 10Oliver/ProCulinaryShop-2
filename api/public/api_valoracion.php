@@ -22,35 +22,28 @@ if (isset($_GET['action'])) {
     // Elección del proceso a realizar
     switch ($_GET['action']) {
         case 'cargarDatos':
-            if(!$comentario->setIdCliente($_SESSION['id_cliente']))
-            {
+            if (!$comentario->setIdCliente($_SESSION['id_cliente'])) {
                 $result['exception'] = 'Tu pedido no se encontró';
-            }elseif($result['dataset'] = $comentario->obtenerProductos())
-            {
+            } elseif ($result['dataset'] = $comentario->obtenerProductos()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;
         case 'guardarValoracion':
             $_POST = $comentario->validarFormularios($_POST);
-            if(!$comentario->setTextoComentario($_POST['comentario']))
-            {
+            if (!$comentario->setTextoComentario($_POST['comentario'])) {
                 $result['exception'] = 'Comentario no valido';
-            }elseif(!$comentario->setValoracionComentario($_POST['valoracion']))
-            {
+            } elseif (!$comentario->setValoracionComentario($_POST['valoracion'])) {
                 $result['exception'] = 'valoración no valida';
-            }elseif(!$comentario->setIdDetalleOrden($_POST['identificador']))
-            {
+            } elseif (!$comentario->setIdDetalleOrden($_POST['identificador'])) {
                 $result['exception'] = 'Tu orden no pudo ser encontrada';
-            }elseif($comentario->guardarValoracion())
-            {
+            } elseif ($comentario->guardarValoracion()) {
                 $result['status'] = 1;
-            }else{
+            } else {
                 $result['exception'] = database::obtenerProblema();
             }
             break;
-        
     }
 
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
