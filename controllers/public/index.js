@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
 //Función que llenará la tabla
 function llenar_tabla(dataset) {
     //Se declara la variable donde se guardará los datos
-    let contenido = "";
+    let promo = "", lanzamiento = "", vendido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
     dataset.map(function (row) {
         if (row.id_tipo_noticia == 1) {
             //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
-            contenido += `
+            promo += `
         <div class="col s12 m6 l4">
                     <div class="card">
                         <div class="card-image">
@@ -45,10 +45,10 @@ function llenar_tabla(dataset) {
         `;
 
             //Se le insertan las filas a la tabla en la vista
-            document.getElementById("contenedorPromociones").innerHTML = contenido;
+            document.getElementById("contenedorPromociones").innerHTML = promo;
         } else if (row.id_tipo_noticia == 2) {
             //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
-            contenido += `
+            lanzamiento += `
         <div class="col s12 m6 l4">
                     <div class="card">
                         <div class="card-image">
@@ -79,10 +79,10 @@ function llenar_tabla(dataset) {
         `;
 
             //Se le insertan las filas a la tabla en la vista
-            document.getElementById("contenedorLanzamientos").innerHTML = contenido;
+            document.getElementById("contenedorLanzamientos").innerHTML = lanzamiento;
         } else {
             //Se va agregando las filas de codigo HTML por cada fila de registro obtenido
-            contenido += `
+            vendido += `
         <div class="col s12 m6 l4">
                     <div class="card">
                         <div class="card-image">
@@ -113,7 +113,7 @@ function llenar_tabla(dataset) {
         `;
 
             //Se le insertan las filas a la tabla en la vista
-            document.getElementById("contenedorVendidos").innerHTML = contenido;
+            document.getElementById("contenedorVendidos").innerHTML = vendido;
         }
 
     });
