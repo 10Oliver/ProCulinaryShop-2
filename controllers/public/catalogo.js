@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //se crea la variable de tipo form
         let dato = new FormData();
         //se llena con el id
-        dato.append('busqueda', busqueda);
+        dato.append('buscar', busqueda);
         //si hay algo que buscar se realiza la consulta
         buscar(API_catalogo, 'buscarProducto', dato);
 
@@ -81,7 +81,7 @@ document.getElementById('buscador_producto').addEventListener('keyup', function 
         //Se crea la variable de tipo formulario
         let dato = new FormData();
         //Se llena con el texto del input
-        dato.append('busqueda', document.getElementById('buscador_producto').value);
+        dato.append('buscar', document.getElementById('buscador_producto').value);
         //se busca el producto
         buscar(API_catalogo, 'buscarProducto', dato);
     } else {

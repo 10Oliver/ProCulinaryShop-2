@@ -20,7 +20,7 @@ function llenarTabla(dataset) {
                     <td>${row.precio}</td>
                     <td>${row.descuento}</td>
                     <td>
-                        <img src="../../api/images/productos/${row.imagen}" alt="">
+                        <img src="../../api/images/productos/${row.imagen}" alt="" width="200px">
                     </td>
                     <td>
                         <a onclick="modalActualizar(${row.id_producto})" class="btn editar"><i
