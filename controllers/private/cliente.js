@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que carga los datos en la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
     //Se explora el vector fila por fila
@@ -26,7 +26,7 @@ function llenar_tabla(dataset) {
                 <td> 
                     <div class="switch">
                         <label>
-                        <input id="cliente${row.id_cliente}" type="checkbox" checked="on" onClick="actualizar_cliente(${row.id_cliente})">
+                        <input id="cliente${row.id_cliente}" type="checkbox" checked="on" onClick="actualizarCliente(${row.id_cliente})">
                         <span class="lever"></span>
                         </label>
                     </div>
@@ -49,7 +49,7 @@ function llenar_tabla(dataset) {
                 <td> 
                     <div class="switch">
                         <label>
-                        <input id="cliente${row.id_cliente}" type="checkbox" onClick="actualizar_cliente(${row.id_cliente})">
+                        <input id="cliente${row.id_cliente}" type="checkbox" onClick="actualizarCliente(${row.id_cliente})">
                         <span class="lever"></span>
                         </label>
                     </div>
@@ -80,7 +80,7 @@ document.getElementById("buscador").addEventListener("keyup", function () {
 
 //Función que actualiza el estado del comentario
 
-function actualizar_cliente(id) {
+function actualizarCliente(id) {
     //Se crea el dato de tipo formulario a enviar
     let datos = new FormData();
     //Se llena con el name y el valor del identificador

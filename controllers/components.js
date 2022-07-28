@@ -26,7 +26,7 @@ const SERVER = "http://localhost/ProCulinaryShop-2/api/";
  * Se retorna todos los registros de la consulta
  */
 
-function leertablas(api, action) {
+function leerTablas(api, action) {
     fetch(api + action, {
         method: "get",
     }).then(function (request) {
@@ -44,7 +44,7 @@ function leertablas(api, action) {
                     sweetAlert(4, response.exception, null);
                 }
                 // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                llenar_tabla(data);
+                llenarTabla(data);
             });
         } else {
             console.log(request.status + " " + request.statusText);
@@ -65,7 +65,7 @@ function leertablas(api, action) {
  * Se retorna todos los registros de la consulta
  */
 
-function guardar_registro(api, action, form, modal) {
+function guardarRegistro(api, action, form, modal) {
     fetch(api + action, {
         method: "post",
         body: new FormData(document.getElementById(form)),
@@ -101,7 +101,7 @@ function guardar_registro(api, action, form, modal) {
  *
  *  retorna los datos para que sean cargados en el controllador
  */
-function cargar_select(endpoint, select, selected, active) {
+function cargarSelect(endpoint, select, selected, active) {
     fetch(endpoint, {
         method: "get",
     }).then(function (request) {
@@ -166,7 +166,7 @@ function cargar_select(endpoint, select, selected, active) {
  *
  */
 
-function cargar_datos_actualizar(api, action, identificador) {
+function cargarDatosActualizar(api, action, identificador) {
     fetch(api + action, {
         method: "post",
         body: identificador,
@@ -201,7 +201,7 @@ function cargar_datos_actualizar(api, action, identificador) {
  *  No devolverá ningún datos, solo la confirmación
  */
 
-function actualizar_registro(API, action, form, modal) {
+function actualizarRegistro(API, action, form, modal) {
     fetch(API + action, {
         method: "post",
         body: new FormData(document.getElementById(form)),
@@ -241,7 +241,7 @@ function actualizar_registro(API, action, form, modal) {
  *  No devolverá valor, solo las confirmaciones
  */
 
-function eliminar_registro(API, action, form, mensaje, action2) {
+function eliminarRegistro(API, action, form, mensaje, action2) {
     if (mensaje == null) {
         mensaje = "¿Está seguro de eliminar el registro?";
     }
@@ -310,7 +310,7 @@ function buscar(API, action, form) {
                     sweetAlert(2, response.exception, null);
                 }
                 // Se envían los datos a la función del controlador para llenar la tabla en la vista.
-                llenar_tabla(data);
+                llenarTabla(data);
             });
         } else {
             //Se imprime el problema al ejecutar la sentencia
@@ -648,7 +648,8 @@ function pastel(CLASS, cabeceras, datos) {
 
 
 //Función para crear un pdf de tipo tabla
-function reporte_tablas(cabeceras, datos, nombre, titulo) {
+function reporteTablas(cabeceras, datos, nombre, titulo) {
+    //Se agrega los primeros datos
     const doc = new jspdf.jsPDF("p", "pt", "letter"),
         margin = {
             top: 210,
@@ -666,9 +667,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
             request.json().then(function (response) {
                 //Se verifica el estado devuelto por la api
                 if (response.status) {
-                    //Propiedades básicas del pdf
-
-                    //Se cargan los datos a la tabla
+                    //Se cargan los datos a la tabla junto con los estilos
                     doc.autoTable({
                         head: [cabeceras],
                         body: datos,
@@ -694,7 +693,7 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         doc.setFont("courier-oblique");
                         doc.setFontSize(22);
                         doc.setTextColor(76, 175, 80);
-                        //Se coloca el titulo de la página
+                        //Se coloca el titulo de la página, se colocará en el centro
                         doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 185, {
                             align: "center",
                         });
@@ -713,11 +712,14 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
                         doc.text("Usuario: " + response.dataset, 60, 80);
                         //Se cambia el idioma de la hora
                         moment.locale("es");
-                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
+                        doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
+                        //Se reestablecen los estilos
                         doc.setFontSize(10);
                         doc.setTextColor(255, 255, 255);
+                        //Se coloca la número de página
                         doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        //Se coloca el nombre de la empresa
                         doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 
@@ -735,8 +737,16 @@ function reporte_tablas(cabeceras, datos, nombre, titulo) {
     });
 }
 
+
+/**
+ *  Explicación de margenes
+ *  1 cm = 28.34 pt
+ *  1.5 cm = 42 pt
+ */
+
 //Función para crear un pdf con multitablas
-function reporte_multitablas(cabeceras, datos, nombre, titulos) {
+function reporteMultitablas(cabeceras, datos, nombre, titulos) {
+    //Se datos generales del documento
     const doc = new jspdf.jsPDF("p", "pt", "letter"),
         margin = {
             top: 210,
@@ -754,7 +764,10 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
             request.json().then(function (response) {
                 //Se verifica el estado devuelto por la api
                 if (response.status) {
-                    //Propiedades básicas del pdf
+                    /*
+                    *   Se revisa la cantidad de titulos recibidos, para luego
+                    *   calcular la cantidad de páginas
+                    */
 
                     for (let index = 0; index < titulos.length - 1; index++) {
                         //Se agregan estilos el titulo
@@ -765,7 +778,7 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.text(titulos[index], doc.internal.pageSize.getWidth() / 2, 185, {
                             align: "center",
                         });
-                        //Se cargan los datos a la tabla
+                        //Se cargan los datos a la tabla y sus estilos
                         doc.autoTable({
                             head: [cabeceras[index]],
                             body: datos[index],
@@ -778,10 +791,10 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         });
                         //Se agrega una nueva página
                         doc.addPage();
-                        console.log(datos[index]);
                     }
 
-                    //Se agrega la última tabla
+                    //Se agrega la última tabla del reporte
+
                     //Se coloca el titulo de la página
                     doc.text(titulos[titulos.length - 1], doc.internal.pageSize.getWidth() / 2, 185, {
                         align: "center",
@@ -821,14 +834,18 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
                         doc.setFont("courier-oblique");
                         doc.setFontSize(12);
                         doc.setTextColor(255, 255, 255);
+                        //Se coloca el nombre de quién está realizando el reporte
                         doc.text("Usuario: " + response.dataset, 60, 80);
                         //Se cambia el idioma de la hora
                         moment.locale("es");
+                        //Se coloca la hora en que se está realizando el reporte
                         doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 60, 120);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
                         doc.setTextColor(255, 255, 255);
+                        //Se coloca el número de página
                         doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        //Se coloca el nombre de la empresa
                         doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 
@@ -846,9 +863,16 @@ function reporte_multitablas(cabeceras, datos, nombre, titulos) {
     });
 }
 
-//Función para crear un reporte de tipo factura
 
+/**
+ *  Explicación de margenes
+ *  1 cm = 28.34 pt
+ *  1.5 cm = 42 pt
+ */
+
+//Función para crear un reporte de tipo factura
 function comprobante(cabeceras, datos, nombre, titulo) {
+    //Se colocan los datos generales de la gráfica
     const doc = new jspdf.jsPDF("p", "pt", "letter"),
         margin = {
             top: 250,
@@ -866,9 +890,7 @@ function comprobante(cabeceras, datos, nombre, titulo) {
             request.json().then(function (response) {
                 //Se verifica el estado devuelto por la api
                 if (response.status) {
-                    //Propiedades básicas del pdf
-
-                    //Se cargan los datos a la tabla
+                    //Se cargan los datos a la tabla y sus estilos
                     doc.autoTable({
                         head: [cabeceras],
                         body: datos,
@@ -894,7 +916,7 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         doc.setFont("courier-oblique");
                         doc.setFontSize(22);
                         doc.setTextColor(76, 175, 80);
-                        //Se coloca el titulo de la página
+                        //Se coloca el titulo de la página en el centro
                         doc.text(titulo, doc.internal.pageSize.getWidth() / 2, 230, {
                             align: "center",
                         });
@@ -912,21 +934,26 @@ function comprobante(cabeceras, datos, nombre, titulo) {
                         doc.setFontSize(12);
                         doc.setFont("courier-oblique");
                         doc.setTextColor(0, 0, 0);
-
+                        //Se coloca el nombre del cliente
                         doc.text("Cliente: " + response.dataset.cliente, 80, 175);
+                        //Se coloca el número de la factura
                         doc.text("N° de factura: " + response.dataset.id_orden_compra, 370, 150);
 
                         //Se cambia el idioma de la hora
                         moment.locale("es");
+                        //Se coloca la hora de emisión
                         doc.text("Fecha: " + moment().format("dddd de MMMM YYYY, h:mm a"), 370, 175);
                         //Se reestablecen los estilos
                         doc.setFontSize(14);
                         doc.setTextColor(0, 0, 0);
+                        //Se coloca el nombre de la empresa en el encabezado
                         doc.text("ProCulinaryShop S.A. de C.V", 80, 125);
                         //Se coloca el pie de página con el número de letra
                         doc.setFontSize(10);
                         doc.setTextColor(255, 255, 255);
+                        //Se coloca la página actual
                         doc.text(500, 730, "Página " + String(i) + " de " + String(pageCount));
+                        //Se coloca el nombre de la empresa en el footer
                         doc.text(80, 730, "ProCulinaryShop S.A. de C.V.");
                     }
 

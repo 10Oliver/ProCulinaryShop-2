@@ -3,11 +3,11 @@ const API_noticia = SERVER + "private/api_noticias.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function () {
-    leertablas(API_noticia, "cargar_datos");
-    cargar_select(API_noticia + "cargar_categorias", "selector_categoria", null, 1);
+    leerTablas(API_noticia, "cargar_datos");
+    cargarSelect(API_noticia + "cargar_categorias", "selector_categoria", null, 1);
 
     //Se carga el componente de los sliders
-    var dateSlider = document.getElementById("slider-fecha");
+    let dateSlider = document.getElementById("slider-fecha");
 
     function timestamp(str) {
         return new Date(str).getTime();
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Rango máximo y minimo para el slider
 
         range: {
-            min: timestamp(moment().subtract(1, "months").format("YYYY-MM-DD")),
+            min: timestamp(moment().subtract(3, "months").format("YYYY-MM-DD")),
             max: timestamp(moment()),
         },
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
@@ -75,9 +75,9 @@ function llenar_tabla(dataset) {
         <td>${row.descripcion_noticia}</td>
         <td>${row.descuento}</td>
         <td>
-            <a onclick="modal_actualizar(${row.id_noticia})" class="btn editar"><i
+            <a onclick="modalActualizar(${row.id_noticia})" class="btn editar"><i
                 class="material-icons ">create</i></a>
-            <a href="#eliminar" onclick="modal_eliminar(${row.id_noticia})" class=" btn eliminar"><i
+            <a href="#eliminar" onclick="modalEliminar(${row.id_noticia})" class=" btn eliminar"><i
                 class="material-icons ">delete</i></a></td>
         </tr>
         `;
@@ -90,7 +90,7 @@ function llenar_tabla(dataset) {
 
 //Función que llenará los select al agregar noticias
 
-function cargar_modal() {
+function cargarModal() {
     //Se cargan los select con los datos correspondientes
     cargar_select(API_noticia + "cargar_productos", "productos_select", null);
     cargar_select(API_noticia + "cargar_tipos", "tipo_noticia", null);
@@ -103,23 +103,23 @@ document.getElementById("guardar_noticia").addEventListener('submit', function (
     //Se evita que se recargue la página
     event.preventDefault();
     //Se ejecuta la función para guardar, está en components.js
-    guardar_registro(API_noticia, "guardar_noticia", "guardar_noticia", "agregar");
+    guardarRegistro(API_noticia, "guardar_noticia", "guardar_noticia", "agregar");
 });
 
 
 //Función para precargar los datos para actualizar
 
-function modal_actualizar(identificador) {
+function modalActualizar(identificador) {
     // Se abre el modal correspondiente
     M.Modal.getInstance(document.getElementById("modificar")).open();
     // Se crea datos de tipo formulario para mandarlos
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se realiza una la petición para cargar los datos en los campos
     fetch(API_noticia + "obtener_actualizar", {
         method: "post",
-        body: identificador_principal,
+        body: identificadorPrincipal,
     }).then(function (request) {
         //Se verifica si la sentencia se ejecutó adecuadamente
         if (request.ok) {
@@ -143,13 +143,13 @@ function modal_actualizar(identificador) {
                     M.updateTextFields();
 
                     //Se carga el select con la función en components.js
-                    cargar_select(
+                    cargarSelect(
                         API_noticia + "cargar_productos", "productos_selectM",
                         response.dataset.id_producto, null);
-                    cargar_select(
+                    cargarSelect(
                         API_noticia + "cargar_tipos", "tipo_noticiaM",
                         response.dataset.id_tipo_noticia, null);
-                    cargar_select(
+                    cargarSelect(
                         API_noticia + "cargar_estados", "estado_noticiaM",
                         response.dataset.id_estado_noticia, null);
                 } else {
@@ -171,20 +171,20 @@ document.getElementById('actualizar_noticia').addEventListener('submit', functio
     //Se evita que se recargue la página
     event.preventDefault();
     //Se ejecuta el método qu actulizará
-    actualizar_registro(API_noticia, 'actualizar_noticia', 'actualizar_noticia', 'modificar');
+    actualizarRegistro(API_noticia, 'actualizar_noticia', 'actualizar_noticia', 'modificar');
     //Se recarga la tabla de datos
-    leertablas(API_noticia, "cargar_datos");
+    leerTablas(API_noticia, "cargar_datos");
 })
 
 
 //Función que cargará los datos en el modal
-function modal_eliminar(identificador) {
+function modalEliminar(identificador) {
     //Se crea una constante de tipo Form para guardar el di
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para reestablecerlo, está en components.js
-    eliminar_registro(API_noticia, "eliminar_noticia", identificador_principal, null, "cargar_datos");
+    eliminarRegistro(API_noticia, "eliminar_noticia", identificadorPrincipal, null, "cargar_datos");
 
 }
 
@@ -286,7 +286,7 @@ function reporte() {
                     //Se crean los titulos de las cabeceras
                     cabeceras.push('Nombre del producto', 'Total recaudado', 'Inicio de la noticia', 'Fin de la noticia');
                     //Se envian los datos para generar el reporte
-                    reporte_tablas(cabeceras, general, `Reporte de noticias terminadas ${moment().format("YYYY-MM-DD")}`, 'Dinero recaudado por noticias finalizadas')
+                    reporteTablas(cabeceras, general, `Reporte de noticias terminadas ${moment().format("YYYY-MM-DD")}`, 'Dinero recaudado por noticias finalizadas')
                 } else {
                     //Se muestra el error
                     sweetAlert(2, response.exception, null);

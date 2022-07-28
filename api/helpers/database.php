@@ -26,7 +26,7 @@ class Database
         $servidor = 'localhost';
         $base_datos = 'ProCulinaryShop';
         $usuario = 'postgres';
-        $contra = 'Firearcher15'; //Contraseña se cambia según necesidades
+        $contra = 'admin'; //Contraseña se cambia según necesidades
 
         //Método que realizará la conexión mediante PDO y el controlador de PostgreSQL
         self::$conexion = new PDO('pgsql:host=' . $servidor . ';dbname= ' . $base_datos . '; port=5432', $usuario, $contra);

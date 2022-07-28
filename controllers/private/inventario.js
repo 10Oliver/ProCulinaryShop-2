@@ -3,9 +3,9 @@ const API_inventario = SERVER + "private/api_inventario.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function () {
-    leertablas(API_inventario, "cargarDatos");
-    leertablas(API_inventario, "CargarTablaCategoria");
-    leertablas(API_inventario, "cargarDatos");
+    leerTablas(API_inventario, "cargarDatos");
+    leerTablas(API_inventario, "CargarTablaCategoria");
+    leerTablas(API_inventario, "cargarDatos");
 });
 //Función que llenará la tabla
 /**
@@ -85,7 +85,7 @@ const mostrarDato = (dato) => {
     return dato != undefined ? `<td>${dato}</td>` : '';
 }
 
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
@@ -104,9 +104,9 @@ function llenar_tabla(dataset) {
             <img src="../../api/images/productos/${row.imagen}" alt="">
         </td>
         <td>
-            <a onclick="modal_actualizar(${row.id_producto})" class="btn editar"><i
+            <a onclick="modalActualizar(${row.id_producto})" class="btn editar"><i
                 class="material-icons ">create</i></a>
-            <a onclick="modal_eliminar(${row.id_producto})" class=" btn eliminar"><i
+            <a onclick="modalEliminar(${row.id_producto})" class=" btn eliminar"><i
                 class="material-icons ">delete</i></a></td>
         </tr>
         `;
@@ -119,13 +119,13 @@ function llenar_tabla(dataset) {
 
 //Función que carga los datos en el modal para crear
 
-function abrir_modal_crear() {
+function abrirModalCrear() {
     //Se abre el modal para crear
     M.Modal.getInstance(document.getElementById("agregar")).open();
     //Se cargan los selects con los datos 
-    cargar_select(API_inventario + "cargarEstados", 'estado_producto', null, null);
-    cargar_select(API_inventario + "cargarMaterial", 'material_producto', null, null);
-    cargar_select(API_inventario + "cargarCategoria", 'categoria_producto', null, null);
+    cargarSelect(API_inventario + "cargarEstados", 'estado_producto', null, null);
+    cargarSelect(API_inventario + "cargarMaterial", 'material_producto', null, null);
+    cargarSelect(API_inventario + "cargarCategoria", 'categoria_producto', null, null);
 
 }
 
@@ -142,30 +142,29 @@ document.getElementById('agregar_producto').addEventListener('submit', function 
     //Se evita la recarga de la página
     event.preventDefault();
     //Se ejecutá el método que guardará el producto
-    guardar_registro(API_inventario, 'guardarProducto', 'agregar_producto', 'agregar');
+    guardarRegistro(API_inventario, 'guardarProducto', 'agregar_producto', 'agregar');
     //Se actualizan la tabla después de 1 segundo
     setTimeout(function () {
-        leertablas(API_inventario, "cargarDatos");
-        console.log('Se ha actualizado');
+        leerTablas(API_inventario, "cargarDatos");
     }, 1000);
 })
 
 //Función para pre-cargar los datos en el modal
 
 //Función que prepará los datos para actualizar
-function modal_actualizar(identificador) {
+function modalActualizar(identificador) {
     //Se abre el formulario
     M.Modal.getInstance(document.getElementById("modificar")).open();
     // Se establece el campo de imahen como opcional.
     document.getElementById("imagen_productoM").required = false;
     // Se crea datos de tipo formulario para mandarlos
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se realiza una la petición para cargar los datos en los campos
     fetch(API_inventario + "obtenerActualizar", {
         method: "post",
-        body: identificador_principal,
+        body: identificadorPrincipal,
     }).then(function (request) {
         //Se verifica si la sentencia se ejecutó adecuadamente
         if (request.ok) {
@@ -185,19 +184,19 @@ function modal_actualizar(identificador) {
                     // Se actualizan los labels como si estuviera escrito algo manualmente
                     M.updateTextFields();
                     //Se carga el select con la función en components.js
-                    cargar_select(
+                    cargarSelect(
                         API_inventario + "cargarEstados",
                         "estado_productoM",
                         response.dataset.id_estado_producto,
                         null
                     );
-                    cargar_select(
+                    cargarSelect(
                         API_inventario + "cargarMaterial",
                         "material_productoM",
                         response.dataset.id_material,
                         null
                     );
-                    cargar_select(
+                    cargarSelect(
                         API_inventario + "cargarCategoria",
                         "categoria_productoM",
                         response.dataset.id_categoria,
@@ -234,11 +233,10 @@ document.getElementById("modificar_producto").addEventListener("submit", functio
         sweetAlert(3, "Existen campos sin llenar", null);
     } else {
         // Se Llama la función que actualizará el registro, están en components.js
-        actualizar_registro(API_inventario, "modificarProducto", "modificar_producto", "modificar");
+        actualizarRegistro(API_inventario, "modificarProducto", "modificar_producto", "modificar");
         //Se actualizan la tabla después de 1 segundo
         setTimeout(function () {
-            leertablas(API_inventario, "cargarDatos");
-            console.log('Se ha actualizado');
+            leerTablas(API_inventario, "cargarDatos");
         }, 1000);
 
 
@@ -248,16 +246,16 @@ document.getElementById("modificar_producto").addEventListener("submit", functio
 
 //Función que eliminar un registro
 
-function modal_eliminar(identificador) {
+function modalEliminar(identificador) {
     //Se crea una constante de tipo Form para guardar el di
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para eliminar el registro
     eliminar_registro(
         API_inventario,
         "eliminarProducto",
-        identificador_principal,
+        identificadorPrincipal,
         null,
         "cargarDatos"
     );
@@ -269,7 +267,7 @@ document.getElementById('buscador').addEventListener("keyup", function () {
     let texto = document.getElementById("buscador").value;
     //Se crea un objeto de tipo form para guardar los datos
     let datos = new FormData();
-    //Se llena con el name y el valo
+    //Se llena con el name y el valor
     datos.append("buscador", texto);
     //Se ejecuta el método para buscar, está en components.js
     buscar(API_inventario, "buscar", datos);

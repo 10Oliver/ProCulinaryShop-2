@@ -6,13 +6,13 @@ const API_usuario = SERVER + "private/api_usuario.php?action=";
 //Se crea el evento para realizar acciones al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
     //Se llenan las tablas
-    leertablas(API_usuario, "leerTablas");
+    leerTablas(API_usuario, "leerTablas");
     //Se cargan los cargos en el select para el buscador
-    cargar_select(API_usuario + "cargarCargos", "cargos_empleado", null, 1);
+    cargarSelect(API_usuario + "cargarCargos", "cargos_empleado", null, 1);
 });
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
@@ -28,9 +28,9 @@ function llenar_tabla(dataset) {
                 <td>Sin hora de desbloqueo</td>
                 <td>Sin intentos gastados: 5/5</td>
                 <td>
-                    <a onclick="modal_actualizar(${row.id_empleado})" class="btn editar"><i
+                    <a onclick="modalActualizar(${row.id_empleado})" class="btn editar"><i
                         class="material-icons ">create</i></a>
-                    <a href="#eliminar" onclick="modal_eliminar(${row.id_empleado})" class=" btn eliminar"><i
+                    <a href="#eliminar" onclick="modalEliminar(${row.id_empleado})" class=" btn eliminar"><i
                         class="material-icons ">delete</i></a></td>
                 </tr>
                 `;
@@ -45,9 +45,9 @@ function llenar_tabla(dataset) {
                 <td>${row.hora_unlock_empleado}</td>
                 <td>${row.intento_empleado}/5</td>
                 <td>
-                    <a onclick="modal_actualizar(${row.id_empleado})" class="waves-effect waves-light btn editar red darken-2"><i
+                    <a onclick="modalActualizar(${row.id_empleado})" class="waves-effect waves-light btn editar red darken-2"><i
                         class="material-icons ">create</i></a>
-                    <a href="#eliminar" onclick="modal_eliminar(${row.id_empleado})" class="waves-effect waves-light btn eliminar deep-orange lighten-1"><i
+                    <a href="#eliminar" onclick="modalEliminar(${row.id_empleado})" class="waves-effect waves-light btn eliminar deep-orange lighten-1"><i
                         class="material-icons ">delete</i></a></td>
                 </tr>
                 `;
@@ -60,9 +60,9 @@ function llenar_tabla(dataset) {
 
 //Función que cargará los datos en el modal para crear
 
-function cargar_modal() {
+function cargarModal() {
     //Se carga el select con los empleados
-    cargar_select(API_usuario + "cargarEmpleados", "select_empleados", null, null);
+    cargarSelect(API_usuario + "cargarEmpleados", "select_empleados", null, null);
 }
 
 //Método que guardará los nuevos usuarios
@@ -93,36 +93,36 @@ document.getElementById("agregar_usuario_f").addEventListener("submit", function
         sweetAlert(3, "La contraseña no puede ser una secuencia de número o letras", null);
     } else {
         //Se envian los datos para que se guarden, esto mediante la función en components.js
-        guardar_registro(API_usuario, "crearUsuario", "agregar_usuario_f", "agregar");
+        guardarRegistro(API_usuario, "crearUsuario", "agregar_usuario_f", "agregar");
         //Se actualiza la tabla de datos
-        leertablas(API_usuario, "leerTablas");
+        leerTablas(API_usuario, "leerTablas");
     }
 });
 
 //Función que cargará los datos en el modal
-function modal_actualizar(identificador) {
+function modalActualizar(identificador) {
     //Se crea una constante de tipo Form para guardar el di
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para reestablecerlo, está en components.js
     eliminar_registro(
         API_usuario,
         "actualizarUsuario",
-        identificador_principal,
+        identificadorPrincipal,
         "¿Estás seguro de reestablecer el usuario?",
         "leerTablas"
     );
 }
 
 //Función que cargará los datos en el modal
-function modal_eliminar(identificador) {
+function modalEliminar(identificador) {
     //Se crea una constante de tipo Form para guardar el di
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para reestablecerlo, está en components.js
-    eliminar_registro(API_usuario, "eliminarUsuario", identificador_principal, null, "leerTablas");
+    eliminar_registro(API_usuario, "eliminarUsuario", identificadorPrincipal, null, "leerTablas");
 }
 
 //Función que buscará los datos

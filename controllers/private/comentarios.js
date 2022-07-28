@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que carga los datos en la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se crea la variable donde se guardarán los datos
     let contenido = "";
     //Se explora el vector fila por fila
@@ -27,7 +27,7 @@ function llenar_tabla(dataset) {
                 <td> 
                     <div class="switch">
                         <label>
-                        <input id="comentario${row.id_resena}" type="checkbox" checked="on" onClick="actualizar_comentario(${row.id_resena})">
+                        <input id="comentario${row.id_resena}" type="checkbox" checked="on" onClick="actualizarComentario(${row.id_resena})">
                         <span class="lever"></span>
                         </label>
                     </div>
@@ -45,7 +45,7 @@ function llenar_tabla(dataset) {
                 <td> 
                     <div class="switch">
                         <label>
-                        <input id="comentario${row.id_resena}" type="checkbox" onClick="actualizar_comentario(${row.id_resena})">
+                        <input id="comentario${row.id_resena}" type="checkbox" onClick="actualizarComentario(${row.id_resena})">
                         <span class="lever"></span>
                         </label>
                     </div>
@@ -60,7 +60,7 @@ function llenar_tabla(dataset) {
 
 //Función que actualiza el estado del comentario
 
-function actualizar_comentario(id) {
+function actualizarComentario(id) {
     //Se crea el dato de tipo formulario a enviar
     let datos = new FormData();
     //Se llena con el name y el valor del identificador

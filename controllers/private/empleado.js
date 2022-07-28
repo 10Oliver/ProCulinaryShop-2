@@ -7,11 +7,11 @@ const API_empleado = SERVER + "private/api_empleado.php?action=";
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function() {
     leertablas(API_empleado, "cargarDatos");
-    cargar_select(API_empleado + "cargarCargos", "selector_cargo", null, 1);
+    cargarSelect(API_empleado + "cargarCargos", "selector_cargo", null, 1);
 });
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     //Se recorre el conjunto para determinar fila por fila la cantidad de registros
@@ -25,9 +25,9 @@ function llenar_tabla(dataset) {
         <td>${row.correo_empleado}</td>
         <td>${row.nombre_cargo}</td>
         <td>
-            <a onclick="modal_actualizar(${row.id_empleado})" class="btn editar"><i
+            <a onclick="modalActualizar(${row.id_empleado})" class="btn editar"><i
                 class="material-icons ">create</i></a>
-            <a href="#eliminar" onclick="modal_eliminar(${row.id_empleado})" class=" btn eliminar"><i
+            <a href="#eliminar" onclick="modalEliminar(${row.id_empleado})" class=" btn eliminar"><i
                 class="material-icons ">delete</i></a></td>
         </tr>
         `;
@@ -55,7 +55,7 @@ document.getElementById("guardar_empleado").addEventListener("submit", function(
     ) {
         sweetAlert(3, "Existen campos sin llenar", null);
     } else { 
-            guardar_registro(API_empleado, "crearEmpleado", "guardar_empleado", "agregar");
+            guardarRegistro(API_empleado, "crearEmpleado", "guardar_empleado", "agregar");
             //Se refresca la tabla de datos
             leertablas(API_empleado, "cargarDatos");
     }
@@ -63,7 +63,7 @@ document.getElementById("guardar_empleado").addEventListener("submit", function(
 });
 
 //Función que carga los datos en los select al momento de activar el modal
-function cargar_modal() {
+function cargarModal() {
     //Se llena el select de estado con los datos obtenidos
     cargar_select(API_empleado + "cargarEstados", "estado_empleado", null, null);
     // Se llena el select de cargos con los datos obtenidos
@@ -71,7 +71,7 @@ function cargar_modal() {
 }
 
 //Función que prepará los datos para actualizar
-function modal_actualizar(identificador) {
+function modalActualizar(identificador) {
     //Se abre el formulario
     M.Modal.getInstance(document.getElementById("modificar")).open();
     // Se crea datos de tipo formulario para mandarlos
@@ -109,10 +109,10 @@ function modal_actualizar(identificador) {
                     M.updateTextFields();
 
                     //Se carga el select con la función en components.js
-                    cargar_select(
+                    cargarSelect(
                         API_empleado + "cargarCargos", "cargo_empleadoM",
                         response.dataset.id_cargo_empleado, null);
-                    cargar_select(
+                    cargarSelect(
                         API_empleado + "cargarEstados", "estado_empleadoM",
                         response.dataset.id_estado_empleado, null);
                 } else {
@@ -147,20 +147,20 @@ document.getElementById("actualizar_empleado_f").addEventListener("submit", func
     } else {
     }
     // Se Llama la función que actualizará el registro, están en components.js
-    actualizar_registro(API_empleado, "actualizarEmpleado", "actualizar_empleado_f", "modificar");
+    actualizarRegistro(API_empleado, "actualizarEmpleado", "actualizar_empleado_f", "modificar");
     //Se actualizan la tabla
     leertablas(API_empleado, "cargarDatos");
 });
 
 //Función que eliminará un registro
 
-function modal_eliminar(identificador) {
+function modalEliminar(identificador) {
     //Se crea una constante de tipo Form para guardar el di
-    const identificador_principal = new FormData();
+    const identificadorPrincipal = new FormData();
     //Se llena con el name y el valor
-    identificador_principal.append("identificador_p", identificador);
+    identificadorPrincipal.append("identificador_p", identificador);
     //Se ejecuta la función para eliminar el registro
-    eliminar_registro(API_empleado, "eliminarEmpleado", identificador_principal, null, "cargarDatos");
+    eliminarRegistro(API_empleado, "eliminarEmpleado", identificador_principal, null, "cargarDatos");
 }
 
 //Función que buscará los datos

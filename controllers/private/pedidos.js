@@ -3,11 +3,11 @@ const API_pedidos = SERVER + "private/api_pedidos.php?action=";
 
 //Método que se ejecuta cuando se carga la página
 document.addEventListener("DOMContentLoaded", function() {
-    leertablas(API_pedidos, "cargarDatos", 1);
+    leerTablas(API_pedidos, "cargarDatos", 1);
 });
 
 //Función que llenará la tabla
-function llenar_tabla(dataset) {
+function llenarTabla(dataset) {
     //Se declara la variable donde se guardará los datos
     let contenido = "";
     if (dataset.length == 0) {
@@ -68,7 +68,7 @@ function llenar_tabla(dataset) {
             //Se le insertan las filas a la tabla en la vista
             document.getElementById("cuerpo_pedido").innerHTML = contenido;
             //Se cargan los SELECT con su datos pertinentes
-            cargar_select(
+            cargarSelect(
                 API_pedidos + "cargarEstados",
                 "estado_pedido" + row.id_orden_compra,
                 row.id_estado_orden,
@@ -80,7 +80,7 @@ function llenar_tabla(dataset) {
 
 // Función que actualiza el estado de un pedido
 
-function actualizar_pedido(identificador) {
+function actualizarPedido(identificador) {
     //Se crea el dato de tipo formulario a enviar
     let datos = new FormData();
     //Se llena con el name y el valor del identificador
@@ -114,7 +114,7 @@ function actualizar_pedido(identificador) {
 
 //Función que elimina un pedido
 
-function eliminar_pedido(identificador) {
+function eliminarPedido(identificador) {
     //Se crea el dato de tipo formulario a enviar
     let datos = new FormData();
     //Se crea la variable para la acción a realizar
@@ -189,7 +189,7 @@ document.getElementById("categoria_pedido").addEventListener("change", function(
 });
 
 //Función que carga los datos de un pedido
-function cargar_lista(identificador) {
+function cargarLista(identificador) {
     //Se crea un objeto de tipo form para guardar los datos
     let datos = new FormData();
     //Se llena con el name y el valor

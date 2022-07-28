@@ -82,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
     //Se carga el componente de los sliders
-    var dateSlider = document.getElementById("slider-cantidad");
-    var dateSliderDinero = document.getElementById("slider-dinero");
-    var dateSliderTrafico = document.getElementById("slider-trafico");
+    let dateSlider = document.getElementById("slider-cantidad");
+    let dateSliderDinero = document.getElementById("slider-dinero");
+    let dateSliderTrafico = document.getElementById("slider-trafico");
 
     function timestamp(str) {
         return new Date(str).getTime();
@@ -155,13 +155,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //Obtención de los componentes a colocarles las fechas
     var dateValues = [document.getElementById("inicio"), document.getElementById("fin")];
     var valores = [document.getElementById("inicioI"), document.getElementById("finI")];
+
     var dateValuesDinero = [document.getElementById("inicioDinero"), document.getElementById("finDinero")];
     var valoresDinero = [document.getElementById("inicioDineroI"), document.getElementById("finDineroI")];
 
     var dateValuesTrafico = [document.getElementById("inicioTrafico"), document.getElementById("finTrafico")];
     var valoresTrafico = [document.getElementById("inicioTraficoI"), document.getElementById("finTraficoI")];
 
-    //Opciones
+    //Opciones de formateo de hora
     var formatter = new Intl.DateTimeFormat("es-ES", {
         dateStyle: "full",
     });
@@ -172,18 +173,22 @@ document.addEventListener("DOMContentLoaded", function () {
         year: "numeric",
     });
 
+    //Se colocan los datos para mostrarlos
+    //Para la gráfica de productos 
     dateSlider.noUiSlider.on("update", function (values, handle) {
         valores[handle].value = formatter1.format(new Date(+values[handle]));
         dateValues[handle].innerHTML = formatter.format(new Date(+values[handle]));
         contar();
     });
 
+    //Para la gráfica de promedios
     dateSliderDinero.noUiSlider.on("update", function (values, handle) {
         valoresDinero[handle].value = formatter1.format(new Date(+values[handle]));
         dateValuesDinero[handle].innerHTML = formatter.format(new Date(+values[handle]));
         dinero();
     });
 
+    //Para el reporte
     dateSliderTrafico.noUiSlider.on("update", function (values, handle) {
         valoresTrafico[handle].value = formatter1.format(new Date(+values[handle]));
         dateValuesTrafico[handle].innerHTML = formatter.format(new Date(+values[handle]));
@@ -191,7 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Función que contará y llenará la gráfica
-
 function contar() {
     //Se declará el array donde se guardarán los id que si usarán
     let id = [];
@@ -428,11 +432,11 @@ function ventas() {
         });
     }
     //Se pasan los datos para generar un reporte
-    reporte_multitablas(cabeceras, datos_tablas, 'Ventas semanales '+ moment().format("YYYY-MM-DD"), titulo);
+    reporteMultitablas(cabeceras, datos_tablas, 'Ventas semanales '+ moment().format("YYYY-MM-DD"), titulo);
 }
 
 //Función para obtener el top de productos
-function top_productos() {
+function topProductos() {
     //Se detiene la recarga de la página
     event.preventDefault();
     //Se realiza la petición para obtener los datos
@@ -460,7 +464,7 @@ function top_productos() {
                     //Se pasan los datos a un array general
 
                     //Se pasan los datos para generar un reporte
-                    reporte_tablas(
+                    reporteTablas(
                         cabeceras,
                         general,
                         "Reporte top producto" + moment().format("YYYY-MM-DD"),
