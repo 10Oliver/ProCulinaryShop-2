@@ -20,46 +20,54 @@
 </head>
 
 <body>
-    <nav id="sticky-nav" class="nav-wrapper green ">
-        <div class="row">
-            <div class="col l3 m3 s12 hide-on-small-only hide-on-med-and-down">
-                <div class="col s1 hide-on-large-only">
-                    <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                </div>
-                <img src="../../resources/img/logowhite.png" class="responsive-img  ">
+    <nav id="sticky-nav" class="nav-wrapper green">
+        <div class="nav-wrapper row">
+            <div class="col m2 s2 hide-on-large-only">
+                <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
-            <div class="col l7 m7 s12">
-                <div class="section-2">
-                    <form class="form" autocomplete="off">
-                        <div class="buscar">
-                            <input id="buscador_producto" name="buscador" placeholder="Buscar por nombre" type="text"
-                                onkeypress="return soloLetras(event)" class="validate buscar">
-                        </div>
-                    </form>
-                </div>
+            <div class="col l3 m6 s8  offset-m1">
+                <img src="../../resources/img/logowhite.png" class="responsive-img">
             </div>
-            <div id="nav" class="col l7 m7 s12">
-                <img src="../../resources/img/logowhite.png" class="log hide-on-large-only ">
-                </a>
-                <ul class="hide-on-med-and-down">
-                    <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
-                    <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
-                    <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
-                    <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
-                    <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
-                    <li id="sesion"></li>
-                    <ul id='opciones' class='dropdown-content'>
+            <div class="col l7 m8 s12 offset-m2">
+                <div class="col l12 m12 s12">
+                    <div class="section-2">
+                        <form class="form" autocomplete="off">
+                            <div class="buscar">
+                                <input id="buscador_producto" name="buscador" placeholder="Buscar por nombre"
+                                    type="text" onkeypress="return soloLetras(event)" class="validate buscar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col l12 m12 s12">
+                    <ul id="nav-mobile" class="hide-on-med-and-down opciones-nav">
+                        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+                        <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
+                        <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
+                        <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
+                        <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
+                        <li id="sesion"></li>
                     </ul>
-                </ul>
+                </div>
             </div>
-    
+
+
+
         </div>
     </nav>
+
     <ul class="sidenav" id="sidenav-list">
-        <li><a href="badges.html">Catálogo</a></li>
-        <li><a href="collapsible.html">Sobre Nosotros</a></li>
-        <li><a href="mobile.html">Centro de Ayuda</a></li>
+        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
+        <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
+        <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
+        <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
+        <li id="sesion"></li>
     </ul>
+    <div>
+        <img src="../../resources/img/home/Banner.png" class="image">
+    </div>
+
     <section class="contenedor_detalle center-align row">
         <div class="col l10 offset-l1">
             <h5>Carrito de compras</h5>
@@ -78,13 +86,15 @@
                 </div>
             </div>
             <div id="productos_carrito">
-                
+
             </div>
-            <button class="btn waves-effect waves-light deep-orange accent-4 opciones_carrito valign-wrappe" type="submit" name="action" onclick="eliminarPedido()">
+            <button class="btn waves-effect waves-light deep-orange accent-4 opciones_carrito valign-wrappe"
+                type="submit" name="action" onclick="eliminarPedido()">
                 Cancelar
                 <i class='bx bxs-x-circle'></i>
             </button>
-            <button  class="btn waves-effect waves-light green accent-4 opciones_carrito valign-wrapper" type="submit" name="action" onclick="verificarExistencia()">
+            <button class="btn waves-effect waves-light green accent-4 opciones_carrito valign-wrapper" type="submit"
+                name="action" onclick="verificarExistencia()">
                 Pedir
                 <i class='bx bxs-shopping-bag'></i>
             </button>
@@ -96,7 +106,9 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text"><img src="../../resources/img/home/Recurso 11.png" alt=""></h5>
-                    <p class="content-1 grey-text text-lighten-4"> Esta tienda ha sido creada con la funcionalidad de facilitarte tus compras de utensilios profesionales de cocina y de la mejor calidad, Para saber más de nosotros puedes ver nuestra historia en sobre nosotros.
+                    <p class="content-1 grey-text text-lighten-4"> Esta tienda ha sido creada con la funcionalidad de
+                        facilitarte tus compras de utensilios profesionales de cocina y de la mejor calidad, Para saber
+                        más de nosotros puedes ver nuestra historia en sobre nosotros.
                     </p>
                 </div>
                 <div id="redes-container" class="col l4 offset-l2 s12">

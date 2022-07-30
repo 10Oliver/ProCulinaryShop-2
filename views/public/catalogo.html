@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
-    
+
     <link rel="stylesheet" href="../../resources/css/materialize.min.css">
     <link rel="stylesheet" href="../../resources/css/public.css">
 
@@ -20,46 +20,54 @@
 </head>
 
 <body>
-    <nav id="sticky-nav" class="nav-wrapper green ">
-        <div class="row">
-            <div class="col l3 m3 s12 hide-on-small-only hide-on-med-and-down">
-                <div class="col s1 hide-on-large-only">
-                    <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                </div>
-                <img src="../../resources/img/logowhite.png" class="responsive-img  ">
+    <nav id="sticky-nav" class="nav-wrapper green">
+        <div class="nav-wrapper row">
+            <div class="col m2 s2 hide-on-large-only">
+                <a href="#" data-target="sidenav-list" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
-            <div class="col l7 m7 s12">
-                <div class="section-2">
-                    <form class="form" autocomplete="off">
-                        <div class="buscar">
-                            <input id="buscador_producto" name="buscador" placeholder="Buscar por nombre" type="text"
-                                onkeypress="return soloLetras(event)" class="validate buscar">
-                        </div>
-                    </form>
-                </div>
+            <div class="col l3 m6 s8  offset-m1">
+                <img src="../../resources/img/logowhite.png" class="responsive-img">
             </div>
-            <div id="nav" class="col l7 m7 s12">
-                <img src="../../resources/img/logowhite.png" class="log hide-on-large-only ">
-                </a>
-                <ul class="hide-on-med-and-down">
-                    <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
-                    <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
-                    <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
-                    <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
-                    <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
-                    <li id="sesion"></li>
-                    <ul id='opciones' class='dropdown-content'>
+            <div class="col l7 m8 s12 offset-m2">
+                <div class="col l12 m12 s12">
+                    <div class="section-2">
+                        <form class="form" autocomplete="off">
+                            <div class="buscar">
+                                <input id="buscador_producto" name="buscador" placeholder="Buscar por nombre"
+                                    type="text" onkeypress="return soloLetras(event)" class="validate buscar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col l12 m12 s12">
+                    <ul id="nav-mobile" class="hide-on-med-and-down opciones-nav">
+                        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+                        <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
+                        <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
+                        <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
+                        <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
+                        <li id="sesion"></li>
                     </ul>
-                </ul>
+                </div>
             </div>
-    
+
+
+
         </div>
     </nav>
+
     <ul class="sidenav" id="sidenav-list">
-        <li><a href="badges.html">Catálogo</a></li>
-        <li><a href="collapsible.html">Sobre Nosotros</a></li>
-        <li><a href="mobile.html">Centro de Ayuda</a></li>
+        <li><a href="index.html"><i class="material-icons left">home</i>Inicio</a></li>
+        <li><a href="catalogo.html"><i class="material-icons left">shop</i>Catálogo</a></li>
+        <li><a href="#"><i class="material-icons left">contacts</i>Sobre Nosotros</a></li>
+        <li><a href="#"><i class="material-icons left">info </i>Centro de Ayuda</a></li>
+        <li><a href="carrito.html"><i class=" material-icons left">add_shopping_cart</i>Carrito</a></li>
+        <li id="sesion"></li>
     </ul>
+    <div>
+        <img src="../../resources/img/home/Banner.png" class="image">
+    </div>
+
     <section class="row">
         <div id="contenedorProductos" class="container contenedor_detalle center-align">
             <div class="col s12 m6 l4">
@@ -72,7 +80,7 @@
                     <div class="section-1">
                         <span id="cards-title" class="card-title">Ablandador</span>
                     </div>
-            
+
                     <div class="card-content">
                         <h6 class="content-2">Precio: $5.25</h6>
                     </div>
@@ -96,7 +104,7 @@
                     <div class="card-action">
                         <a href="#!" id="producto" class="waves-effect waves-light btn green">Añadir<i
                                 class="fa-solid fa-cart-plus left"></i></a>
-            
+
                     </div>
                 </div>
             </div>
