@@ -342,6 +342,55 @@ class Verificador{
     }
 
     /**
+     * Función para verificar que una palabra no exista dentro de la contraseña
+     * 
+     * Se devolverá true si es encontrada o por lo menos una parte de ella
+     * 
+     * Se devolverá false si no es contrada, ni tampoco una fracción de ella
+     * 
+     * Si la palabra a buscar es demasiado pequeña <=3 solo se buscará solo si la palabra completa existe
+     * 
+     */
+
+    public function encontrarPalabra($palabra, $clave) {
+        //Se verifica la longitud de la palabra a buscar
+        if (strlen($palabra) > 3) {
+            //Si la palabra no es muy pequeña se inicia el proceso de coincidencias
+            $coincidencias = 0;
+            //Se verifica si la palabra a buscar es compuesta (Más de una palabra separada por espacio)
+            $palabraDividida = explode(" ", $palabra);
+            //Se divide la clave en un arreglo
+            $claveDividida = explode("", $clave);
+            //Se procede a revisar todas las subcadenas obtenidas de la palabra de busqueda
+            foreach($palabraDividida AS $palabraActual) {
+                //Se divide la palabra actual en un vector
+                $palabraBusqueda = explode("", $palabraActual);
+                /**
+                 * Se revisa caracter por caracter de la palabra a buscar ya que es mas corta que la clave
+                 * si existe alguna coincidencia del caracter que se esté evaluando con el caracter de la clave
+                 * Si se encuentra el mismo caracter se suma una coincidencia, y se continua con el siguiente 
+                 * de la clave, y si este vuelve a encontrarse se vuelve a sumar otra coincidencia
+                 * pero si ya no es la misma esta secuencia se rompe y se reiniciará las coincidencias a 0
+                 */
+                for ($i=0; $i < count($palabraBusqueda); $i++) { 
+                    if ($palabraBusqueda[$i] == $claveDividida[$i]) {
+                        //Se suman las coincidencias
+                        $coincidencias++;
+                    } else {
+                        $coincidencias = 0; //Se reinician las coincidencias
+                    }
+                    /**
+                     * Se revisa el total de coincidencias
+                     */
+                }
+            }
+        }
+    }
+
+
+
+
+    /**
      * Función para validar contraseña segura
      * 
      * Se validan los siguientes aspectos
@@ -360,6 +409,24 @@ class Verificador{
      * - Que alguna parte de la fecha de nacimiento no esté dentro de la contraseña
      * - Que no existan más de 3 carácteres del mismo tipo juntos
      */
+
+    public function validateSafePassword($clave, $usuario, $nombre, $apellido, $correo, $fecha)
+    {
+        //Se procede a revisa que la contraseña sea superior a 8 carácteres
+        if (!strlen($clave) < 8) {
+            $this->passwordError = 'La contraseña debe de contener al menos 8 caracteres';
+        } elseif (!strlen($clave) > 72) {
+            $this->passwordError = 'La contraseña debe de tener como máximo 72 carácteres';
+        } elseif (!preg_match('[A-Z]', $clave)) {
+            $this->passwordError = 'La contraseña debe de contener al menos una letra mayúscula';
+        } elseif (!preg_match('[a-z]', $clave)) {
+            $this->passwordError = 'La contraseña debe de contener al menos una letra minúscula';
+        } elseif(!preg_match('[0-9]', $clave)) {
+            $this->passwordError = 'La contraseña debe de contener al menos un número';
+        } elseif(!preg_match('[áÁäÄéÉëËíÍïÏóÓöÖúÚüÜ!#$&/()=?¡!¿?*-+.,;:]', $clave)) {
+            $this->passwordError = 'La contraseña debe de contener al menos un símbolo';
+        }
+    }
 
 
 }
