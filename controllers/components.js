@@ -374,6 +374,13 @@ function lineaI(CLASS, cabeceras, datos) {
             series: [datos],
         },
         {
+            plugins: [
+                Chartist.plugins.ctPointLabels({
+                    textAnchor: "middle",
+                }),
+            ],
+        },
+        {
             fullWidth: true,
             chartPadding: {
                 right: 100,
@@ -498,23 +505,19 @@ function lineaI(CLASS, cabeceras, datos) {
 
 //función de línea simple
 function linea(CLASS, cabeceras, datos) {
-    new Chartist.Line(
-        CLASS,
-        {
-            labels: cabeceras,
-            series: datos,
-        },
-        {
-            lineSmooth: Chartist.Interpolation.simple({
-                divisor: 2,
-            }),
-            fullWidth: true,
-            chartPadding: {
-                right: 20,
-            },
-            low: 0,
-        }
-    );
+var chart = new Chartist.Line(
+    CLASS,
+    {
+        labels: [1, 2, 3, 4, 5, 6, 7],
+        series: [
+            [1, 5, 3, 4, 6, 2, 3],
+            [2, 4, 2, 5, 4, 3, 6],
+        ],
+    },
+    {
+        plugins: [Chartist.plugins.tooltip()],
+    }
+);
 }
 
 //Función de barras
@@ -525,6 +528,13 @@ function barras(CLASS, cabeceras, datos) {
         {
             labels: cabeceras,
             series: datos,
+        },
+        {
+            plugins: [
+                Chartist.plugins.ctPointLabels({
+                    textAnchor: "top",
+                }),
+            ],
         },
         {
             seriesBarDistance: 10,
@@ -549,16 +559,27 @@ function semiPastel(CLASS, titulos, datos) {
     };
 
     //Se crean los datos
-    var chart = new Chartist.Pie(CLASS, data, {
-        donut: true,
-        showLabel: true,
-    });
+    var chart = new Chartist.Pie(
+        CLASS,
+        data,
+        {
+            donut: true,
+            showLabel: true,
+        },
+        {
+            plugins: [
+                Chartist.plugins.ctPointLabels({
+                    textAnchor: "middle",
+                }),
+            ],
+        }
+    );
     chart.on("draw", function (data) {
         if (data.type === "slice") {
-           //Se obtiene la ruta
+            //Se obtiene la ruta
             var pathLength = data.element._node.getTotalLength();
 
-           //Se toman las coordenadas y limites de dónde puede llegar
+            //Se toman las coordenadas y limites de dónde puede llegar
             data.element.attr({
                 "stroke-dasharray": pathLength + "px " + pathLength + "px",
             });
@@ -636,14 +657,11 @@ function pastel(CLASS, cabeceras, datos) {
     new Chartist.Pie(CLASS, data, options, responsiveOptions);
 }
 
-
-
 /**
  *  Explicación de margenes
  *  1 cm = 28.34 pt
  *  1.5 cm = 42 pt
  */
-
 
 //Función para crear un pdf de tipo tabla
 function reporteTablas(cabeceras, datos, nombre, titulo) {
@@ -735,7 +753,6 @@ function reporteTablas(cabeceras, datos, nombre, titulo) {
     });
 }
 
-
 /**
  *  Explicación de margenes
  *  1 cm = 28.34 pt
@@ -763,9 +780,9 @@ function reporteMultitablas(cabeceras, datos, nombre, titulos) {
                 //Se verifica el estado devuelto por la api
                 if (response.status) {
                     /*
-                    *   Se revisa la cantidad de titulos recibidos, para luego
-                    *   calcular la cantidad de páginas
-                    */
+                     *   Se revisa la cantidad de titulos recibidos, para luego
+                     *   calcular la cantidad de páginas
+                     */
 
                     for (let index = 0; index < titulos.length - 1; index++) {
                         //Se agregan estilos el titulo
@@ -808,7 +825,6 @@ function reporteMultitablas(cabeceras, datos, nombre, titulos) {
                         tableLineColor: [132, 241, 136],
                         tableLineWidth: 0.1,
                     });
-
 
                     //Se carga la imagen a colocar como header
                     var logo = new Image();
@@ -860,7 +876,6 @@ function reporteMultitablas(cabeceras, datos, nombre, titulos) {
         }
     });
 }
-
 
 /**
  *  Explicación de margenes

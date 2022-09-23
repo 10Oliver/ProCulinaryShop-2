@@ -341,15 +341,25 @@ class Verificador{
         }
     }
 
-    function validarFecha($date, $format = 'Y-m-d H:i:s')
-    {
-        $d = DateTime::createFromFormat($format, $date);
-        $repuesta = $d && $d->format($format) == $date;
-        return $repuesta;
-    }
-
-
-
+    /**
+     * Función para validar contraseña segura
+     * 
+     * Se validan los siguientes aspectos
+     * 
+     * - Mínimo de 8 caracteres
+     * - Máximo de 72 caracteres
+     * - Que contenga al menos 1 letra mayúscula
+     * - Que contenga al menos 1 letra mayúscula
+     * - Que contenga al menos 1 símbolo
+     * - Que contegan al menos 1 número
+     * - Que el usuario no esté dentro de la contraseña
+     * - Que el nombre no esté dentro de la contraseña
+     * - Que el apellido no esté dentro de la contraseña
+     * - Que el correo no esté dentro de la contraseña
+     * - Que la fecha de nacimiento no esté dentro de la contraseña
+     * - Que alguna parte de la fecha de nacimiento no esté dentro de la contraseña
+     * - Que no existan más de 3 carácteres del mismo tipo juntos
+     */
 
 
 }

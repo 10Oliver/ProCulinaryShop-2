@@ -1,11 +1,13 @@
+$chart-tooltip-bg: #F4C63D;
+$chart-tooltip-color: #453D3F;
 .chartist-tooltip {
   position: absolute;
   display: inline-block;
   opacity: 0;
   min-width: 5em;
   padding: .5em;
-  background: #F4C63D;
-  color: #453D3F;
+  background: $chart-tooltip-bg;
+  color: $chart-tooltip-color;
   font-family: Oxygen,Helvetica,Arial,sans-serif;
   font-weight: 700;
   text-align: center;
@@ -14,8 +16,8 @@
   -webkit-transition: opacity .2s linear;
   -moz-transition: opacity .2s linear;
   -o-transition: opacity .2s linear;
-  transition: opacity .2s linear; }
-  .chartist-tooltip:before {
+  transition: opacity .2s linear;
+  &:before {
     content: "";
     position: absolute;
     top: 100%;
@@ -24,11 +26,13 @@
     height: 0;
     margin-left: -15px;
     border: 15px solid transparent;
-    border-top-color: #F4C63D; }
-  .chartist-tooltip.tooltip-show {
-    opacity: 1; }
+    border-top-color: $chart-tooltip-bg;
+  }
+  &.tooltip-show {
+    opacity: 1;
+  }
+}
 
 .ct-area, .ct-line {
-  pointer-events: none; }
-
-/*# sourceMappingURL=chartist-plugin-tooltip.css.map */
+  pointer-events: none;
+}

@@ -1207,6 +1207,14 @@ input {
     margin-top: 30px;
     margin-bottom: 30px;
 }
+.chart {
+	height: 400px;
+}
+
+.ct-point {
+	stroke-width: 15px;
+	cursor: pointer;
+}
 
 .grafica {
     height: 100% !important;

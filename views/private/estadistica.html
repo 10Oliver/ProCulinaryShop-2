@@ -6,8 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Estadística</title>
     <link rel="stylesheet" href="../../resources/css/materialize.min.css" />
+    <link type="text/css"
+        href="https://cdn.jsdelivr.net/npm/chartist-plugin-tooltips@0.0.17/dist/chartist-plugin-tooltip.css"
+        rel="stylesheet">
+            <link type="text/css"
+                href="https://cdn.jsdelivr.net/npm/chartist-plugin-tooltips@0.0.17/dist/chartist-plugin-tooltip.css.map"
+                rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/css/private.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
@@ -190,15 +197,21 @@
             </div>
             <div class="col l8 m8 s12 offset-l2 offset-m2 cgrafica">
                 <div class="col l4 m6 s12 valign-wrapper offset-l2 offset-m2 contenedor_titulo"><i
-                        class="material-icons titulo1">insert_chart</i><span class="titulos">Total de ventas</span></div>
+                        class="material-icons titulo1">insert_chart</i><span class="titulos">Total de ventas</span>
+                </div>
                 <div class="col l4 m6 s12 valign-wrapper offset-l1 offset-m1 contenedor_titulo"><i
-                        class="material-icons titulo2">insert_chart</i><span class="titulos">Promedio de ventas</span></div>
-                <div class="center lineas grafica">
+                        class="material-icons titulo2">insert_chart</i><span class="titulos">Promedio de ventas</span>
+                </div>
+                <div class="center lineas grafica" id="lineas">
 
                 </div>
+                <div class="container">
+                    <div id="chart1" class="chart grafica"></div>
+                </div>
+                
 
             </div>
-            
+
             <div class="col l8 m8 s12 offset-l2 offset-m2 cgrafica">
                 <h6 class="col l12 m12 s12 titulos">Clientes con más compras </h6>
                 <div class="center barras grafica">
@@ -206,12 +219,12 @@
                 </div>
             </div>
 
-           
+
             <div class="row">
                 <h5 class="col l12 m12 s12 titulos">Sección de reportes</h5>
                 <div class="col l6 m6 s12">
                     <h6 class="titulos">Top productos</h6>
-                    <a  onclick="topProductos()" class="btn textograficas">Generar</a>
+                    <a onclick="topProductos()" class="btn textograficas">Generar</a>
                 </div>
                 <div class="col l6 m6 s12">
                     <div class="col l8 m8 s10 offset-l2 offset-m2 offset-s1">
@@ -248,7 +261,7 @@
 
                     <div class=" col l12 m12 s12 center">
                         <h6 class="titulos">Ventas por semanas</h6>
-                        <a  onclick="ventas()" class="btn textograficas">Generar</a>
+                        <a onclick="ventas()" class="btn textograficas">Generar</a>
                     </div>
 
                 </div>
@@ -259,8 +272,14 @@
 
     </section>
     <!--Librerías y complementos-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../resources/js/materialize.min.js"></script>
-    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://themesberg.com/docs/volt-bootstrap-5-dashboard/assets/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="https://themesberg.com/docs/volt-bootstrap-5-dashboard/assets/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-pointlabels@0.0.6/dist/chartist-plugin-pointlabels.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"
         integrity="sha512-Bw9Zj8x4giJb3OmlMiMaGbNrFr0ERD2f9jL3en5FmcTXLhkI+fKyXVeyGyxKMIl1RfgcCBDprJJt4JvlglEb3A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
