@@ -22,11 +22,10 @@ $correo = 'oliver.erazo1@gmail.com';
 
 $division = strripos($correo, '@');
 
-$inicio = substr($correo, 0, $division);
+$inicio = substr($correo, 0, strripos($correo, '@'));
 
 $punto = strripos($correo, '.');
 
-$final = substr($correo, $division-1, $punto);
-
-echo $inicio."<br>";
-echo $final;
+$final = substr($correo, strripos($correo, '@') + 1, $punto);
+$total = substr(substr($correo, strripos($correo, '@') + 1, strripos($correo, '.')), (strlen($correo) - (strlen($correo))), (strripos($correo, '.') - strlen($correo)));
+echo $total;

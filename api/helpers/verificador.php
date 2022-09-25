@@ -406,37 +406,59 @@ class Verificador
     }
 
     /**
-     * Función para validar que el correo no esté dentro de la contraseña
+     * Función para validar que la fecha de nacimiento no esté dentro de la contraseña
      */
 
-     public function correoClave($correo, $clave) {
-        //Se revisa que el correo entero no esté dentro de la constraseña
-        if (!str_contains($clave, $correo)) {
-            return true;
-        } 
-        //Se divide el correo en dos partes
-        $nombreCorreo = "";
-        $dominio = "";
-     }
-
-
-    /**
-     * Función para darle una pista al usuario de su propio correo
-     */
-    public function formatEmail($correo)
+    public function validarFecha($clave, $fecha)
     {
-        //Se recorta las primeras 3 líneas del correo
-        $comienzo = substr($correo, 0, strlen($correo) - (strlen($correo) - 3));
-        //Se extraen el dominio del correo
-        $final = substr($correo, strripos($correo, '@') - strlen($correo));
-        //Se obtiene el sobrante del correo para saber su longitud
-        $restante = substr($correo, (strlen($correo) - (strlen($correo) - 3)), (strripos($correo, '@') - strlen($correo)));
-        //Se le agregan asteríscos según la longitud del correo restante
-        $total = str_pad($comienzo, strlen($restante) + 3, "*", STR_PAD_RIGHT);
-        //Se une el todo para generar el nuevo formato de correo
-        return $total . $final;
-    }
+        //Variable para validar las coincidencias
+        $coincidencias = 0;
+        //Variable general para revisar la fecha
+        $fechaModificada = [];
+        //Variable que contendrá la fecha en un solo string
+        $fechaTotal = '';
+        //Se verifica si la fecha dada contiene guiones como parte del formato
+        if (str_contains($fecha, '-')) {
+            //Se crea un arreglo separado por los guiones
+            $fechaModificada = explode('-', $fecha);
+        } else {
+            //Se crea un arreglo separado por las plecas
+            $fechaModificada = explode('/', $fecha);
+        }
 
+        //Se revisa cada caso de la fecha encontrada
+        for ($i = 0; $i <= count($fechaModificada); $i++) {
+            //Se revisa si ya es el último dato
+            if (count($fechaModificada) == $i) {
+                //Se revisa la unión de toda la fecha para determinar si está dentro de la fecha
+                foreach ($fechaModificada as $trozo) {
+                    $fechaTotal = $fechaTotal . $trozo;
+                }
+                //Se revisa si la fecha completa está dentro de la contraseña
+                if (str_contains($clave, $fechaTotal)) {
+                    $coincidencias = $coincidencias + 3;
+                }
+            } else {
+                //Se evalua si una fracción de la fecha está dentro de la contraseña
+                if (str_contains($clave, $fechaModificada[$i])) {
+                    $coincidencias++;
+                }
+            }
+
+            /**
+             * Se revisa la cantidad de coincidencias que se han encontrado
+             * Si se han encontrado 2 se da por hecho que al menos una parte 
+             * de la fecha está dentro de la fecha
+             */
+
+            if ($coincidencias > 1) {
+                return true;
+                break;
+            }
+        }
+        //Si todo está bien se devuelve false porque no es encontró
+        return false;
+    }
 
 
     /**
@@ -464,24 +486,41 @@ class Verificador
         //Se procede a revisa que la contraseña sea superior a 8 carácteres
         if (!strlen($clave) < 8) {
             $this->passwordError = 'La contraseña debe de contener al menos 8 caracteres';
+            return false;
         } elseif (!strlen($clave) > 72) {
             $this->passwordError = 'La contraseña debe de tener como máximo 72 carácteres';
+            return false;
         } elseif (!preg_match('[A-Z]', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra mayúscula';
+            return false;
         } elseif (!preg_match('[a-z]', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra minúscula';
+            return false;
         } elseif (!preg_match('[0-9]', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos un número';
         } elseif (!preg_match('[áÁäÄéÉëËíÍïÏóÓöÖúÚüÜ!#$&/()=?¡!¿?*-+.,;:]', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos un símbolo';
+            return false;
         } elseif (!$this->encontrarPalabra($usuario, $clave)) {
             $this->passwordError = 'Tú usuario o una fracción de él no puede ser parte de la contraseña';
+            return false;
         } elseif (!$this->encontrarPalabra($nombre, $clave)) {
             $this->passwordError = 'Tú nombre o una fracción de él no puede ser parte de la contraseña';
+            return false;
         } elseif (!$this->encontrarPalabra($apellido, $clave)) {
             $this->passwordError = 'Tú apellido o una fracción de él no puede ser parte de la contraseña';
-        } elseif (!$this->correoClave($correo, $clave)) {
+            return false;
+        } elseif (!$this->encontrarPalabra(substr($correo, 0, strripos($correo, '@')), $clave)) {
             $this->passwordError = 'Tú correo o una fracción de él no puede ser parte de la contraseña';
+            return false;
+        } elseif (!$this->encontrarPalabra(substr(substr($correo, strripos($correo, '@') + 1, strripos($correo, '.')), (strlen($correo) - (strlen($correo))), (strripos($correo, '.') - strlen($correo))), $clave)) {
+            $this->passwordError = 'El dominio de tu correo no puede ser parte de la contraseña';
+            return false;
+        } elseif (!$this->validarFecha($clave, $fecha)) {
+            $this->passwordError = 'La contraseña o una parte de ella no puede ser parta de la contraseña';
+            return false;
+        } else {
+            return true;
         }
     }
 }
