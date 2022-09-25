@@ -480,6 +480,8 @@ class Verificador
             $this->passwordError = 'Tú nombre o una fracción de él no puede ser parte de la contraseña';
         } elseif (!$this->encontrarPalabra($apellido, $clave)) {
             $this->passwordError = 'Tú apellido o una fracción de él no puede ser parte de la contraseña';
-        } elseif (!$t)
+        } elseif (!$this->correoClave($correo, $clave)) {
+            $this->passwordError = 'Tú correo o una fracción de él no puede ser parte de la contraseña';
+        }
     }
 }
