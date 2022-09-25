@@ -115,7 +115,7 @@ function verificarDUI(presionar, texto) {
     } else if (ingresar.value.length < 8 && teclado == '-') {
         return false;
     } else if (ingresar.value.length == 8) {
-        //Se colocará el -
+        ingresar.value += '-';
     } else if (valores.indexOf(teclado) == -1) {
         return false;
     } else if (ingresar.value.length > 9) {
@@ -185,6 +185,33 @@ function soloLetras(texto) {
     }
     //Se revisa si las tecla escrita se puede escribir
     if (valores.indexOf(teclado) == -1 && !permitido) {
+        return false;
+    }
+}
+
+/**
+ * Función para validar número de teléfono
+ *
+ *  Se permitirán:
+ *  - Digitos
+ *  - guión
+ *
+ */
+function verificarTel(event, id) {
+    //Se obtiene el codigo ASCII de la tecla
+    key = event.keyCode;
+    //Se almacena
+    teclado = String.fromCharCode(key);
+    //Se obtiene toda la cadena de texto
+    ingresar = document.getElementById(id);
+    // Valores permitidos
+    valores = "0123456789";
+    //Se revisa si las tecla escrita se puede escribir
+    if (ingresar.value.length == 4) {
+        ingresar.value = ingresar.value + "-";
+    } else if (ingresar.value.length > 8) {
+        return false;
+    } else if (valores.indexOf(teclado) == -1) {
         return false;
     }
 }

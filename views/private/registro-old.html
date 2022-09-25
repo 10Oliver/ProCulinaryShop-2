@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+
+    <link rel="stylesheet" href="../../resources/css/materialize.min.css">
+    <link rel="stylesheet" href="../../resources/css/public.css">
+
+
+
+    <title>ProCulinary Shop</title>
+    <link rel="icon" href="../../resources/img/home/shopping.png">
+</head>
+
+<body class="green">
+    <section class="container alinear-login  valign-wrapper">
+        <div class="card-inicio">
+            <form id="registro" method="post" enctype="multipart/form-data" autocomplete="off">
+
+                <div class="row card carta-login">
+                    <div class="col l8 m10 s10 pull-l2">
+                        <img src="../../resources/img/logoblack.png" class="responsive-img" alt="">
+                    </div>
+                    
+                    <h5>Crear cuenta</h5>
+                    <div class="col l12 m12 s12">
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Nombre" id="nombres" name="nombre" type="text" class="validate"
+                                required onkeypress="return soloLetras(event)">
+                            <label for="nombres">Nombres</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Apellido" id="Apellidos" name="apellido" type="text" class="validate"
+                                required onkeypress="return soloLetras(event)">
+                            <label for="Apellidos">Apellidos</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Correo" id="correo" name="correo" type="email" class="validate"
+                                required onkeypress="return revisarTexto(event)">
+                            <label for="correo">Correo</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Teléfono" id="telefono" name="telefono" type="tel" class="validate"
+                                required onkeypress="return soloNumerosC(event)">
+                            <label for="telefono">Teléfono</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Dui" id="dui" name="dui" type="text" class="validate" required onkeypress="return verificarDUI(event, 'dui')">
+                            <label for="dui" >DUI</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="Nombre de usuario" name="usuario" id="usuario" type="tel"
+                                class="validate" required onkeypress="return letras_numeros(event)">
+                            <label for="usuario">Usuario</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="contraseña" id="pass" name="pass" type="password" class="validate"
+                                required onkeypress="return revisarTexto(event)">
+                            <label for="contraseña">Contraseña</label>
+                        </div>
+                        <div class="input-field col l6 m6 s12">
+                            <input placeholder="contraseña" id="passR" type="password" class="validate" required>
+                            <label for="contraseñaR" onkeypress="return revisarTexto(event)">Confirmar contraseña</label>
+                        </div>
+                        <div class="input-field col l12 m12 s12">
+                            <input placeholder="Dirección" id="direccion" name="direccion" type="text" class="validate"
+                                required onkeypress="return revisarTexto(event)">
+                            <label for="direccion">Dirección</label>
+                        </div>
+                    </div>
+                    <button class="waves-effect waves-light btn green" type="submit">Crear cuenta</button>
+                    <p>¿Ya tienes cuenta? <a href="login.html">Inicio de sesión</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="../../resources/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="../../controllers/components.js"></script>
+    <script type="text/javascript " src="../../controllers/Public/registro.js"></script>
+    <script type="text/javascript" src="../../controllers/verificador.js"></script>
+    <script type="text/javascript " src="../../controllers/Public/activaciones_publicas.js"></script>
+
+</body>
+
+</html>
