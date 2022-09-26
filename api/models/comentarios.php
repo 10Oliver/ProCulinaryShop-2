@@ -2,7 +2,7 @@
 // Modelo para comentarios
 
 
-class comentarios extends Verificador
+class Comentarios extends Verificador
 {
 
     /*

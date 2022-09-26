@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
     //Se crea o reiniciar una sesión
     session_start();
     //Se instancia la clase correspondiente en la variable
-    $usuario = new usuario;
+    $usuario = new Usuario;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
     //Se debería crear un método para confirmar si el usuario tiene permitido, todavía en cuestionamiento

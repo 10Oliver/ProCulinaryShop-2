@@ -19,7 +19,7 @@ if (isset($_GET['action'])) {
     //Se crea o reiniciar una sesión
     session_start();
     //Se instancia la clase correspondiente en la variable
-    $cliente = new cliente;
+    $cliente = new Cliente;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
     //Se escoge el proceso que se ejecutará en el modelo

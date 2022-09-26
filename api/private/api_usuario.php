@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
     //Se crea la sesión 
     session_start();
     //Se instancia la clase del modelo
-    $usuario = new usuario;
+    $usuario = new Usuario;
     //Se crea el vector de datos que se retonarán
     $result = array('status' => 0, 'message' => null, 'exception' => null, 'dataset' => null);
 

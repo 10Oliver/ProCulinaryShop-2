@@ -1,6 +1,6 @@
 <?php
 
-class pedido extends Verificador
+class Pedido extends Verificador
 {
 
     /**

@@ -2,7 +2,7 @@
 // Modelo para comentarios
 
 
-class catalogo extends Verificador
+class Catalogo extends Verificador
 {
 
     /*

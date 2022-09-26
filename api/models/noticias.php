@@ -1,7 +1,7 @@
 <?php
 
 
-class noticia extends Verificador
+class Noticia extends Verificador
 {
 
     /**

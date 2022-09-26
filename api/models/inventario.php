@@ -2,7 +2,7 @@
 
 // Modelo para el inventario (Vista privada) y carrito (Vista pública)
 
-class inventario extends Verificador
+class Inventario extends Verificador
 {
     //Variables generales para las operaciones SCRUD
     private $nombreProducto = null;

@@ -2,7 +2,7 @@
 // Modelo para comentarios
 
 
-class cliente extends Verificador
+class Cliente extends Verificador
 {
 
     /*

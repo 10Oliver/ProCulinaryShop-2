@@ -2,7 +2,7 @@
 
 // Modelo para empleados
 
-class empleado extends Verificador
+class Empleado extends Verificador
 {
     //Variables generales para las operaciones SCRUD
     private $identificador = null;

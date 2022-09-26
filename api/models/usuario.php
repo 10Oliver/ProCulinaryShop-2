@@ -2,7 +2,7 @@
 
 // Modelo de usuarios
 
-class usuario extends Verificador{
+class Usuario extends Verificador{
 
     /*
     * Declaración de variables globales para el modelo
