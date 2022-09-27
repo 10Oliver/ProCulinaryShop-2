@@ -483,6 +483,7 @@ class Verificador
 
     public function validateSafePassword($clave, $usuario, $nombre, $apellido, $correo, $fecha)
     {
+
         //Se procede a revisa que la contraseña sea superior a 8 carácteres
         if (strlen($clave) < 8) {
             $this->passwordError = 'La contraseña debe de contener al menos 8 caracteres';
@@ -501,6 +502,9 @@ class Verificador
         } elseif (!preg_match('/[áÁäÄéÉëËíÍïÏóÓöÖúÚüÜ!#$&()=?¡!¿?*-+.,;:]/', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos un símbolo';
             return false;
+        } elseif (str_contains($clave, "'") || str_contains($clave, "'") || str_contains($clave, "\\") || str_contains($clave, "`") || str_contains($clave, "<") || str_contains($clave, ">")) {
+            $this->passwordError = 'Existen simbolos no permitidos dentro de la contraseña';
+            return false;
         } elseif ($this->encontrarPalabra($usuario, $clave)) {
             $this->passwordError = 'Tú usuario o una fracción de él no puede ser parte de la contraseña';
             return false;
@@ -518,6 +522,12 @@ class Verificador
             return false;
         } elseif (!$this->validarFecha($clave, $fecha)) {
             $this->passwordError = 'La contraseña o una parte de ella no puede ser parta de la contraseña';
+            return false;
+        } elseif (preg_match('/insert/i', $clave) || preg_match('/select/i', $clave) || preg_match('/update/i', $clave) || preg_match('/delete/i', $clave) || preg_match('/drop/i', $clave)) {
+            $this->passwordError = 'No se admiten consultas SQL dentro de la contraseña';
+            return false;
+        } elseif (preg_match('/script/i', $clave) || preg_match('/html/i', $clave) || preg_match('/php/i', $clave) || preg_match('/or/i', $clave) || preg_match('/and/i', $clave)) {
+            $this->passwordError = 'No se admiten código dentro de la contraseña';
             return false;
         } else {
             return true;

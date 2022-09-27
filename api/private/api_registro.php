@@ -50,10 +50,10 @@ if (isset($_GET['action'])) {
                 } elseif (!$empleado->setUsuarioEmpleado($_POST['usuario'])) {
                     $result['exception'] = 'Nombre de usuario incorrecto o es demasiado corto';
                 } elseif (!$empleado->setPassEmpleado($_POST['pass'])) {
-                    $result['exception'] = $empleado->getPasswordError(). $_POST['pass'];
+                    $result['exception'] = $empleado->getPasswordError();
                 } elseif ($empleado->registrarEmpleado()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Registro de primer usuario finalizado con éxito';
+                    $result['status'] = 0;
+                    $result['exception'] = 'Registro de primer usuario finalizado con éxito';
                 } elseif (Database::obtenerProblema()) {
                     $result['exception'] = Database::obtenerProblema();
                 } else {
