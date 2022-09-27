@@ -356,15 +356,15 @@ class Verificador
         //Se verifica la longitud de la palabra a buscar
         if (strlen($palabra) > 3) {
             //Si la palabra no es muy pequeña se inicia el proceso de coincidencias
-            $coincidencias = 0;
+            $coincidencias = 1;
             //Se verifica si la palabra a buscar es compuesta (Más de una palabra separada por espacio)
             $palabraDividida = explode(" ", $palabra);
             //Se divide la clave en un arreglo
-            $claveDividida = explode("", $clave);
+            $claveDividida = str_split($clave);
             //Se procede a revisar todas las subcadenas obtenidas de la palabra de busqueda
             foreach ($palabraDividida as $palabraActual) {
                 //Se divide la palabra actual en un vector
-                $palabraBusqueda = explode("", $palabraActual);
+                $palabraBusqueda = str_split($palabraActual);
                 /**
                  * Se revisa caracter por caracter de la palabra a buscar ya que es mas corta que la clave
                  * si existe alguna coincidencia del caracter que se esté evaluando con el caracter de la clave
@@ -372,11 +372,11 @@ class Verificador
                  * de la clave, y si este vuelve a encontrarse se vuelve a sumar otra coincidencia
                  * pero si ya no es la misma esta secuencia se rompe y se reiniciará las coincidencias a 0
                  */
-                for ($i = 0; $i < count($palabraBusqueda); $i++) {
+                for ($i = 0; $i < count($claveDividida); $i++) {
                     //Se revisa si el caracter de la palabra tiene una "i" o una "y" las cuales se tomarán como si
                     //se tratara de un disminutivo de la palabra, (Es un caso excepcional)
-                    if (preg_match('[yYiI]', $palabraBusqueda[$i])) {
-                        if ($palabraBusqueda[$i] == $claveDividida[$i]) {
+                    if (preg_match('/[yYiI]/', $claveDividida[$i])) {
+                        if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
                             //Se suman las coincidencias
                             $coincidencias++;
                         } else {
@@ -384,7 +384,7 @@ class Verificador
                         }
                     }
 
-                    if ($palabraBusqueda[$i] == $claveDividida[$i]) {
+                    if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
                         //Se suman las coincidencias
                         $coincidencias++;
                     } else {
@@ -484,36 +484,36 @@ class Verificador
     public function validateSafePassword($clave, $usuario, $nombre, $apellido, $correo, $fecha)
     {
         //Se procede a revisa que la contraseña sea superior a 8 carácteres
-        if (!strlen($clave) < 8) {
+        if (strlen($clave) < 8) {
             $this->passwordError = 'La contraseña debe de contener al menos 8 caracteres';
             return false;
-        } elseif (!strlen($clave) > 72) {
+        } elseif (strlen($clave) > 72) {
             $this->passwordError = 'La contraseña debe de tener como máximo 72 carácteres';
             return false;
-        } elseif (!preg_match('[A-Z]', $clave)) {
+        } elseif (!preg_match('/^[A-Z]/i', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra mayúscula';
             return false;
-        } elseif (!preg_match('[a-z]', $clave)) {
+        } elseif (!preg_match('/^[a-z]/i', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra minúscula';
             return false;
-        } elseif (!preg_match('[0-9]', $clave)) {
+        } elseif (!preg_match('/[0-9]/', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos un número';
-        } elseif (!preg_match('[áÁäÄéÉëËíÍïÏóÓöÖúÚüÜ!#$&/()=?¡!¿?*-+.,;:]', $clave)) {
+        } elseif (!preg_match('/[áÁäÄéÉëËíÍïÏóÓöÖúÚüÜ!#$&()=?¡!¿?*-+.,;:]/', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos un símbolo';
             return false;
-        } elseif (!$this->encontrarPalabra($usuario, $clave)) {
+        } elseif ($this->encontrarPalabra($usuario, $clave)) {
             $this->passwordError = 'Tú usuario o una fracción de él no puede ser parte de la contraseña';
             return false;
-        } elseif (!$this->encontrarPalabra($nombre, $clave)) {
+        } elseif ($this->encontrarPalabra($nombre, $clave)) {
             $this->passwordError = 'Tú nombre o una fracción de él no puede ser parte de la contraseña';
             return false;
-        } elseif (!$this->encontrarPalabra($apellido, $clave)) {
+        } elseif ($this->encontrarPalabra($apellido, $clave)) {
             $this->passwordError = 'Tú apellido o una fracción de él no puede ser parte de la contraseña';
             return false;
-        } elseif (!$this->encontrarPalabra(substr($correo, 0, strripos($correo, '@')), $clave)) {
+        } elseif ($this->encontrarPalabra(substr($correo, 0, strripos($correo, '@')), $clave)) {
             $this->passwordError = 'Tú correo o una fracción de él no puede ser parte de la contraseña';
             return false;
-        } elseif (!$this->encontrarPalabra(substr(substr($correo, strripos($correo, '@') + 1, strripos($correo, '.')), (strlen($correo) - (strlen($correo))), (strripos($correo, '.') - strlen($correo))), $clave)) {
+        } elseif ($this->encontrarPalabra(substr(substr($correo, strripos($correo, '@') + 1, strripos($correo, '.')), (strlen($correo) - (strlen($correo))), (strripos($correo, '.') - strlen($correo))), $clave)) {
             $this->passwordError = 'El dominio de tu correo no puede ser parte de la contraseña';
             return false;
         } elseif (!$this->validarFecha($clave, $fecha)) {

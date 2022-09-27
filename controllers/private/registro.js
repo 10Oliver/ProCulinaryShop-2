@@ -11,7 +11,7 @@ document.getElementById("registro").addEventListener('submit', function (event) 
     //Se previene la recarga de la página
     event.preventDefault();
     //Se realiza la petición
-    fetch(API_registro + "registart", {
+    fetch(API_registro + "registrar", {
         method: "post",
         body: new FormData(document.getElementById("registro")),
     }).then(function (request) { 

@@ -14,9 +14,11 @@ class Empleado extends Verificador
     private $usuarioEmpleado = null;
     private $telefonoEmpleado = null;
     private $correoEmpleado = null;
+    private $fechaNacimiento = null;
     private $estadoEmpleado = null;
     private $buscador = null;
     private $categoriaEmpleado = null;
+    private $passEmpleado = null;
 
 
     /*
@@ -34,6 +36,26 @@ class Empleado extends Verificador
         }
     }
 
+    public function setPassEmpleado($pass)
+    {
+        if ($this->validateSafePassword($pass, $this->usuarioEmpleado, $this->nombreEmpleado, $this->apellidoEmpleado, 
+        $this->correoEmpleado, $this->fechaNacimiento)) {
+            $this->passEmpleado = password_hash($pass, PASSWORD_DEFAULT);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function setFechaNacimiento($fecha)
+    {
+        if ($this->validateDate($fecha)) {
+            $fechaNacimiento = $fecha;
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function setCategoriaEmpleado($valor)
     {
         if ($this->validateNaturalNumber($valor)) {
@@ -116,7 +138,7 @@ class Empleado extends Verificador
 
     public function setTelefonoEmpleado($telefono)
     {
-        if ($this->validateNaturalNumber($telefono)) {
+        if ($this->validatePhone($telefono)) {
             $this->telefonoEmpleado = $telefono;
             return true;
         } else {
@@ -222,6 +244,34 @@ class Empleado extends Verificador
     {
         $sql = 'UPDATE empleado SET id_estado_empleado = ? WHERE id_empleado = ?';
         $params = array(4, $this->identificador);
+        return database::ejecutar($sql, $params);
+    }
+
+    //Se realiza la petición para verifica si existen más empleados
+    public function verificarexistencia()
+    {
+        $sql = 'SELECT COUNT(id_empleado) AS total FROM empleado';
+        $params = null;
+        $data = Database::filaUnica($sql, $params);
+        //Se verifica la cantidad obtenida
+        if ($data['total'] == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //Función para registrar empleados por primera vez
+
+    public function registrarEmpleado()
+    {
+        $sql = 'INSERT INTO empleado (dui, nombre_empleado, apellido_empleado, telefono_empleado, fecha_nacimiento, correo_empleado, 
+        direccion_empleado,usuario_empleado, contrasena_empleado, intento_empleado, id_cargo_empleado, id_estado_empleado)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?);';
+        $params = array(
+            $this->duiEmpleado, $this->nombreEmpleado, $this->apellidoEmpleado, $this->telefonoEmpleado, $this->fechaNacimiento,
+            $this->correoEmpleado, $this->direccionEmpleado, $this->usuarioEmpleado, $this->passEmpleado, 0, 1, 1
+        );
         return database::ejecutar($sql, $params);
     }
 }
