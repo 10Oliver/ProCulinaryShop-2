@@ -65,7 +65,6 @@ function validadPorcentajes(presionar, texto) {
     }
 }
 
-
 /**
  * Función que admite solo números y algunos caracteres
  *
@@ -112,10 +111,10 @@ function verificarDUI(presionar, texto) {
     //Se revisa si las tecla escrita se puede escribir
     if (ingresar.value.includes("-") && teclado == "-") {
         return false;
-    } else if (ingresar.value.length < 8 && teclado == '-') {
+    } else if (ingresar.value.length < 8 && teclado == "-") {
         return false;
     } else if (ingresar.value.length == 8) {
-        ingresar.value += '-';
+        ingresar.value += "-";
     } else if (valores.indexOf(teclado) == -1) {
         return false;
     } else if (ingresar.value.length > 9) {
@@ -264,8 +263,7 @@ function revisarTexto(texto) {
     //Se almacena
     teclado = String.fromCharCode(key);
     // Valores permitidos
-    valores =
-        '1234567890abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ áéíóúÁÉÍÓÚ,.()/"-_.,;:@';
+    valores = '1234567890abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ áéíóúÁÉÍÓÚ,.()/"-_.,;:@';
     // Teclas de control en codigo ASCII (Sin funcionar)
     especiales = "8-32-44-45-46-35-248-95";
     // Si se permiten o no las teclas de control
@@ -279,5 +277,26 @@ function revisarTexto(texto) {
     //Se revisa si las tecla escrita se puede escribir
     if (valores.indexOf(teclado) == -1 && !permitido) {
         return false;
+    }
+}
+
+/**
+ * Función para validar para mostrar y confirmar los campos de contraseña
+ */
+
+function ocultar(comp, icon) {
+    //Se obtiene los componentes
+    let componente = document.getElementById(comp);
+    let icono = document.getElementById(icon);
+
+    //Se revisa el tipo de campo
+    if (componente.type == "password") {
+        //Se cambia a texto para ver la clave
+        componente.type = "text";
+        icono.innerHTML = "visibility";
+    } else {
+        //Se cambia a password para que no sea visible
+        componente.type = "password";
+        icono.innerHTML = "visibility_off";
     }
 }
