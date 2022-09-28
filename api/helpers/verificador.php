@@ -356,7 +356,7 @@ class Verificador
         //Se verifica la longitud de la palabra a buscar
         if (strlen($palabra) > 3) {
             //Si la palabra no es muy pequeña se inicia el proceso de coincidencias
-            $coincidencias = 1;
+            $coincidencias = 0;
             //Se verifica si la palabra a buscar es compuesta (Más de una palabra separada por espacio)
             $palabraDividida = explode(" ", $palabra);
             //Se divide la clave en un arreglo
@@ -373,21 +373,21 @@ class Verificador
                  * pero si ya no es la misma esta secuencia se rompe y se reiniciará las coincidencias a 0
                  */
                 for ($i = 0; $i < count($claveDividida); $i++) {
-                    //Se revisa si el caracter de la palabra tiene una "i" o una "y" las cuales se tomarán como si
-                    //se tratara de un disminutivo de la palabra, (Es un caso excepcional)
-                    if (preg_match('/[yYiI]/', $claveDividida[$i])) {
-                        if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
-                            //Se suman las coincidencias
-                            $coincidencias++;
-                        } else {
-                            $coincidencias = 0; //Se reinician las coincidencias
-                        }
-                    }
-
+                    //Se revisa si el carácter de la clave es el mismo carácter de la palabra
                     if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
                         //Se suman las coincidencias
                         $coincidencias++;
                     } else {
+                        //Se revisa si el caracter de la palabra tiene una "i" o una "y" las cuales se tomarán como si
+                        //se tratara de un disminutivo de la palabra, (Es un caso excepcional)
+                        if (preg_match('/[yYiI]/', $claveDividida[$i])) {
+                            if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
+                                //Se suman las coincidencias
+                                $coincidencias++;
+                            } else {
+                                $coincidencias = 0; //Se reinician las coincidencias
+                            }
+                        }
                         $coincidencias = 0; //Se reinician las coincidencias
                     }
                     /**
@@ -462,6 +462,62 @@ class Verificador
 
 
     /**
+     * Función para validar que más de tres carácteres del mismo tipo no sean parte de la contraseña
+     * 
+     * Es decir, que un máximo de 3 carácteres pueden ser parte de la contraseña, pero si ya existen 4
+     * en línea, lo colocará como una contraseña "insegura"
+     * 
+     * Se tomarán en cuenta estos tres tipos de carácteres
+     *  - Números
+     *  - Símbolos
+     *  - Letras (Sin diferencia entre mayúsculas y minúsculas)
+     * 
+     * Si hay 3 de un mismo tipo, pero luego hay un carácter que rompe la consecutividad y luego se continua
+     * no se tomará en cuenta ese quinto carácter, y se reiniciará el conteo
+     * 
+     */
+
+    public function validarContinuo($clave)
+    {
+        //Se crea el contador de continuidad
+        $contador = array('numero' => 0, 'letra' => 0, 'simbolo' => 0);
+        //Se pasa la clave a un vector para analizarlo uno por uno
+        $division = str_split($clave);
+        //se procede a revisar la clave carácter por carácter
+        foreach ($division as $caracter) {
+            //Se revisa si el valor es un número
+            if (ctype_digit($caracter)) {
+                $contador['numero']++;
+            } else {
+                $contador['numero'] = 0;
+            }
+
+            //Se revisa si el valor es una letra
+            if (ctype_alpha($caracter)) {
+                $contador['letra']++;
+            } else {
+                $contador['letra'] = 0;
+            }
+
+            //Se revisa si el valor es un símbolo
+            if (ctype_punct($caracter)) {
+                $contador['simbolo']++;
+            } else {
+                $contador['simbolo'] = 0;
+            }
+
+            //Si se detecta que ha llegado a 4 consecutivas, entonces se detiene e informe que se ha llegado al limite
+            if ($contador['simbolo'] > 5 || $contador['numero'] > 5 || $contador['letra'] > 5) {
+                return true;
+                break;
+            }
+        }
+        //Si en ningún momento se detectó una llegada a 4 valores consecutivos, se retorna un false
+        return false;
+    }
+
+
+    /**
      * Función para validar contraseña segura
      * 
      * Se validan los siguientes aspectos
@@ -477,13 +533,11 @@ class Verificador
      * - Que el apellido no esté dentro de la contraseña
      * - Que el correo no esté dentro de la contraseña
      * - Que la fecha de nacimiento no esté dentro de la contraseña
-     * - Que alguna parte de la fecha de nacimiento no esté dentro de la contraseña
      * - Que no existan más de 3 carácteres del mismo tipo juntos
      */
 
     public function validateSafePassword($clave, $usuario, $nombre, $apellido, $correo, $fecha)
     {
-
         //Se procede a revisa que la contraseña sea superior a 8 carácteres
         if (strlen($clave) < 8) {
             $this->passwordError = 'La contraseña debe de contener al menos 8 caracteres';
@@ -522,6 +576,9 @@ class Verificador
             return false;
         } elseif (!$this->validarFecha($clave, $fecha)) {
             $this->passwordError = 'La contraseña o una parte de ella no puede ser parta de la contraseña';
+            return false;
+        } elseif ($this->validarContinuo($clave)) {
+            $this->passwordError = 'La contraseña no debe de contener más de 3 caracteres del mismo tipo consecutivamente';
             return false;
         } elseif (preg_match('/insert/i', $clave) || preg_match('/select/i', $clave) || preg_match('/update/i', $clave) || preg_match('/delete/i', $clave) || preg_match('/drop/i', $clave)) {
             $this->passwordError = 'No se admiten consultas SQL dentro de la contraseña';
