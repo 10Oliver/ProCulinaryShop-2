@@ -705,6 +705,10 @@ h1 {
     margin: 0 5px;
 }
 
+.settings:hover {
+    cursor: pointer;
+}
+
 .dark-light i {
     position: absolute;
     color: var(--text-color);

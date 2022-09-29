@@ -21,6 +21,14 @@ function menuBtnChange() {
     }
 }
 
+/*Código para activar abrir los ajustes */
+const settings = document.querySelector(".settings");
+
+settings.addEventListener('click', () => {
+    location.href = 'perfil.html';
+})
+
+
 /* codigo para el modo nocturno y modo luz */
 const body = document.querySelector("body"),
     div = document.querySelector(".nav"),
