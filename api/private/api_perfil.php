@@ -51,6 +51,48 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema durante la actualización de datos';
                 }
                 break;
+            case 'verificarPass':
+                //Se verifica la contraseña actual
+                if (!$perfil->setLowPass($_POST['pass'])) {
+                    $result['exception'] = $perfil->getError();
+                } elseif ($perfil->validarPass()) {
+                    $result['status'] = 1;
+                    $_SESSION['verificacion'] = true;
+                } elseif (Database::obtenerProblema()) {
+                    $result['exception'] = Database::obtenerProblema();
+                } else {
+                    $result['exception'] = $perfil->getError();
+                }
+                break;
+            case 'NombreUsuario':
+                //Se verifica que ya se haya pasado por la verificación
+                if (!isset($_SESSION['verificacion'])) {
+                    $result['exception'] = 'Debes de verificar tu identidad antes de proceder';
+                } elseif ($result['dataset'] = $perfil->obtenerUsuario()) {
+                    $result['status'] = 1;
+                } elseif (Database::obtenerProblema()) {
+                    $result['exception'] = Database::obtenerProblema();
+                } else {
+                    $result['exception'] = 'Ocurrió un problema al cargar los datos';
+                }
+                break;
+            case 'actualizarRegistro':
+                if (!$perfil->setUsuario($_POST['usuario'])) {
+                    $result['exception'] = $perfil->getError();
+                } elseif (trim($_POST['pass']) === '') {
+                    //Si no se colocó la contraseña se obtiene la actual
+                    if (!$data = $perfil->obtenerPass()) {
+                        $result['exception'] = 'Ocurrió un problema al obtener datos';
+                    } elseif ($perfil->actualizarCuenta($data['contrasena_empleado'])) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Cuenta actualizada correctamente';
+                    } elseif (Database::obtenerProblema()) {
+                        $result['exception'] = Database::obtenerProblema();
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema durante el cambio de contraseña';
+                    }
+                } elseif (!$perfil)
+                break;
         }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
         header('content-type: application/json; charset=utf-8');

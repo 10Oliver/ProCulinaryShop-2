@@ -105,6 +105,43 @@ class Perfil extends Verificador
         }
     }
 
+    public function setUsuario($value) 
+    {
+        if (!$this->validateString($value, 3, 60)) {
+            $this->error = 'Nombre de usuario incorrecto';
+            return false;
+        } elseif (!$this->validateDanger($value)) {
+            $this->error = $this->getException();
+            return false;
+        } else {
+            $this->usuario = $value;
+            return true;
+        }
+    }
+
+    public function setLowPass($value)
+    {
+        if (!$this->validateDanger($value)) {
+            $this->error = $this->getException();
+            return false;
+        } else {
+            $this->pass = $value;
+            return true;
+        }
+    }
+
+
+    public function setHighPass($value)
+    {
+        if (!$this->validateSafePassword($value)) {
+            $this->error = $this->getException();
+            return false;
+        } else {
+            $this->pass = $value;
+            return true;
+        }
+    }
+
     public function getError()
     {
         return $this->error;
@@ -133,4 +170,47 @@ class Perfil extends Verificador
         $params = array($this->nombre, $this->apellido, $this->telefono, $this->correo, $this->direccion, $_SESSION['id_empleado']);
         return database::ejecutar($sql, $params);
     }
+
+    //Función para verifica la contraseña
+    public function validarPass()
+    {
+        $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
+        $params = array($_SESSION['id_empleado']);
+        $data = Database::filaUnica($sql, $params);
+        if (!$data) {
+            $this->error = 'No se encontró tu perfil';
+            return false;
+        } elseif (!password_verify($this->pass, $data['contrasena_empleado'])) {
+            $this->error = 'Contraseña incorrecta';
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //Función para obtener la contraseña
+    public function obtenerPass()
+    {
+        $sql = 'SELECT contrasena_empleado FROM empleado WHERE id_empleado = ?';
+        $params = array($_SESSION['id_empleado']);
+        return Database::filaUnica($sql, $params);
+    }
+
+    //Función para obtener el nombre de usuario
+    public function obtenerUsuario()
+    {
+        $sql = 'SELECT usuario_empleado FROM empleado WHERE id_empleado = ?';
+        $params = array($_SESSION['id_empleado']);
+        return Database::filaUnica($sql, $params);
+    }
+
+    //Función para actualizar los datos
+    public function actualizarCuenta($pass)
+    {
+        $sql = 'UPDATE empleado SET usuario_empleado = ?, contrasena_empleado = ? WHERE id_empleado = 1';
+        $params = array($this->usuario, $pass, $_SESSION['id_empleado']);
+        return Database::ejecutar($sql, $params);
+    }
+
+    //Función para obtener los datos personales del usuario
 }

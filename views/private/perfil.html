@@ -224,29 +224,120 @@
 
 
     <!--Modals para cambiar los datos-->
+
+    <!--Modal para verificar la contraseña antes de cambiar la actual-->
     <div id="permiso" class="modal">
         <div class="modal-content">
             <div class="row center">
                 <h4>Confirmación de identidad</h4>
                 <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
-                    <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña para
+                    <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña
+                        para
                         seguir con el cambio de usuario.</h6>
-                        <div class="input-field col l6 m6 s12">
-                            <input id="passR" type="password" class="validate" required onkeypress="return revisarTexto(event)">
-                            <label for="passR">Confirmar contraseña</label>
-                            <a onclick="ocultar('passR', 'clave1')"><i id="clave1"
-                                    class="bx bxs-bullseye iconos prefix"></i></a>
-                        </div>
+                    <div class="input-field col l8 m8 s10 push-m2 push-l2 push-s1">
+                        <input id="passP" name="pass" type="password" class="validate" required
+                            onkeypress="return revisarTexto(event)">
+                        <label for="passP">Confirmar contraseña</label>
+                        <a onclick="ocultar('passP', 'claveP')"><i id="claveP"
+                                class="bx bxs-low-vision iconos prefix"></i></a>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="waves-effect btn" onclick="verificarPassCuenta()">Verificar</a>
+            <a href="#!" class="modal-close waves-effect btn" onclick="limpiarPass('passP')">Cancelar</a>
+        </div>
+    </div>
 
+    <!--Modal para cambiar la contraseña-->
+    <div id="cuenta" class="modal">
+        <form action="post" id="formCuenta">
+            <div class="modal-content">
+                <div class="row center">
+                    <h4>Datos de cuenta</h4>
+                    <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
+                        <div class="input-field col l5 m5 s12">
+                            <input id="passN" type="password" class="validate" required
+                                onkeypress="return revisarTexto(event)">
+                            <label for="passN">Nueva contraseña</label>
+                            <a onclick="ocultar('passN', 'claveN')"><i id="claveN"
+                                    class="bx bxs-low-vision iconos prefix"></i></a>
+                        </div>
+                        <div class="input-field col l5 m5 s12 push-l1 push-m1">
+                            <input id="passC" type="password" class="validate" required
+                                onkeypress="return revisarTexto(event)">
+                            <label for="passC">Confirmar contraseña</label>
+                            <a onclick="ocultar('passC', 'claveC')"><i id="claveC"
+                                    class="bx bxs-low-vision iconos prefix"></i></a>
+                        </div>
+                        <div class="input-field col l6 m6 s12 push-l3 push-m3">
+                            <input type="text" name="usuario" class="validate" id="nombreUsuario">
+                            <label for="passC" id="labelUsuario">Nombre de usuario</label>
+                        </div>
+                        <div class="col l12 m12 s12 left-align">
+                            <p>Nota: Si no deseas modificar la contraseña, puedes dejarla en blanco</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="waves-effect btn" type="submit">Verificar</button>
+                <a class="modal-close waves-effect btn" onclick="limpiarForm('formCuenta')">Cancelar</a>
+            </div>
+        </form>
+    </div>
 
+    <!--Modal para verificar la contraseña antes de cambiar la actual-->
+    <div id="desactivar" class="modal">
+        <div class="modal-content">
+            <div class="row center">
+                <h4>Confirmación de identidad</h4>
+                <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
+                    <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña
+                        para desactivar el segundo paso de autentificación.</h6>
+                    <div class="input-field col l8 m8 s10 push-m2 push-l2 push-s1">
+                        <input id="passD" type="password" class="validate" required
+                            onkeypress="return revisarTexto(event)">
+                        <label for="passD">Confirmar contraseña</label>
+                        <a onclick="ocultar('passD', 'claveD')"><i id="claveD"
+                                class="bx bxs-low-vision iconos prefix"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="waves-effect btn" onclick="verificarPassCuenta()">Verificar</a>
+            <a href="#!" class="modal-close waves-effect btn" onclick="limpiarPass('passD')">Cancelar</a>
+        </div>
+    </div>
+
+    <!--Modal para verificar el cambio de contraseña-->
+    <div id="permiso" class="modal">
+        <div class="modal-content">
+            <div class="row center">
+                <h4>Confirmación de identidad</h4>
+                <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
+                    <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña
+                        para
+                        seguir con el cambio de usuario.</h6>
+                    <div class="input-field col l8 m8 s10 push-m2 push-l2 push-s1">
+                        <input id="passR" type="password" class="validate" required
+                            onkeypress="return revisarTexto(event)">
+                        <label for="passR">Confirmar contraseña</label>
+                        <a onclick="ocultar('passR', 'clave1')"><i id="clave1"
+                                class="bx bxs-low-vision iconos prefix"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect btn">Verificar</a>
             <a href="#!" class="modal-close waves-effect btn">Cancelar</a>
         </div>
     </div>
+
+
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script
@@ -255,6 +346,7 @@
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="../../controllers/components.js"></script>
     <script src="../../controllers/private/activaciones_privadas.js"></script>
+    <script src="../../controllers/verificador.js"></script>
     <script src="../../controllers/private/opciones_perfil.js"></script>
     <script type="text/javascript " src="../../controllers/private/sidebar.js"></script>
     <script type="text/javascript " src="../../controllers/private/perfil.js"></script>
