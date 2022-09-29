@@ -12,6 +12,7 @@ class Verificador
     private $passwordError = null;
     private $fileError = null;
     private $fileName = null;
+    private $exception = null;
 
     /*
     *   Método para obtener el error al validar una contraseña.
@@ -19,6 +20,14 @@ class Verificador
     public function getPasswordError()
     {
         return $this->passwordError;
+    }
+
+        /*
+    *   Método para obtener el error al validar un campo.
+    */
+    public function getException()
+    {
+        return $this->exception;
     }
 
     /*
@@ -585,6 +594,30 @@ class Verificador
             return false;
         } elseif (preg_match('/script/i', $clave) || preg_match('/html/i', $clave) || preg_match('/php/i', $clave) || preg_match('/or/i', $clave) || preg_match('/and/i', $clave)) {
             $this->passwordError = 'No se admiten código dentro de la contraseña';
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Función para validar que los campos dentro a insertar no contenga datos peligroso para el sistema
+     * 
+     * Se evaluarán los siguientes apartados
+     * - Simboles o caracteres invalidos
+     * - Palabras peligrosas
+     */
+
+    public function validateDanger($campo)
+    {
+        if (str_contains($campo, "'") || str_contains($campo, "'") || str_contains($campo, "\\") || str_contains($campo, "`") || str_contains($campo, "<") || str_contains($campo, ">")) {
+            $this->exception = 'Existen simbolos no permitidos dentro de los campos';
+            return false;
+        } elseif (preg_match('/insert/i', $campo) || preg_match('/select/i', $campo) || preg_match('/update/i', $campo) || preg_match('/delete/i', $campo) || preg_match('/drop/i', $campo)) {
+            $this->exception = 'No se admiten consultas SQL dentro de los campos';
+            return false;
+        } elseif (preg_match('/script/i', $campo) || preg_match('/html/i', $campo) || preg_match('/php/i', $campo) || preg_match('/or/i', $campo) || preg_match('/and/i', $campo)) {
+            $this->exception = 'No se admiten código dentro de los campos';
             return false;
         } else {
             return true;

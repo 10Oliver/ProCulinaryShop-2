@@ -60,6 +60,11 @@ button {
     color: var(--card-tabs) !important;
 }
 
+.btn {
+    background-color: var(--sidebar-color) !important;
+    color: var(--card-tabs) !important;
+}
+
 .input-field label {
     color: var(--text-color);
 }

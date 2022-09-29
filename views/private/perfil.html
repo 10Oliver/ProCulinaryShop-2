@@ -143,51 +143,82 @@
             </div>
         </div>
         <main class="row center">
+            <div class="row"></div>
             <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
                 <div class="col l16 m6 s12">
-                    <div class="col l6 m6 s6 push-l3 push-m3 push-s3">
-                        <img src="../../resources/img/private/datos_usuarios/predeterminado.png" class="responsive-img"
-                            alt="">
-                        <div class="file-field input-field">
-                            <div class="btn">
-                                <span>Foto</span>
-                                <input type="file">
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col l8 m8 s8 push-l2 push-m2 push-s2">
-                        <div class="row">
-                            <h6>Segundo paso de autentificación</h6>
-                            <hr>
+                        <h6>Datos de tu cuenta</h6>
+                        <hr>
+                        <div class="input-field col s12 m12 l12">
+                            <input id="cargo" name="usuario" type="text" class="validate" disabled>
+                            <label class="activado" for="cargo">Cargo</label>
                         </div>
-                       
-                        <div class="row">
-                            <div class="col l6 m6 s6 right-align">
-                                Estado:
-                            </div>
-                            <div class="col l6 m6 s6 left-align">
-                                Inactivo
-                            </div>
+                        <div class="input-field col s12 m12 l12">
+                            <input id="usuario" name="usuario" type="text" class="validate" disabled>
+                            <label class="activado" for="usuario">Usuario</label>
                         </div>
-                        
                         <div class="row">
-                            <a class="btn">¡Activar!</a>
+                            <a class="btn">Modificar</a>
                         </div>
-                        
                     </div>
                 </div>
-                <div class="col l16 m6 s12 blue">
+                <div class="col l16 m6 s12">
+                    <h6>Datos personales</h6>
+                    <form action="post" id="datosPersonales">
+                        <div class="row">
+                            <div class="input-field col l6 m6 s6">
+                                <input id="nombre" name="nombre" class="personal" type="text" class="validate" disabled>
+                                <label class="activado" for="nombre">Nombre</label>
+                            </div>
+                            <div class="input-field col l6 m6 s6">
+                                <input id="apellido" name="apellido" class="personal" type="text" class="validate" disabled>
+                                <label class="activado" for="apellido">Apellido</label>
+                            </div>
+                            <div class="input-field col l6 m6 s6">
+                                <input id="telefono" name="telefono" class="personal" type="tel" class="validate" disabled>
+                                <label class="activado" for="telefono">Teléfono</label>
+                            </div>
+                            <div class="input-field col l6 m6 s6">
+                                <input id="correo" name="correo" class="personal" type="email" class="validate" disabled>
+                                <label class="activado" for="correo">Correo</label>
+                            </div>
+                            <div class="input-field col l6 m6 s6">
+                                <input id="fecha" name="fecha" class="personal" type="date" class="validate" disabled>
+                                <label class="activado" for="fecha">Fecha de nacimiento</label>
+                            </div>
+                            <div class="input-field col l6 m6 s6">
+                                <input id="direccion" name="direccion" class="personal" type="text" class="validate" disabled >
+                                <label class="activado" for="direccion">Dirección</label>
+                            </div>
+                            <div id="opciones_perfil" class="col l12 m12 s12 center"><a class="btn" onclick="cambiarOpcionesDatos()">Modificar</a></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col l8 m8 s8 push-l2 push-m2 push-s2">
+                    <div class="row">
+                        <h6>Segundo paso de autentificación</h6>
+                        <hr>
+                    </div>
 
+                    <div class="row">
+                        <div class="col l6 m6 s6 right-align">
+                            Estado:
+                        </div>
+                        <div id="estado-factor" class="col l6 m6 s6 left-align">
+                            Inactivo
+                        </div>
+                    </div>
+
+                    <div class="row" id="opcionesFactor">
+                        <a class="btn" onclick=" activar()">¡Activar!</a>
+                    </div>
                 </div>
             </div>
         </main>
     </section>
 
 
-
+<!--Modals para cambiar los datos-->
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script
@@ -197,6 +228,7 @@
     <script src="../../controllers/components.js"></script>
     <script src="../../controllers/private/opciones_perfil.js"></script>
     <script type="text/javascript " src="../../controllers/private/sidebar.js"></script>
+    <script type="text/javascript " src="../../controllers/private/perfil.js"></script>
 
     <!-- <script src=""></script>-->
 </body>
