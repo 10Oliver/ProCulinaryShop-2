@@ -36,108 +36,6 @@
     --green: #00b050; 
 }
 
-.titulo1 {
-    color: var(--fa-users);
-}
-
-.titulo2 {
-    color: var(--box-rounded);
-}
-
-/*Definiendo atributos de etiqueta body*/
-
-body {
-    min-height: 100vh;
-    background-color: var(--body-color);
-    display: flex;
-    flex-direction: column;
-}
-
-/*Personalización general para todo el sitiop privado*/
-
-button {
-    background-color: var(--sidebar-color) !important;
-    color: var(--card-tabs) !important;
-}
-
-.btn {
-    background-color: var(--sidebar-color) !important;
-    color: var(--card-tabs) !important;
-}
-
-.input-field label {
-    color: var(--text-color);
-}
-
-/* label focus color */
-.input-field input[type="text"]:focus + label,
-.input-field input[type="email"]:focus + label
-.input-field input[type="password"]:focus + label
-.input-field input[type="tel"]:focus + label {
-    color: var(--sidebar-color) !important;
-}
-
-/* label underline focus color */
-.input-field input[type="text"]:focus,
-.input-field input[type="email"]:focus,
-.input-field input[type="password"]:focus,
-.input-field input[type="tel"]:focus {
-    border-bottom: 1px solid var(--sidebar-color) !important;
-    box-shadow: 0 1px 0 0 var(--sidebar-color) !important;
-}
-
-
-/* invalid color */
-.input-field input[type="text"].invalid,
-input[type="email"].invalid,
-input[type="password"].invalid,
-input[type="tel"].invalid {
-    border-bottom: 1px solid var(--fa-users) !important;
-    box-shadow: 0 1px 0 0 var(--fa-users) !important;
-}
-
-/* invalid color */
-.input-field input[type="text"].invalid ~ label,
-input[type="email"].invalid ~ label,
-input[type="password"].invalid ~ label,
-input[type="tel"].invalid ~ label {
-    color: var(--fa-users) !important;
-}
-
-/* valid color */
-.input-field input[type="text"].valid,
-.input-field input[type="email"].valid,
-.input-field input[type="password"].valid,
-.input-field input[type="tel"].valid {
-    border-bottom: 1px solid var(--green);
-    box-shadow: 0 1px 0 0 var(--green);
-}
-
-.input-field input[type="text"].valid ~ label,
-input-field input[type="email"].valid ~ label,
-input-field input[type="password"].valid ~ label,
-input-field input[type="tel"].valid ~ label{
-    color: var(--green);
-}
-
-/*Cuando se selecciona y está vacío*/
-
-input[type="text"]:not(.browser-default):focus:not([reandoly]),
-input[type="email"]:not(.browser-default):focus:not([reandoly]),
-input[type="password"]:not(.browser-default):focus:not([reandoly]),
-input[type="tel"]:not(.browser-default):focus:not([reandoly]) {
-    border-bottom: 1px solid var(--sidebar-color) !important;
-    box-shadow: 0 1px 0 0 var(--sidebar-color) !important;
-}
-
-input[type="text"]:not(.browser-default):focus:not([reandoly]) ~ label,
-input[type="email"]:not(.browser-default):focus:not([reandoly]) ~ label,
-input[type="password"]:not(.browser-default):focus:not([reandoly]) ~ label,
-input[type="tel"]:not(.browser-default):focus:not([reandoly]) ~ label {
-    color: var(--sidebar-color) !important;
-}
-
-
 /*Definiendo colores de elementos en modo dark*/
 
 body.dark {
@@ -161,6 +59,145 @@ body.dark {
     --color-badcrum: #565659;
     --button-background-color: #889c9b;
 }
+
+.titulo1 {
+    color: var(--fa-users);
+}
+
+.titulo2 {
+    color: var(--box-rounded);
+}
+
+/*Definiendo atributos de etiqueta body*/
+
+body {
+    min-height: 100vh;
+    background-color: var(--body-color);
+    display: flex;
+    flex-direction: column;
+}
+
+h6 {
+    color: var(--text-color);
+}
+
+h4 {
+    color: var(--text-color);
+}
+/*Personalización general para todo el sitiop privado*/
+
+button {
+    background-color: var(--sidebar-color) !important;
+    color: var(--card-tabs) !important;
+}
+
+.btn {
+    background-color: var(--sidebar-color) !important;
+    color: #fff !important;
+}
+
+.input-field label {
+    color: var(--text-color);
+}
+
+.input-field input[type="text"]:disabled + label,
+.input-field input[type="email"]:disabled + label,
+.input-field input[type="password"]:disabled + label,
+.input-field input[type="tel"]:disabled + label,
+.input-field input[type="date"]:disabled + label {
+    color: var(--text-color) !important;
+}
+
+/* label focus color */
+.input-field input[type="text"]:focus + label,
+.input-field input[type="email"]:focus + label,
+.input-field input[type="password"]:focus + label,
+.input-field input[type="tel"]:focus + label,
+.input-field input[type="date"]:focus + label {
+    color: var(--sidebar-color) !important;
+}
+
+/* label underline focus color */
+.input-field input[type="text"]:focus,
+.input-field input[type="email"]:focus,
+.input-field input[type="password"]:focus,
+.input-field input[type="tel"]:focus,
+.input-field input[type="date"]:focus  {
+    border-bottom: 1px solid var(--sidebar-color) !important;
+    box-shadow: 0 1px 0 0 var(--sidebar-color) !important;
+}
+
+.input-field input[type="text"]:disabled,
+.input-field input[type="email"]:disabled,
+.input-field input[type="password"]:disabled,
+.input-field input[type="tel"]:disabled,
+.input-field input[type="date"]:disabled  {
+    border-bottom: 1px solid var(--sidebar-color) !important;
+    box-shadow: 0 1px 0 0 var(--sidebar-color) !important;
+    color: var(--p-active);
+}
+
+
+/* invalid color */
+.input-field input[type="text"].invalid,
+input[type="email"].invalid,
+input[type="password"].invalid,
+input[type="tel"].invalid,
+input[type="date"].invalid {
+    border-bottom: 1px solid var(--fa-users) !important;
+    box-shadow: 0 1px 0 0 var(--fa-users) !important;
+}
+
+/* invalid color */
+.input-field input[type="text"].invalid ~ label,
+input[type="email"].invalid ~ label,
+input[type="password"].invalid ~ label,
+input[type="tel"].invalid ~ label,
+input[type="date"].invalid ~ label {
+    color: var(--fa-users) !important;
+}
+
+/* valid color */
+.input-field input[type="text"].valid,
+.input-field input[type="email"].valid,
+.input-field input[type="password"].valid,
+.input-field input[type="tel"].valid,
+.input-field input[type="date"].valid {
+    border-bottom: 1px solid var(--green);
+    box-shadow: 0 1px 0 0 var(--green);
+}
+
+.input-field input[type="text"].valid ~ label,
+input-field input[type="email"].valid ~ label,
+input-field input[type="password"].valid ~ label,
+input-field input[type="tel"].valid ~ label,
+input-field input[type="date"].valid ~ label{
+    color: var(--green);
+}
+
+/*Cuando se selecciona y está vacío*/
+
+input[type="text"]:not(.browser-default):focus:not([reandoly]),
+input[type="email"]:not(.browser-default):focus:not([reandoly]),
+input[type="password"]:not(.browser-default):focus:not([reandoly]),
+input[type="tel"]:not(.browser-default):focus:not([reandoly]),
+input[type="date"]:not(.browser-default):focus:not([reandoly]) {
+    border-bottom: 1px solid var(--sidebar-color) !important;
+    box-shadow: 0 1px 0 0 var(--sidebar-color) !important;
+}
+
+input[type="text"]:not(.browser-default):focus:not([reandoly]) ~ label,
+input[type="email"]:not(.browser-default):focus:not([reandoly]) ~ label,
+input[type="password"]:not(.browser-default):focus:not([reandoly]) ~ label,
+input[type="tel"]:not(.browser-default):focus:not([reandoly]) ~ label {
+    color: var(---text-color) !important;
+}
+
+
+.iconos {
+    color: var(--text-color);
+}
+
 
 /*Diseñando registro de usuario para el primer admin*/
 
@@ -1455,6 +1492,9 @@ input {
     background-color: var(--card-background-color) !important;
 }
 
+.modal-footer {
+    background-color: var(--card-background-color) !important;
+}
 .confirmacion_boton_modal i {
     color: var(--text-color-card-two);
 }

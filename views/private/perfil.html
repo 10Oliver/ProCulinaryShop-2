@@ -158,7 +158,7 @@
                             <label class="activado" for="usuario">Usuario</label>
                         </div>
                         <div class="row">
-                            <a class="btn">Modificar</a>
+                            <a class="btn modal-trigger" href="#permiso">Modificar</a>
                         </div>
                     </div>
                 </div>
@@ -171,15 +171,18 @@
                                 <label class="activado" for="nombre">Nombre</label>
                             </div>
                             <div class="input-field col l6 m6 s6">
-                                <input id="apellido" name="apellido" class="personal" type="text" class="validate" disabled>
+                                <input id="apellido" name="apellido" class="personal" type="text" class="validate"
+                                    disabled>
                                 <label class="activado" for="apellido">Apellido</label>
                             </div>
                             <div class="input-field col l6 m6 s6">
-                                <input id="telefono" name="telefono" class="personal" type="tel" class="validate" disabled>
+                                <input id="telefono" name="telefono" class="personal" type="tel" class="validate"
+                                    disabled>
                                 <label class="activado" for="telefono">Teléfono</label>
                             </div>
                             <div class="input-field col l6 m6 s6">
-                                <input id="correo" name="correo" class="personal" type="email" class="validate" disabled>
+                                <input id="correo" name="correo" class="personal" type="email" class="validate"
+                                    disabled>
                                 <label class="activado" for="correo">Correo</label>
                             </div>
                             <div class="input-field col l6 m6 s6">
@@ -187,10 +190,12 @@
                                 <label class="activado" for="fecha">Fecha de nacimiento</label>
                             </div>
                             <div class="input-field col l6 m6 s6">
-                                <input id="direccion" name="direccion" class="personal" type="text" class="validate" disabled >
+                                <input id="direccion" name="direccion" class="personal" type="text" class="validate"
+                                    disabled>
                                 <label class="activado" for="direccion">Dirección</label>
                             </div>
-                            <div id="opciones_perfil" class="col l12 m12 s12 center"><a class="btn" onclick="cambiarOpcionesDatos()">Modificar</a></div>
+                            <div id="opciones_perfil" class="col l12 m12 s12 center"><a class="btn"
+                                    onclick="cambiarOpcionesDatos()">Modificar</a></div>
                         </div>
                     </form>
                 </div>
@@ -218,7 +223,30 @@
     </section>
 
 
-<!--Modals para cambiar los datos-->
+    <!--Modals para cambiar los datos-->
+    <div id="permiso" class="modal">
+        <div class="modal-content">
+            <div class="row center">
+                <h4>Confirmación de identidad</h4>
+                <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
+                    <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña para
+                        seguir con el cambio de usuario.</h6>
+                        <div class="input-field col l6 m6 s12">
+                            <input id="passR" type="password" class="validate" required onkeypress="return revisarTexto(event)">
+                            <label for="passR">Confirmar contraseña</label>
+                            <a onclick="ocultar('passR', 'clave1')"><i id="clave1"
+                                    class="bx bxs-bullseye iconos prefix"></i></a>
+                        </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn">Verificar</a>
+            <a href="#!" class="modal-close waves-effect btn">Cancelar</a>
+        </div>
+    </div>
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <script
@@ -226,6 +254,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a1f66ad641.js" crossorigin="anonymous"></script>
     <script src="../../controllers/components.js"></script>
+    <script src="../../controllers/private/activaciones_privadas.js"></script>
     <script src="../../controllers/private/opciones_perfil.js"></script>
     <script type="text/javascript " src="../../controllers/private/sidebar.js"></script>
     <script type="text/javascript " src="../../controllers/private/perfil.js"></script>
