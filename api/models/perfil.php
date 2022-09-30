@@ -154,7 +154,7 @@ class Perfil extends Verificador
 
     public function leerPerfil()
     {
-        $sql = 'SELECT dui, nombre_empleado, apellido_empleado, telefono_empleado, correo_empleado, direccion_empleado, usuario_empleado, nombre_cargo FROM empleado e
+        $sql = 'SELECT dui, nombre_empleado, apellido_empleado, telefono_empleado, correo_empleado, direccion_empleado, usuario_empleado,fecha_nacimiento, nombre_cargo FROM empleado e
         INNER JOIN cargo_empleado ce ON ce.id_cargo_empleado = e.id_cargo_empleado
         WHERE id_empleado = ?;';
         $params = array($_SESSION['id_empleado']);
@@ -164,10 +164,10 @@ class Perfil extends Verificador
     //Función para actualizar los datos personales del perfil
     public function actualizarDatosPerfil()
     {
-        //$sql = 'UPDATE empleado SET nombre_empleado = ?, apellido_empleado = ?, telefono_empleado = ?, correo_empleado = ?, fecha_nacimiento = ?, direccion = ? 
-        $sql = 'UPDATE empleado SET nombre_empleado = ?, apellido_empleado = ?, telefono_empleado = ?, correo_empleado = ?, direccion_empleado = ? 
+         //$sql = 'UPDATE empleado SET nombre_empleado = ?, apellido_empleado = ?, telefono_empleado = ?, correo_empleado = ?, direccion_empleado = ? 
+        $sql = 'UPDATE empleado SET nombre_empleado = ?, apellido_empleado = ?, telefono_empleado = ?, correo_empleado = ?, fecha_nacimiento = ?, direccion_empleado = ? 
         WHERE id_empleado = ?';
-        $params = array($this->nombre, $this->apellido, $this->telefono, $this->correo, $this->direccion, $_SESSION['id_empleado']);
+        $params = array($this->nombre, $this->apellido, $this->telefono, $this->correo,$this->fecha, $this->direccion,  $_SESSION['id_empleado']);
         return database::ejecutar($sql, $params);
     }
 

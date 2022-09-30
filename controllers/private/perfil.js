@@ -17,7 +17,7 @@ function llenarTabla(dataset) {
     document.getElementById('direccion').value = dataset.direccion_empleado;
     document.getElementById('usuario').value = dataset.usuario_empleado;
     document.getElementById('cargo').value = dataset.nombre_cargo;
-    document.getElementById('fecha').value = '2020-03-03';
+    document.getElementById('fecha').value = dataset.fecha_nacimiento;
     document.getElementById('estado-factor').innerHTML = dataset.factor == null ? 'Desactivado' : '¡Activado!';
     //Se revisa si el factor está activado
     if (dataset.factor == null) {
