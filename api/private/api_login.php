@@ -2,6 +2,7 @@
 //Se importan los archivos necesarios
 require_once('../helpers/database.php');
 require_once('../helpers/verificador.php');
+require_once('../helpers/autenticator.php');
 require_once('../models/usuario.php');
 
 
@@ -16,6 +17,7 @@ if (isset($_GET['action'])) {
     session_start();
     //Se instancia la clase correspondiente en la variable
     $usuario = new Usuario;
+    $autentificador = new Autentificador;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
     //Se debería crear un método para confirmar si el usuario tiene permitido, todavía en cuestionamiento
@@ -32,12 +34,49 @@ if (isset($_GET['action'])) {
             } elseif (!$usuario->setPassEmpleadoS($_POST['pass'])) {
                 $result['exception'] = 'Contraseña no valida';
             } elseif ($usuario->revisarPassEmpleado()) {
-                $result['status'] = 1;
-                $result['message'] = 'Autentificación completada';
-                $_SESSION['id_empleado'] = $usuario->getIdEmpleado();
+                $_SESSION['id_empleado_temporal'] = $usuario->getIdEmpleado();
                 $_SESSION['usuario'] = $usuario->getUsuarioEmpleado();
+                //Se procede a revisar si está activado el segundo paso de autentificación
+                if ($usuario->verificarFactorEmpleado()) {
+                    //Si está activada, solo se le muestra que debe de proseguir con su completación
+                    $result['status'] = 2;
+                } else {
+                    //Si no está activada, únicamene se le dirá si estpa completada o no
+                    $result['status'] = 1;
+                    $_SESSION['id_empleado'] = $_SESSION['id_empleado_temporal'];
+                    echo $_SESSION['id_empleado'];
+                    unset($_SESSION['id_empleado_temporal']);
+                }
+                $result['message'] = 'Autentificación completada';
+                
             } else {
                 $result['exception'] = 'Contraseña incorrecta';
+            }
+            break;
+        case 'verificarActivacion':
+            //Se verifica que el segundo factor de autentificación está activado
+            if (!isset($_SESSION['id_empleado_temporal'])) {
+                $result['exception'] = 'No tienes activado el segundo factor de autentificación';
+            } else {
+                $result['status'] = 1;
+                $result['message'] = 'Segundo paso de autentificación activado';
+            }
+            break;
+        case 'verificarSegundoPaso':
+            //Se sanean los campos
+            $_POST = $usuario->validarFormularios($_POST);
+            //Se obtiene el token secreto de la cuenta
+            if (!isset($_SESSION['id_empleado_temporal'])) {
+                $result['exception'] = 'No tienes activado el segundo factor de autentificación';
+            } elseif (!$data = $usuario->obtenerFactor()) {
+                $result['exception'] = 'No tienes activado el segundo factor de autentificación';
+            } elseif ($autentificador->validateCode($data['factor'], $_POST['codigo'])) {
+                $result['status'] = true;
+                $result['exception'] = 'Segundo paso de autentificación completado con éxito';
+            } elseif (Database::obtenerProblema()) {
+                $result['exception'] = Database::obtenerProblema();
+            } else {
+                $result['exception'] = 'Código incorrecto';
             }
             break;
         case 'obtenerSesion':

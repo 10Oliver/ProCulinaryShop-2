@@ -401,4 +401,25 @@ class Usuario extends Verificador{
         return database::filaUnica($sql, $params);
     }
 
+    //Se revisa si está activado el segundo paso de autentificación
+    public function verificarFactorEmpleado()
+    {
+        $sql = 'SELECT factor FROM empleado WHERE id_empleado = ?';
+        $params = array($_SESSION['id_empleado_temporal']);
+        $data = Database::filaUnica($sql, $params);
+        if (empty($data)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //Función para obtener el código secreto
+    public function obtenerFactor()
+    {
+        $sql = 'SELECT factor FROM empleado WHERE id_empleado = ?';
+        $params = array($_SESSION['id_empleado_temporal']);
+        return Database::filaUnica($sql, $params);
+    }
+
 }

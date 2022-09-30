@@ -15,9 +15,11 @@ document.getElementById("login").addEventListener('submit', function (event) {
             // Se obtiene la respuesta en formato JSON.
             request.json().then(function (response) {
                 // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-                if (response.status) {
+                if (response.status == 2) {
+                    sweetAlert(1, response.message, "segundo_factor.html");
+                } else if (response.status == 1) {
                     sweetAlert(1, response.message, "dashboard.html");
-                } else {
+                } else { 
                     sweetAlert(2, response.exception, null);
                 }
             });
