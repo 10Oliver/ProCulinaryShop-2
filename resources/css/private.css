@@ -1496,6 +1496,11 @@ input {
 
 .modal-footer {
     background-color: var(--card-background-color) !important;
+    padding-right: 20px !important;
+}
+
+.bold {
+    font-weight: 700 !important;
 }
 .confirmacion_boton_modal i {
     color: var(--text-color-card-two);
@@ -1506,6 +1511,9 @@ input {
     padding: 0px !important;
 }
 
+.modal-content{
+    padding-bottom: 10px !important;
+}
 /*Página web de noticias*/
 
 .buscador_noticia {
@@ -2071,4 +2079,16 @@ input {
 .ct-series-d .ct-point,
 .ct-series-d .ct-slice-donut {
     stroke: var(--box-rounded) !important;
+}
+
+
+.alineador-vertical{
+    height: 500px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#autentificacion {
+    height: 700px !important;
 }

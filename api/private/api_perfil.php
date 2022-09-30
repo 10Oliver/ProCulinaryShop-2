@@ -4,12 +4,14 @@
 require_once('../helpers/database.php');
 require_once('../helpers/verificador.php');
 require_once('../models/perfil.php');
+require_once('../helpers/autenticator.php');
 
 if (isset($_GET['action'])) {
     //Se crea o reiniciar una sesión
     session_start();
     //Se instancia la clase correspondiente en la variable
     $perfil = new Perfil;
+    $autentificador = new Autentificador;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
 
@@ -77,7 +79,10 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'actualizarRegistro':
-                if (!$perfil->setUsuario($_POST['usuario'])) {
+                //Se verifica que ya se haya pasado por la verificación
+                if (!isset($_SESSION['verificacion'])) {
+                    $result['exception'] = 'Debes de verificar tu identidad antes de proceder';
+                } elseif (!$perfil->setUsuario($_POST['usuario'])) {
                     $result['exception'] = $perfil->getError();
                 } elseif (trim($_POST['pass']) === '') {
                     //Si no se colocó la contraseña se obtiene la actual
@@ -86,6 +91,8 @@ if (isset($_GET['action'])) {
                     } elseif ($perfil->actualizarCuenta($data['contrasena_empleado'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Cuenta actualizada correctamente';
+                        //Se quita la autentificación
+                        unset( $_SESSION['verificacion']);
                     } elseif (Database::obtenerProblema()) {
                         $result['exception'] = Database::obtenerProblema();
                     } else {
@@ -102,6 +109,19 @@ if (isset($_GET['action'])) {
                     $result['exception'] = Database::obtenerProblema();
                 } else {
                     $result['exception'] = 'Ocurrió un problema durante la actualización de la cuenta';
+                }
+                break;
+            case 'solicitarAutentificacion':
+                //Se verifica que ya se haya pasado por la verificación
+                if (!isset($_SESSION['verificacion'])) {
+                    $result['exception'] = 'Debes de verificar tu identidad antes de proceder';
+                } elseif ($result['dataset'] = $autentificador->secretGenerator()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Código generado correctamente';
+                    //Se quita la autentificación
+                    unset( $_SESSION['verificacion']);
+                } else {
+                    $result['exception'] = 'Ocurrió un problema durante la generación';
                 }
                 break;
         }

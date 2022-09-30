@@ -265,8 +265,7 @@
                                     class="bx bxs-low-vision iconos prefix"></i></a>
                         </div>
                         <div class="input-field col l5 m5 s12 push-l1 push-m1">
-                            <input id="passC" type="password" class="validate"
-                                onkeypress="return revisarTexto(event)">
+                            <input id="passC" type="password" class="validate" onkeypress="return revisarTexto(event)">
                             <label for="passC">Confirmar contraseña</label>
                             <a onclick="ocultar('passC', 'claveC')"><i id="claveC"
                                     class="bx bxs-low-vision iconos prefix"></i></a>
@@ -295,7 +294,7 @@
                 <h4>Confirmación de identidad</h4>
                 <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
                     <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña
-                        para desactivar el segundo paso de autentificación.</h6>
+                        para activar el segundo paso de autentificación.</h6>
                     <div class="input-field col l8 m8 s10 push-m2 push-l2 push-s1">
                         <input id="passD" type="password" class="validate" required
                             onkeypress="return revisarTexto(event)">
@@ -313,30 +312,98 @@
     </div>
 
     <!--Modal para verificar el cambio de contraseña-->
-    <div id="permiso" class="modal">
+    <div id="activar" class="modal">
         <div class="modal-content">
             <div class="row center">
                 <h4>Confirmación de identidad</h4>
                 <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
                     <h6>Antes de continuar, es necesario que verifiques tu identidad, para ello coloca tu contraseña
-                        para
-                        seguir con el cambio de usuario.</h6>
+                        para activar el segundo paso de autentificación</h6>
                     <div class="input-field col l8 m8 s10 push-m2 push-l2 push-s1">
-                        <input id="passR" type="password" class="validate" required
+                        <input id="passA" type="password" class="validate" required
                             onkeypress="return revisarTexto(event)">
-                        <label for="passR">Confirmar contraseña</label>
-                        <a onclick="ocultar('passR', 'clave1')"><i id="clave1"
+                        <label for="passA">Confirmar contraseña</label>
+                        <a onclick="ocultar('passA', 'claveA')"><i id="claveA"
                                 class="bx bxs-low-vision iconos prefix"></i></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect btn">Verificar</a>
+            <a href="#!" class="modal-close waves-effect btn" onclick="validar()">Verificar</a>
             <a href="#!" class="modal-close waves-effect btn">Cancelar</a>
         </div>
     </div>
 
+    <!--Modal para la activación del segundo paso de autentificación-->
+    <div id="autentificacion" class="modal">
+        <div class="modal-content">
+            <div class="row center sin_marge">
+                <h4>Activación del segundo paso de autentificacion</h4>
+                <div class="col l8 m8 s12 center">
+                    <div class="col l12 m12 s12 center-align">
+                        <h6>Pasos para activar el segundo paso de autentificación</h6>
+                        <ul class="left-align">
+                            <li>1- Instalar Google Autenticator en tu dispositivo móvil.</li>
+                            <li>2- En la esquina inferior derecha, verás un botón donde podrás elegir el modo en el que
+                                quiere activarlo.</li>
+                        </ul>
+                    </div>
+
+                    <div class="col l5 m5 s12">
+                        <span class="bold">Usando tu cámara</span>
+                        <ul class="left-align">
+                            <li>1- Presiona la opción "Escanear un código QR".</li>
+                            <li>2- Se abrirá un scanner, donde deberás apuntar tu cámara al código que se te presente a
+                                tu derecha.</li>
+                            <li>3- Cuando tu cámara detecte el código, se cerrará el scanner y ya tendrás vinculada tu
+                                cuenta con la aplicación.</li>
+                        </ul>
+                    </div>
+                    <div class="col l7 m7 s12">
+                        <span class="bold">Usando el código</span>
+                        <ul class="left-align">
+                            <li>1- Presiona la opción "Ingresar clave de configuración".</li>
+                            <li>2- En el primer apartado, colocarás el nombre con el que quieres identificar la cuenta,
+                                puedes colocar "ProculinaryShop" o bien el nombre de tu cuenta.</li>
+                            <li>3- En el segundo apartado, colocarás el código de identificación que aparece debajo del
+                                código QR, debes de respetar las mayúsculas.</li>
+                            <li>4- El tipo de clave déjala en "Basado en tiempo" y haz clic en agregar.</li>
+                            <li>Se cerrará el formulario y ya tendrás vinculada tu cuenta con la aplicación</li>
+                        </ul>
+                    </div>
+                    <div class="col l12 m12 s12 black">
+
+                    </div>
+                    <p>Como último paso, deberás de colocar el pin que te aparece en al aplicación en el espacio debajo
+                        del código de identificación, y luego presiona verificar.</p>
+                    <span>Nota: Toma en cuenta que cada pin generado por la aplicación solo dura unos segundos, una vez
+                        finalizado ese tiempo, el código ya no será valido, por lo que deberás de colocar el nuevo
+                        código que reemplazará al anterior</span>
+                </div>
+                <div class="col l4 m4 s12 alineador-vertical">
+                    <div class="col l10 m10 s10 pull-l1 pull-m1 pull-s1">
+                        <img src="" class="responsive-img" id="imagenQR" alt="">
+                        <div class="col l12 m12 s12 center">
+                            <span id="codigoTexto"></span>
+                        </div>
+
+                    </div>
+                    <div class="col l12 m12 s12">
+                        <div class="input-field col l12 m12 s12">
+                            <i class='bx bx-lock-alt prefix'></i>
+                            <input id="icon_prefix2" type="text" required></input>
+                            <label for="icon_prefix2">Código de autentificación</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect btn" onclick="validar()">Verificar</a>
+            <a href="#!" class="modal-close waves-effect btn">Cancelar</a>
+        </div>
+    </div>
 
     <script src="../../resources/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>

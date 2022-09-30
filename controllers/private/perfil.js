@@ -163,15 +163,83 @@ document.getElementById('formCuenta').addEventListener('submit', (event) => {
     //Se verifica que ambas contraseñas sean iguales
     if (pass1.value.length == 0 && !(pass1.value == pass2.value)) {
         sweetAlert(3, 'Las contraseñas no coinciden', null);
-    } else { 
+    } else {
         //Se realiza la petición
         guardarRegistro(API_PERFIL, 'actualizarRegistro', 'formCuenta', 'cuenta');
+        //Se reinicia el formulario
+        document.getElementById('formCuenta').reset();
     }
 })
 
 //Función para activar el segundo paso de autentificación
 function activar() {
+    //Se abre el formulario de verificación de identidad
+    M.Modal.getInstance(document.getElementById('activar')).open();
+}
 
+//Función para validar que la contraseña sea correcta
+function validar() {
+    //Se crea la variable para guardar los datos
+    let datos = new FormData();
+    datos.append('pass', document.getElementById('passA').value);
+    //Se realiza la petición
+    fetch(API_PERFIL + 'verificarPass', {
+        method: 'post',
+        body: datos,
+    }).then((request) => {
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a json
+            request.json().then((response) => {
+                //Se revisa el estado devuelto por la API
+                if (response.status) {
+                    //Se busca la generación del código QR
+                    generarCodigo();
+                    //Se reinicia el input
+                    document.getElementById('passA').value = '';
+                } else {
+                    //Se muestra el problema
+                    sweetAlert(2, response.exception, null);
+                }
+            })
+        } else {
+            //Se muestra el problema
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+
+}
+
+//Función para generar el código de segundo paso de autentificación
+function generarCodigo() {
+    //Se realiza la petición
+    fetch(API_PERFIL + 'solicitarAutentificacion', {
+        method: 'get',
+    }).then((request) => {
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a json
+            request.json().then((response) => {
+                //Se revisa el estado devuelto por la API
+                if (response.status) {
+                    //Se muestra el éxito
+                    sweetAlert(1, response.message, null);
+                    //Se cargan los datos en el formulario
+                    document.getElementById('imagenQR').src = response.dataset[1]; //QR
+                    document.getElementById('codigoTexto').innerHTML = response.dataset[0]; //Código por escrito
+                    //Se abre el formulario
+                    M.Modal.getInstance(document.getElementById('autentificacion')).open();
+
+                } else {
+                    //Se muestra el problema
+                    sweetAlert(2, response.exception, null);
+                }
+            })
+        } else {
+            //Se muestra el problema
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
 }
 
 //Función para desactivar el segundo paso de autentificación
