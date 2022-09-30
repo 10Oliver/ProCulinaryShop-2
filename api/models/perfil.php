@@ -219,5 +219,11 @@ class Perfil extends Verificador
         return Database::ejecutar($sql, $params);
     }
 
-    //Función para obtener los datos personales del usuario
+    //Función para guardar la llave secreta para la autentificación en dos pasos
+    public function activarFactor($codigo)
+    {
+        $sql = 'UPDATE empleado SET factor = ? WHERE id_empleado = ?';
+        $params = array($codigo, $_SESSION['id_empleado']);
+        return Database::ejecutar($sql, $params);
+    }
 }

@@ -242,6 +242,43 @@ function generarCodigo() {
     });
 }
 
+//Función para validar el código para activar el segundo factor de autentificación
+function validarFactor() { 
+    //Se crea una variable donde se guardarán los datos
+    let datos = new FormData();
+    datos.append('codigo', document.getElementById('codigo').value);
+    //Se procede a realizar la petición para activarla
+    fetch(API_PERFIL + 'activarFactor', {
+        method: 'post',
+        body: datos,
+    }).then((request) => {
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se termina de pasar a JSON
+            request.json().then((response) => {
+                //Se revisa el estado devuelto por la API
+                if (response.status) {
+                    //Se confirma la situación
+                    sweetAlert(1, response.message, null);
+                    //Se cierra el modal
+                    M.Modal.getInstance(document.getElementById('autentificacion')).close();
+                    //Se limpia el campo
+                    document.getElementById('codigo').value = '';
+                    //Se refrescan los datos
+                    leerTablas(API_PERFIL, 'leerPerfil');
+                } else {
+                    //Se muestra el problema
+                    sweetAlert(2, response.exception, null);
+                }
+            });
+        } else { 
+            //Se imprime el error
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+}
+
+
 //Función para desactivar el segundo paso de autentificación
 function desactivar() {
 

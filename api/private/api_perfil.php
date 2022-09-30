@@ -92,7 +92,7 @@ if (isset($_GET['action'])) {
                         $result['status'] = 1;
                         $result['message'] = 'Cuenta actualizada correctamente';
                         //Se quita la autentificación
-                        unset( $_SESSION['verificacion']);
+                        unset($_SESSION['verificacion']);
                     } elseif (Database::obtenerProblema()) {
                         $result['exception'] = Database::obtenerProblema();
                     } else {
@@ -119,9 +119,28 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Código generado correctamente';
                     //Se quita la autentificación
-                    unset( $_SESSION['verificacion']);
+                    unset($_SESSION['verificacion']);
                 } else {
                     $result['exception'] = 'Ocurrió un problema durante la generación';
+                }
+                break;
+            case 'activarFactor':
+                //Se revisa que ya se ha generado el código
+                if (!isset($_SESSION['identificador'])) {
+                    $result['exception'] = 'Ocurrió un problema al verificar el proceso';
+                    //Se verifica si el código ingresado es incorrecto
+                } elseif (!$autentificador->validateCode($_SESSION['identificador'], $_POST['codigo'])) {
+                    $result['exception'] = 'Código incorrecto';
+                    //Se guarda en la base de datos
+                } elseif ($perfil->activarFactor($_SESSION['identificador'])) {
+                    $result['status'] = true;
+                    $result['message'] = 'Segundo paso de autentificación activado correctamente';
+                    //Se elimina el secreto temporal
+                    unset($_SESSION['identificador']);
+                } elseif (Database::obtenerProblema()) {
+                    $result['exception'] = Database::obtenerProblema();
+                } else {
+                    $result['exception'] = 'Ocurrió un problema durante la actualización del servicio';
                 }
                 break;
         }
