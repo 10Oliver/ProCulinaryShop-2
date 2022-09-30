@@ -258,21 +258,21 @@
                     <h4>Datos de cuenta</h4>
                     <div class="col l10 m10 s10 push-l1 push-m1 push-s1">
                         <div class="input-field col l5 m5 s12">
-                            <input id="passN" type="password" class="validate" required
+                            <input id="passN" type="password" name="pass" class="validate"
                                 onkeypress="return revisarTexto(event)">
                             <label for="passN">Nueva contraseña</label>
                             <a onclick="ocultar('passN', 'claveN')"><i id="claveN"
                                     class="bx bxs-low-vision iconos prefix"></i></a>
                         </div>
                         <div class="input-field col l5 m5 s12 push-l1 push-m1">
-                            <input id="passC" type="password" class="validate" required
+                            <input id="passC" type="password" class="validate"
                                 onkeypress="return revisarTexto(event)">
                             <label for="passC">Confirmar contraseña</label>
                             <a onclick="ocultar('passC', 'claveC')"><i id="claveC"
                                     class="bx bxs-low-vision iconos prefix"></i></a>
                         </div>
                         <div class="input-field col l6 m6 s12 push-l3 push-m3">
-                            <input type="text" name="usuario" class="validate" id="nombreUsuario">
+                            <input type="text" name="usuario" class="validate" id="nombreUsuario" required>
                             <label for="passC" id="labelUsuario">Nombre de usuario</label>
                         </div>
                         <div class="col l12 m12 s12 left-align">

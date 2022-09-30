@@ -372,8 +372,9 @@ class Verificador
             $claveDividida = str_split($clave);
             //Se procede a revisar todas las subcadenas obtenidas de la palabra de busqueda
             foreach ($palabraDividida as $palabraActual) {
+
                 //Se divide la palabra actual en un vector
-                $palabraBusqueda = str_split($palabraActual);
+                $palabraBusqueda = str_split(strtolower($palabraActual));
                 /**
                  * Se revisa caracter por caracter de la palabra a buscar ya que es mas corta que la clave
                  * si existe alguna coincidencia del caracter que se esté evaluando con el caracter de la clave
@@ -382,6 +383,11 @@ class Verificador
                  * pero si ya no es la misma esta secuencia se rompe y se reiniciará las coincidencias a 0
                  */
                 for ($i = 0; $i < count($claveDividida); $i++) {
+                    //Se revisa si el caracter a revisar es una letra
+                    if (ctype_alpha($claveDividida[$i])) {
+                        //Si es así, se pasa ese carácter a minúscula
+                        $claveDividida[$i] = strtolower($claveDividida[$i]);
+                    }
                     //Se revisa si el carácter de la clave es el mismo carácter de la palabra
                     if ($claveDividida[$i] == $palabraBusqueda[$coincidencias]) {
                         //Se suman las coincidencias
@@ -516,7 +522,7 @@ class Verificador
             }
 
             //Si se detecta que ha llegado a 4 consecutivas, entonces se detiene e informe que se ha llegado al limite
-            if ($contador['simbolo'] > 5 || $contador['numero'] > 5 || $contador['letra'] > 5) {
+            if ($contador['simbolo'] > 3 || $contador['numero'] > 3 || $contador['letra'] > 3) {
                 return true;
                 break;
             }
@@ -554,10 +560,10 @@ class Verificador
         } elseif (strlen($clave) > 72) {
             $this->passwordError = 'La contraseña debe de tener como máximo 72 carácteres';
             return false;
-        } elseif (!preg_match('/^[A-Z]/i', $clave)) {
+        } elseif (!preg_match('/[A-Z]/', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra mayúscula';
             return false;
-        } elseif (!preg_match('/^[a-z]/i', $clave)) {
+        } elseif (!preg_match('/[a-z]/', $clave)) {
             $this->passwordError = 'La contraseña debe de contener al menos una letra minúscula';
             return false;
         } elseif (!preg_match('/[0-9]/', $clave)) {
@@ -583,17 +589,17 @@ class Verificador
         } elseif ($this->encontrarPalabra(substr(substr($correo, strripos($correo, '@') + 1, strripos($correo, '.')), (strlen($correo) - (strlen($correo))), (strripos($correo, '.') - strlen($correo))), $clave)) {
             $this->passwordError = 'El dominio de tu correo no puede ser parte de la contraseña';
             return false;
-        } elseif (!$this->validarFecha($clave, $fecha)) {
-            $this->passwordError = 'La contraseña o una parte de ella no puede ser parta de la contraseña';
+        } elseif ($this->validarFecha($clave, $fecha)) {
+            $this->passwordError = 'La fecha o una parte de ella no puede ser parte de la contraseña';
+            return false;
+        } elseif (preg_match('/insert/i', $clave) || preg_match('/select/i', $clave) || preg_match('/update/i', $clave) || preg_match('/delete/i', $clave) || preg_match('/drop/i', $clave) || preg_match('/truncate/i', $clave)) {
+            $this->passwordError = 'No se admiten consultas SQL dentro de la contraseña';
+            return false;
+        } elseif (preg_match('/script/i', $clave) || preg_match('/html/i', $clave) || preg_match('/php/i', $clave) || preg_match('/ or /i', $clave) || preg_match('/ and /i', $clave) || preg_match('/ && /i', $clave) || preg_match('/ || /i', $clave)) {
+            $this->passwordError = 'No se admiten código dentro de la contraseña';
             return false;
         } elseif ($this->validarContinuo($clave)) {
             $this->passwordError = 'La contraseña no debe de contener más de 3 caracteres del mismo tipo consecutivamente';
-            return false;
-        } elseif (preg_match('/insert/i', $clave) || preg_match('/select/i', $clave) || preg_match('/update/i', $clave) || preg_match('/delete/i', $clave) || preg_match('/drop/i', $clave)) {
-            $this->passwordError = 'No se admiten consultas SQL dentro de la contraseña';
-            return false;
-        } elseif (preg_match('/script/i', $clave) || preg_match('/html/i', $clave) || preg_match('/php/i', $clave) || preg_match('/or/i', $clave) || preg_match('/and/i', $clave)) {
-            $this->passwordError = 'No se admiten código dentro de la contraseña';
             return false;
         } else {
             return true;

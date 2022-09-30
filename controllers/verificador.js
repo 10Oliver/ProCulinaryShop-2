@@ -263,7 +263,7 @@ function revisarTexto(texto) {
     //Se almacena
     teclado = String.fromCharCode(key);
     // Valores permitidos
-    valores = '1234567890abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ áéíóúÁÉÍÓÚ,.()/"-_.,;:@';
+    valores = '1234567890abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ áéíóúÁÉÍÓÚ$%,.()/!¡¿?=+*-_.,;:@';
     // Teclas de control en codigo ASCII (Sin funcionar)
     especiales = "8-32-44-45-46-35-248-95";
     // Si se permiten o no las teclas de control

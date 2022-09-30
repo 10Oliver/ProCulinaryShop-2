@@ -119,6 +119,7 @@ class Perfil extends Verificador
         }
     }
 
+    //Verificación que no contenga datos problemáticos
     public function setLowPass($value)
     {
         if (!$this->validateDanger($value)) {
@@ -131,13 +132,14 @@ class Perfil extends Verificador
     }
 
 
-    public function setHighPass($value)
+    //Verificación que la contraseña sea segura
+    public function setHighPass($value,$usuario, $nombre, $apellido, $correo, $fecha)
     {
-        if (!$this->validateSafePassword($value)) {
-            $this->error = $this->getException();
+        if (!$this->validateSafePassword($value,$usuario, $nombre, $apellido, $correo, $fecha)) {
+            $this->error = $this->getPasswordError();
             return false;
         } else {
-            $this->pass = $value;
+            $this->pass = password_hash($value, PASSWORD_DEFAULT);
             return true;
         }
     }
@@ -145,6 +147,11 @@ class Perfil extends Verificador
     public function getError()
     {
         return $this->error;
+    }
+
+    public function getPass()
+    {
+        return $this->pass;
     }
     /**
      * Métodos que interactuarán con la base de datos
@@ -207,7 +214,7 @@ class Perfil extends Verificador
     //Función para actualizar los datos
     public function actualizarCuenta($pass)
     {
-        $sql = 'UPDATE empleado SET usuario_empleado = ?, contrasena_empleado = ? WHERE id_empleado = 1';
+        $sql = 'UPDATE empleado SET usuario_empleado = ?, contrasena_empleado = ? WHERE id_empleado = ?';
         $params = array($this->usuario, $pass, $_SESSION['id_empleado']);
         return Database::ejecutar($sql, $params);
     }

@@ -91,7 +91,18 @@ if (isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'Ocurrió un problema durante el cambio de contraseña';
                     }
-                } elseif (!$perfil)
+                } elseif (!$data = $perfil->leerPerfil()) {
+                    $result['exception'] = 'Ocurrió un problema durante la verificación de la contraseña';
+                } elseif (!$perfil->setHighPass($_POST['pass'], $data['usuario_empleado'], $data['nombre_empleado'], $data['apellido_empleado'], $data['correo_empleado'], $data['fecha_nacimiento'])) {
+                    $result['exception'] = $perfil->getError();
+                } elseif ($perfil->actualizarCuenta($perfil->getPass())) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Cuenta actualizada correctamente';
+                } elseif (Database::obtenerProblema()) {
+                    $result['exception'] = Database::obtenerProblema();
+                } else {
+                    $result['exception'] = 'Ocurrió un problema durante la actualización de la cuenta';
+                }
                 break;
         }
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.

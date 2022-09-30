@@ -161,7 +161,7 @@ document.getElementById('formCuenta').addEventListener('submit', (event) => {
     const pass2 = document.getElementById('passC');
     //Se revisa si se colocó la contraseña
     //Se verifica que ambas contraseñas sean iguales
-    if (pass1.value.length == 0 && (pass1.value != pass2.value)) {
+    if (pass1.value.length == 0 && !(pass1.value == pass2.value)) {
         sweetAlert(3, 'Las contraseñas no coinciden', null);
     } else { 
         //Se realiza la petición
