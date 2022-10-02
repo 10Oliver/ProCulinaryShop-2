@@ -28,12 +28,12 @@
             </div>
             <div class="contenedor-datos-login">
                 <div class="card col l5 m5 s12 center formulario-login">
-                    <form id="login" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <form id="segundo_factor" method="post" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
                             <p>Coloca el código de 6 dígitos que se está generando en este momento</p>
                             <div class="input-field col l10 m10 s12 offset-l1 offset-m1">
-                                <input id="pass" type="text" class="validate" name="pass" onkeypress="return soloNumeros(event)">
-                                <label for="pass">Código de verificación</label>
+                                <input id="codigo" type="text" class="validate" name="codigo" onkeypress="return soloNumeros(event)">
+                                <label for="codigo">Código de verificación</label>
                             </div>
                             <button class="waves-effect waves-light btn green" type="submit">Iniciar sesión</button>
                         </div>
@@ -45,9 +45,6 @@
                     <p>Haz activado el segundo factor de autentificación, por lo que es necesario que proporciones el
                         código que se está generando en tu aplicación de Google Autenticator</p>
                     <p>Si no puedes acceder, puedes cambiar tu contraseña <a href="" class="green-text">aquí</a></p>
-
-
-
                 </div>
             </div>
 

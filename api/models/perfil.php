@@ -161,7 +161,7 @@ class Perfil extends Verificador
 
     public function leerPerfil()
     {
-        $sql = 'SELECT dui, nombre_empleado, apellido_empleado, telefono_empleado, correo_empleado, direccion_empleado, usuario_empleado,fecha_nacimiento, nombre_cargo FROM empleado e
+        $sql = 'SELECT dui, nombre_empleado, apellido_empleado, telefono_empleado, correo_empleado, direccion_empleado, usuario_empleado,fecha_nacimiento, nombre_cargo, factor FROM empleado e
         INNER JOIN cargo_empleado ce ON ce.id_cargo_empleado = e.id_cargo_empleado
         WHERE id_empleado = ?;';
         $params = array($_SESSION['id_empleado']);

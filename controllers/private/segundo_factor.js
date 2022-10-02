@@ -25,3 +25,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//Método que se encarga de validar que el código ingresado sea correcto
+document.getElementById("segundo_factor").addEventListener('submit', (event) => { 
+    //Se previene el refrescado automático
+    event.preventDefault();
+    //Se realiza la petición para verificar 
+    fetch(API_FACTOR + "verificarSegundoPaso", {
+            method: "post",
+            body: new FormData(document.getElementById("segundo_factor")),
+    }).then((request) => { 
+        //Se revisa el estado devuelto por la ejecución
+        if (request.ok) {
+            //Se termina de pasar a formato JSON
+            request.json().then((response) => { 
+                //Se verifica el estado devuelto por la API
+                if (response.status) {
+                    //Se muestra la confirmación
+                    sweetAlert(1, response.message, 'dashboard.html');
+                } else if (response.status == 2) {
+                    //Si no está activado se redirecciona al login
+                    sweetAlert(2, response.exception, 'index.html');
+                } else {
+                    //Se muestra el error
+                    sweetAlert(2, response.exception, null);
+                }
+            })
+        } else { 
+            console.log(request.status + ' ' + request.statusText);
+        }
+    })
+});

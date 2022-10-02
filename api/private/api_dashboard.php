@@ -19,18 +19,26 @@ if (isset($_GET['action'])) {
     $dashboard = new Dashboard;
     //Se crea un vector con los datos para crear el mensaje (Se devuelve al controllador)
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'exception' => null);
-    //Se escoge el proceso que se ejecutará en el modelo
-    switch ($_GET['action']) {
-        case 'obtenerConexiones':
-            if ($result['dataset'] = $dashboard->InicioSesion()) {
-                $result['status'] = 1;
-            } elseif (database::obtenerProblema()) {
-                $result['exception'] = database::obtenerProblema();
-            } else {
-                $result['exception'] = 'No hay datos de momento';
-            }
-            break;
+    //Se revisa si realmente se ha iniciado sesión o no
+    if (isset($_SESSION['id_empleado'])) {
+        //Se escoge el proceso que se ejecutará en el modelo
+        switch ($_GET['action']) {
+            case 'obtenerConexiones':
+                if ($result['dataset'] = $dashboard->InicioSesion()) {
+                    $result['status'] = 1;
+                } elseif (database::obtenerProblema()) {
+                    $result['exception'] = database::obtenerProblema();
+                } else {
+                    $result['exception'] = 'No hay datos de momento';
+                }
+                break;
+        }
+    } else {
+        
+        //Si no hay ninguna opción dentro de los datos
+        $result['exception'] = 'Necesitas iniciar sesión para continuar';
     }
+
     // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('content-type: application/json; charset=utf-8');
     // Se imprime el resultado en formato JSON y se retorna al controlador.

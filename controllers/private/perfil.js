@@ -197,11 +197,14 @@ function validar() {
                     generarCodigo();
                     //Se reinicia el input
                     document.getElementById('passA').value = '';
+                    //Se cierra el modal actual
+                    M.Modal.getInstance(document.getElementById("activar")).close();
+
                 } else {
                     //Se muestra el problema
                     sweetAlert(2, response.exception, null);
                 }
-            })
+            });
         } else {
             //Se muestra el problema
             console.log(request.status + ' ' + request.statusText);
@@ -258,14 +261,14 @@ function validarFactor() {
             request.json().then((response) => {
                 //Se revisa el estado devuelto por la API
                 if (response.status) {
+                    //Se refrescan los datos
+                    leerTablas(API_PERFIL, "leerPerfil");
                     //Se confirma la situación
                     sweetAlert(1, response.message, null);
                     //Se cierra el modal
-                    M.Modal.getInstance(document.getElementById('autentificacion')).close();
+                    M.Modal.getInstance(document.getElementById("autentificacion")).close();
                     //Se limpia el campo
-                    document.getElementById('codigo').value = '';
-                    //Se refrescan los datos
-                    leerTablas(API_PERFIL, 'leerPerfil');
+                    document.getElementById("codigo").value = "";
                 } else {
                     //Se muestra el problema
                     sweetAlert(2, response.exception, null);

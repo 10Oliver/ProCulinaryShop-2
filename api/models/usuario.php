@@ -407,7 +407,7 @@ class Usuario extends Verificador{
         $sql = 'SELECT factor FROM empleado WHERE id_empleado = ?';
         $params = array($_SESSION['id_empleado_temporal']);
         $data = Database::filaUnica($sql, $params);
-        if (empty($data)) {
+        if ($data['factor'] == null) {
             return false;
         } else {
             return true;
