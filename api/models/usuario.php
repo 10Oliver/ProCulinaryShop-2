@@ -2,12 +2,13 @@
 
 // Modelo de usuarios
 
-class Usuario extends Verificador{
+class Usuario extends Verificador
+{
 
     /*
     * Declaración de variables globales para el modelo
     */
-    
+
     private $usuarioEmpleado = null;
     private $usuarioCliente = null;
     private $passEmpleado = null;
@@ -32,13 +33,12 @@ class Usuario extends Verificador{
 
     public function setUsuarioEmpleado($valor)
     {
-        if($this->validateString($valor,5,80)){
+        if ($this->validateString($valor, 5, 80)) {
             $this->usuarioEmpleado = $valor;
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setNombreUsuario($valor)
@@ -93,7 +93,7 @@ class Usuario extends Verificador{
 
     public function setUsuarioUsuario($valor)
     {
-        if ($this->validateString($valor,5,80)) {
+        if ($this->validateString($valor, 5, 80)) {
             $this->usuarioUsuario = $valor;
             return true;
         } else {
@@ -133,13 +133,12 @@ class Usuario extends Verificador{
 
     public function setPassEmpleado($pass)
     {
-        if($this->validatePassword($pass)){
+        if ($this->validatePassword($pass)) {
             $this->passEmpleado = password_hash($pass, PASSWORD_DEFAULT);
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setPassEmpleadoS($pass)
@@ -164,35 +163,32 @@ class Usuario extends Verificador{
 
     public function setHoraEmpleado($hora)
     {
-        if($this->validateDate($hora)){
+        if ($this->validateDate($hora)) {
             $this->horaEmpleado = $hora;
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setIntentosEmpleado($intento)
     {
-        if($this->validateNaturalNumber($intento)){
+        if ($this->validateNaturalNumber($intento)) {
             $this->intentosEmpleado = $intento;
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setIdEmpleado($id)
     {
-        if($this->validateNaturalNumber($id)){
+        if ($this->validateNaturalNumber($id)) {
             $this->idEmpleado = $id;
             return true;
-        }else{
+        } else {
             return false;
         }
-        
     }
 
     public function setIdCliente($valor)
@@ -244,11 +240,12 @@ class Usuario extends Verificador{
 
     //Función para llenar la tabla tomando en cuenta la paginación
 
-    public function llenarTabla(){
+    public function llenarTabla()
+    {
         $sql = 'SELECT id_empleado,nombre_empleado,usuario_empleado, correo_empleado, hora_unlock_empleado, intento_empleado FROM empleado
         WHERE id_estado_empleado NOT IN (4) AND usuario_empleado NOT IN (?) ORDER BY id_empleado';
         $params = array("-");
-        return database::multiFilas($sql,$params);
+        return database::multiFilas($sql, $params);
     }
 
     //Función que devuelve los datos de los cargos para SELECT's
@@ -256,17 +253,16 @@ class Usuario extends Verificador{
     {
         $sql = 'SELECT id_cargo_empleado, nombre_cargo FROM cargo_empleado';
         $params = null;
-        return database::multiFilas($sql,$params);
+        return database::multiFilas($sql, $params);
     }
 
     //Función que devuelve los nombre de los empleados
     public function cargarEmpleados()
     {
-      $sql = '
+        $sql = '
       SELECT id_empleado, nombre_empleado FROM empleado WHERE id_estado_empleado NOT IN (4) AND usuario_empleado = ?';
-      $params = array("-");
-      return database::multiFilas($sql, $params);
-
+        $params = array("-");
+        return database::multiFilas($sql, $params);
     }
 
     //Función que "crea un usuario"
@@ -290,24 +286,25 @@ class Usuario extends Verificador{
     public function eliminarUsuario()
     {
         $sql = 'UPDATE empleado SET usuario_empleado = ?, contrasena_empleado = ? WHERE id_empleado = ?';
-        $params = array("-","-",$this->idEmpleado);
+        $params = array("-", "-", $this->idEmpleado);
         return database::ejecutar($sql, $params);
     }
 
     //Función que busca el usuario
-    public function buscar($buscador, $categoria){
+    public function buscar($buscador, $categoria)
+    {
         $sql = 'SELECT id_empleado, nombre_empleado,usuario_empleado, correo_empleado, hora_unlock_empleado, intento_empleado 
         FROM empleado e INNER JOIN cargo_empleado ce ON e.id_cargo_empleado=ce.id_cargo_empleado
         WHERE nombre_empleado ILIKE ?';
         $params = array("%$buscador%");
-        if($categoria!=0){
+        if ($categoria != 0) {
             $sql .= ' AND e.id_cargo_empleado = ? ';
             array_push($params, $categoria);
         }
         $sql .= ' AND e.id_cargo_empleado NOT IN (4) AND usuario_empleado NOT IN (?) ORDER BY id_empleado';
         array_push($params, "-");
-       
-        return database::multiFilas($sql,$params);
+
+        return database::multiFilas($sql, $params);
     }
 
     public function revisarEmpleado()
@@ -385,9 +382,11 @@ class Usuario extends Verificador{
         $sql = 'INSERT INTO cliente(
 	nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, direccion, dui, visto, usuario_cliente, contrasena_cliente, intento_cliente, hora_unlock_cliente, estado_cliente)
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    $params = array($this->nombreUsuario, $this->apellidoUsuario, $this->correoUsuario, $this->telefonoUsuario, $this->direccionUsuario,
-    $this->duiUsuario, true, $this->usuarioUsuario, $this->passUsuario, 5,null,true);
-    return database::ejecutar($sql, $params);
+        $params = array(
+            $this->nombreUsuario, $this->apellidoUsuario, $this->correoUsuario, $this->telefonoUsuario, $this->direccionUsuario,
+            $this->duiUsuario, true, $this->usuarioUsuario, $this->passUsuario, 5, null, true
+        );
+        return database::ejecutar($sql, $params);
     }
 
     //Función para obtener el id de la orden
@@ -446,4 +445,27 @@ class Usuario extends Verificador{
         return $total;
     }
 
+    //Función para generar un registro cuando se inicia sesión
+    public function guardarInicioSesion()
+    {
+        //Se configura la zona horaria
+        date_default_timezone_set('America/El_Salvador');
+        $sql = 'INSERT INTO actividad_empleado (fecha_actividad, id_empleado, tipo) VALUES (?, ?, true);';
+        //Se obtiene la fecha actual
+        $fecha = date_format(new DateTime(), 'Y-m-d H:i:s');
+        $params = array($fecha, $_SESSION['id_empleado']);
+        return Database::ejecutar($sql, $params);
+    }
+
+    //Función para generar un registro cuando se termina la sesión
+    public function guardarCerrarSesion()
+    {
+        //Se configura la zona horaria
+        date_default_timezone_set('America/El_Salvador');
+        $sql = 'INSERT INTO actividad_empleado (fecha_actividad, id_empleado, tipo) VALUES (?, ?, false);';
+        //Se obtiene la fecha actual
+        $fecha = date_format(new DateTime(), 'Y-m-d H:i:s');
+        $params = array($fecha, $_SESSION['id_empleado']);
+        return Database::ejecutar($sql, $params);
+    }
 }

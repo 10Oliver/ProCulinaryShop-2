@@ -37,16 +37,25 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'CerrarSesion':
-                if (session_destroy()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'La sesión ha finalizado';
+                //Se verifica que exista la sesión activa
+                if (isset($_SESSION['id_empleado'])) {
+                    //Se guarda el registro que se ha cerrado sesión
+                    if ($usuario->guardarCerrarSesion()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'La sesión ha finalizado';
+                        //Se eliminan lo campos
+                        unset($_SESSION['id_empleado']);
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema en el cerrado de sesión';
+                    }
+                    
                 } else {
                     $result['exception'] = 'La sesión no se pudo finalizar';
                 }
                 break;
             default:
                 $result['exception'] = 'La acción solicitada necesita realizarse fuera de una sesión activa, por favor finaliza la sesión para utitlizarla';
-            break;
+                break;
         }
     } else {
         // Elección del proceso a realizar
@@ -76,10 +85,16 @@ if (isset($_GET['action'])) {
                             //Si está activada, solo se le muestra que debe de proseguir con su completación
                             $result['status'] = 2;
                         } else {
-                            //Si no está activada, únicamente se le dirá si estpa completada o no
-                            $result['status'] = 1;
+                            //Se cambia el id temporal por el permanente
                             $_SESSION['id_empleado'] = $_SESSION['id_empleado_temporal'];
                             unset($_SESSION['id_empleado_temporal']);
+                            //Se registra el inicio de sesión
+                            if ($usuario->guardarInicioSesion()) {
+                                //Si no está activada, únicamente se le dirá si estpa completada o no
+                                $result['status'] = 1;
+                            } else {
+                                $result['exception'] = 'Ocurrió un problema durante el registro de sesión';
+                            }
                         }
                         //Se procede a configurar el mensaje dependiendo de los días en que se cambió la contraseña
                         if ($data >= 80) {
@@ -87,9 +102,7 @@ if (isset($_GET['action'])) {
                             $_SESSION['advertencia'] = $data;
                         }
                         $result['message'] = 'Autentificación completada';
-                        
                     }
-                    
                 } else {
                     $result['exception'] = 'Contraseña incorrecta';
                 }
