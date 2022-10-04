@@ -1,6 +1,29 @@
 // Constantes para establecer rutas de archivos esenciales y parametros de la API
 const API_login = SERVER + "private/api_login.php?action=";
 
+//Función que verifica si el usuario ya se ha logueado 
+document.addEventListener('DOMContentLoaded', () => { 
+    //Se realiza la petición
+    fetch(API_login + "datosSesion", {
+        method: 'get',
+    }).then((request) => { 
+        //Se revisa el estado de la ejecución
+        if (request.ok) {
+            //Se pasa a JSON
+            request.json().then((response) => {
+                //Se verifica el estado de la ejecución
+                if (response.status) {
+                    sweetAlert(1, 'Sesión activa, por favor regresa a su sesión', 'dashboard.html');
+                } else {
+                    sweetAlert(3, 'Debes de iniciar sesión para continuar', null);
+                }
+            });
+        } else { 
+            console.log(request.status + ' ' + request.statusText);
+        }
+    });
+})
+
 //Método que verifica la sesión
 document.getElementById("login").addEventListener('submit', function (event) {
     // Se evita recargar la página web después de enviar el formulario.

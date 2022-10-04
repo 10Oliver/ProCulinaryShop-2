@@ -422,4 +422,28 @@ class Usuario extends Verificador{
         return Database::filaUnica($sql, $params);
     }
 
+    //Función para verificar el último cambio de contraseña
+    public function cambioObligatorio()
+    {
+        $sesion = null;
+        $sql = 'SELECT cambio_contrasena FROM empleado WHERE id_empleado = ?';
+        //Se verifica si ya se inició sesión
+        if (isset($_SESSION['id_empleado'])) {
+            $sesion = $_SESSION['id_empleado'];
+        } elseif (isset($_SESSION['id_empleado_temporal'])) {
+            $sesion = $_SESSION['id_empleado_temporal'];
+        } else {
+            return null;
+        }
+        $params = array($sesion);
+        $data =  Database::filaUnica($sql, $params);
+        //Se obtiene la fecha actual
+        $fechaActual =  date_format(new DateTime('now'), 'Y-m-d');
+        //Se calcula la cantidad de días que existen entre el último cambio y la fecha actual
+        $diferencia = abs(strtotime($fechaActual)  - strtotime($data['cambio_contrasena']));
+        //Se pasa la diferencia de segundos a minutos
+        $total = floor($diferencia / (60 * 60 * 24));
+        return $total;
+    }
+
 }

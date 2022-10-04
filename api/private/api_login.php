@@ -51,6 +51,7 @@ if (isset($_GET['action'])) {
     } else {
         // Elección del proceso a realizar
         switch ($_GET['action']) {
+
             case 'iniciarSesion':
                 $_POST = $usuario->validarFormularios($_POST);
                 if (!$usuario->setUsuarioEmpleado($_POST['usuario'])) {
@@ -64,17 +65,31 @@ if (isset($_GET['action'])) {
                 } elseif ($usuario->revisarPassEmpleado()) {
                     $_SESSION['id_empleado_temporal'] = $usuario->getIdEmpleado();
                     $_SESSION['usuario'] = $usuario->getUsuarioEmpleado();
-                    //Se procede a revisar si está activado el segundo paso de autentificación
-                    if ($usuario->verificarFactorEmpleado()) {
-                        //Si está activada, solo se le muestra que debe de proseguir con su completación
-                        $result['status'] = 2;
+                    //Se verifica la fecha del último cambio de la contraseña
+                    if (!$data = $usuario->cambioObligatorio()) {
+                        $result['exception'] = 'Ocurrió un problema durante la búsqueda de tus datos';
+                    } elseif ($data >= 90) {
+                        $result['exception'] = 'Han pasado más de 90 días desde que cambiaste tu contraseña, por favor inicia el proceso de recuperación';
                     } else {
-                        //Si no está activada, únicamente se le dirá si estpa completada o no
-                        $result['status'] = 1;
-                        $_SESSION['id_empleado'] = $_SESSION['id_empleado_temporal'];
-                        unset($_SESSION['id_empleado_temporal']);
+                        //Se procede a revisar si está activado el segundo paso de autentificación
+                        if ($usuario->verificarFactorEmpleado()) {
+                            //Si está activada, solo se le muestra que debe de proseguir con su completación
+                            $result['status'] = 2;
+                        } else {
+                            //Si no está activada, únicamente se le dirá si estpa completada o no
+                            $result['status'] = 1;
+                            $_SESSION['id_empleado'] = $_SESSION['id_empleado_temporal'];
+                            unset($_SESSION['id_empleado_temporal']);
+                        }
+                        //Se procede a configurar el mensaje dependiendo de los días en que se cambió la contraseña
+                        if ($data >= 80) {
+                            $result['message'] = 'Autentificación completada, pero se te aconseja cambiar la contraseña para no perder tu cuenta';
+                        } else {
+                            $result['message'] = 'Autentificación completada';
+                        }
+                        
                     }
-                    $result['message'] = 'Autentificación completada';
+                    
                 } else {
                     $result['exception'] = 'Contraseña incorrecta';
                 }
