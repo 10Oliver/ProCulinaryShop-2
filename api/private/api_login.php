@@ -83,10 +83,10 @@ if (isset($_GET['action'])) {
                         }
                         //Se procede a configurar el mensaje dependiendo de los días en que se cambió la contraseña
                         if ($data >= 80) {
-                            $result['message'] = 'Autentificación completada, pero se te aconseja cambiar la contraseña para no perder tu cuenta';
-                        } else {
-                            $result['message'] = 'Autentificación completada';
+                            //Se coloca un dato extra para que se muestre en el dashboard
+                            $_SESSION['advertencia'] = $data;
                         }
+                        $result['message'] = 'Autentificación completada';
                         
                     }
                     

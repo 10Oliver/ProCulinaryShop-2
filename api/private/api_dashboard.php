@@ -26,6 +26,10 @@ if (isset($_GET['action'])) {
             case 'obtenerConexiones':
                 if ($result['dataset'] = $dashboard->InicioSesion()) {
                     $result['status'] = 1;
+                    //Se verifica si hay advertencia de cambio
+                    if (isset($_SESSION['advertencia'])) {
+                        $result['message'] = 'Han pasado '.$_SESSION['advertencia']. ' días desde que cambiaste por última vez tu contraseña, por favor cámbiala para que no pierdas acceso';
+                    }
                 } elseif (database::obtenerProblema()) {
                     $result['exception'] = database::obtenerProblema();
                 } else {
