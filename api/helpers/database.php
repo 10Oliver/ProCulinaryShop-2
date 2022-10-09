@@ -23,10 +23,25 @@ class Database
     public static function conectar()
     {
         //Variables con los datos para la conexión
-        $servidor = 'localhost';
-        $base_datos = 'ProCulinaryShop';
-        $usuario = 'postgres';
-        $contra = 'Firearcher15'; //Contraseña se cambia según necesidades
+        //Opción local
+        /*
+         $servidor = 'localhost';
+         $base_datos = 'ProCulinaryShop';
+         $usuario = 'postgres';
+         $contra = 'Firearcher15';
+
+         */
+
+
+         //Opción heroku
+
+         $servidor = 'ec2-107-23-76-12.compute-1.amazonaws.com';
+         $base_datos = 'dbsiugt3oagqkk';
+         $usuario = 'utkzuccdzqbjok';
+         $contra = '8774c0ae83c250680cc937bb452ba51018bef7bdcd6a9c52aadcc45b007d38f2';
+
+
+
 
         //Método que realizará la conexión mediante PDO y el controlador de PostgreSQL
         self::$conexion = new PDO('pgsql:host=' . $servidor . ';dbname= ' . $base_datos . '; port=5432', $usuario, $contra);
