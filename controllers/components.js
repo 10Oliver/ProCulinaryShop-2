@@ -5,7 +5,8 @@
 /*
  *  Ruta del servidor
  */
-const SERVER = "http://localhost/ProCulinaryShop-2/api/";
+//const SERVER = "http://localhost/ProCulinaryShop-2/api/";
+const SERVER = '';
 
 /*
  * Función que carga las tablas en las vistas

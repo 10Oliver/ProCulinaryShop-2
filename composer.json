@@ -1,1 +1,6 @@
-'{}' 
+{
+    "require": {
+        "silex/silex": "~1.1",
+        "heroku/heroku-buildpack-php": "^225.0"
+    }
+}
