@@ -6,7 +6,7 @@
  *  Ruta del servidor
  */
 //const SERVER = "http://localhost/ProCulinaryShop-2/api/";
-const SERVER = '';
+const SERVER = "http://proculinaryshop.herokuapp.com/apí";
 
 /*
  * Función que carga las tablas en las vistas
