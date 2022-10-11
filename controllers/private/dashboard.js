@@ -22,10 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         datos.push(row.total);
                     });
                     //Se envían los datos para ser gráficados
-                    console.log(datos);
+                    //console.log(datos);
                     lineaI(".conexiones", cabeceras, datos);
                     //Se revisa si existe un mensaje que mostrar
-                    sweetAlert(3, response.message, null);
+                    if (response.message != null) { 
+                         sweetAlert(3, response.message, null);
+                    }
+                   
                 } else {
                     sweetAlert(2, response.exception, null);
                 }

@@ -328,9 +328,68 @@ class Usuario extends Verificador
         $params = array($this->idEmpleado);
         $data = Database::filaUnica($sql, $params);
         if (password_verify($this->passEmpleado, $data['contrasena_empleado'])) {
-            return true;
+            //Se reestablece la cantidad de intentos
+            $sql = 'UPDATE empleado SET intento_empleado = 3 WHERE id_empleado = ?';
+            $params = array($this->idEmpleado);
+            return Database::ejecutar($sql, $params);
         } else {
             return false;
+        }
+    }
+
+    //Función para disminuir la cantidad de intentos disponibles
+    public function disminuirIntentos()
+    {
+        $sql = 'UPDATE empleado SET intento_empleado = (SELECT intento_empleado -1  FROM empleado WHERE id_empleado = ?) 
+        WHERE id_empleado = ?';
+        $params = array($this->idEmpleado, $this->idEmpleado);
+        Database::ejecutar($sql, $params);
+        //Se revisa la cantidad de intentos restantes
+        $sql = 'SELECT intento_empleado FROm empleado WHERE id_empleado = ?';
+        $params = array($this->idEmpleado);
+        $data = Database::filaUnica($sql, $params);
+        if ($data['intento_empleado'] == 0) {
+            //Se procede a bloquear la cuenta
+            $sql = 'UPDATE empleado SET id_estado_empleado = 2, hora_unlock_empleado = ? WHERE id_empleado = ?';
+            //Se establece la zona horaria
+            date_default_timezone_set('America/El_Salvador');
+            $fecha = date('Y-m-d H:i:s',strtotime(date('Y-m-d H:i:s') . "+ 1 days"));
+            $params = array($fecha, $this->idEmpleado);
+            return Database::ejecutar($sql, $params);
+        } else {
+            return true;
+        }
+    }
+
+    //Se revisa el estado de la cuenta
+    public function verificarEstadoCuenta()
+    {
+        $sql = 'SELECT id_estado_empleado FROM empleado WHERE id_empleado = ?';
+        $params = array($this->idEmpleado);
+        return Database::filaUnica($sql, $params);
+    }
+
+    //Función que desbloqueará la cuenta si ya ha pasado 
+    public function desbloquear()
+    {
+        $sql = 'SELECT hora_unlock_empleado FROM empleado WHERE id_empleado = ? AND id_estado_empleado NOT IN (1)';
+        $params = array($this->idEmpleado);
+        $data = Database::filaUnica($sql, $params);
+        //print_r($data);
+        //Se internacionaliza
+        date_default_timezone_set('America/El_Salvador');
+        //echo date('Y-m-d H:i:s') . " < " . $data['hora_unlock_empleado'];
+        if (!empty($data)) {
+           
+            if ($data['hora_unlock_empleado'] < date('Y-m-d H:i:s')) {
+                $sql = 'UPDATE empleado SET id_estado_empleado = 1, hora_unlock_empleado = null WHERE id_empleado = ?';
+                $params = array($this->idEmpleado);
+                return Database::ejecutar($sql, $params);
+            } else {
+                return true;
+            }
+        } else {
+            return true;
         }
     }
 

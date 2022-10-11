@@ -24,23 +24,23 @@ class Database
     {
         //Variables con los datos para la conexión
         //Opción local
-        /*
+        
          $servidor = 'localhost';
          $base_datos = 'ProCulinaryShop';
          $usuario = 'postgres';
          $contra = 'Firearcher15';
 
-         */
+         
 
 
          //Opción heroku
-
+/*
          $servidor = 'ec2-107-23-76-12.compute-1.amazonaws.com';
          $base_datos = 'dbsiugt3oagqkk';
          $usuario = 'utkzuccdzqbjok';
          $contra = '8774c0ae83c250680cc937bb452ba51018bef7bdcd6a9c52aadcc45b007d38f2';
 
-
+*/
 
 
         //Método que realizará la conexión mediante PDO y el controlador de PostgreSQL

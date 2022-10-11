@@ -48,7 +48,6 @@ if (isset($_GET['action'])) {
                     } else {
                         $result['exception'] = 'Ocurrió un problema en el cerrado de sesión';
                     }
-                    
                 } else {
                     $result['exception'] = 'La sesión no se pudo finalizar';
                 }
@@ -60,15 +59,20 @@ if (isset($_GET['action'])) {
     } else {
         // Elección del proceso a realizar
         switch ($_GET['action']) {
-
             case 'iniciarSesion':
                 $_POST = $usuario->validarFormularios($_POST);
                 if (!$usuario->setUsuarioEmpleado($_POST['usuario'])) {
                     $result['exception'] = 'Nombre de usuario no valido';
                 } elseif (!$usuario->revisarEmpleado()) {
                     $result['exception'] = 'El nombre de usuario no existe';
-                } elseif ($usuario->getEstadoEmpleado() != 1) {
+                } elseif (!$data = $usuario->verificarEstadoCuenta()) {
+                    $result['exception'] = 'Ocurrió un problema durante la verificación del estado de tu cuenta';
+                } elseif ($usuario->getEstadoEmpleado() > 2) {
                     $result['exception'] = 'Tu cuenta ha sido desactivada';
+                } elseif(!$usuario->desbloquear()) {
+                    $result['exception'] = 'Ocurrió un problema durante la verificación del desbloqueo de tu cuenta';
+                } elseif ($usuario->getEstadoEmpleado() == 2) {
+                    $result['exception'] = 'Tu cuenta ha sido desactivada por alcanzar la cantidad máxima de intentos fallidos, intentalo más tarde.';
                 } elseif (!$usuario->setPassEmpleadoS($_POST['pass'])) {
                     $result['exception'] = 'Contraseña no valida';
                 } elseif ($usuario->revisarPassEmpleado()) {
@@ -104,7 +108,23 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'Autentificación completada';
                     }
                 } else {
-                    $result['exception'] = 'Contraseña incorrecta';
+                    //Se procede a disminuir la cantidad de intentos
+                    if ($usuario->disminuirIntentos()) {
+                        //Se revisa el estado de la cuenta
+                        if (!$data = $usuario->verificarEstadoCuenta()) {
+                            $result['exception'] = 'Ocurrió un problema durante la revisión de la contraseña';
+                        } elseif ($data['id_estado_empleado'] != 1) {
+                            $result['exception'] = 'Tu cuenta ha sido bloqueda por 24 horas';
+                        } elseif (Database::obtenerProblema()) {
+                            $result['exception'] = Database::obtenerProblema();
+                        } else {
+                            $result['exception'] = 'Contraseña incorrecta';
+                        }
+                    } elseif (Database::obtenerProblema()) {
+                        $result['exception'] = Database::obtenerProblema();
+                    } else {
+                        $result['exception'] = 'Ocurrió un problema durante la revisión de la contraseña';
+                    }
                 }
                 break;
             case 'verificarActivacion':

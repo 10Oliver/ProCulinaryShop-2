@@ -29,6 +29,8 @@ if (isset($_GET['action'])) {
                     //Se verifica si hay advertencia de cambio
                     if (isset($_SESSION['advertencia'])) {
                         $result['message'] = 'Han pasado '.$_SESSION['advertencia']. ' días desde que cambiaste por última vez tu contraseña, por favor cámbiala para que no pierdas acceso';
+                        //Se elimina la advertencia
+                        unset($_SESSION['advertencia']);
                     }
                 } elseif (database::obtenerProblema()) {
                     $result['exception'] = database::obtenerProblema();
